@@ -7,19 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root {
-  --or:#C8401A; --gr:#1E4D2B; --ye:#8B7420; --be:#7a6f65; --wi:#6B2535;
-  --green2:#2d7a4a; --red:#C8401A; --blue:#4a7a94;
-  --bg:#f5f2ee; --s1:#ffffff; --s2:#f0ece7; --s3:#e8e3dc;
-  --tx:#1a1a18; --tx2:#3d3d38; --mu:#7a7570;
-  --bor:#d4cfc8; --bor2:#b8b0a5; --bor3:#c8401a33;
-  --shadow:0 1px 3px rgba(0,0,0,0.08);
+:root{
+  --or:#C8401A;--gr:#2d7a4a;--ye:#8B7420;--blue:#4a7a94;--wi:#6B2535;
+  --green2:#3a9460;
+  --bg:#131009;--s1:#1c1710;--s2:#241e14;--s3:#2e2619;
+  --tx:#e8ddd0;--tx2:#c4b8a8;--mu:#8a7d6d;
+  --bor:#3a3025;--bor2:#4d4035;--bor3:rgba(200,64,26,0.25);
+  --shadow:0 1px 4px rgba(0,0,0,0.4);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--tx);font-family:'DM Mono',monospace;font-weight:300;display:flex;flex-direction:column;font-size:13px;}
-
-/* HEADER */
 .hdr{padding:14px 28px;border-bottom:1px solid var(--bor);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--s1);box-shadow:var(--shadow);}
 .hdr-left{display:flex;align-items:center;gap:16px;}
 .brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--tx);}
@@ -28,349 +26,311 @@ body{background:var(--bg);color:var(--tx);font-family:'DM Mono',monospace;font-w
 .grupo{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--mu);}
 .hdr-right{display:flex;align-items:center;gap:12px;}
 .date-chip{font-size:9px;color:var(--mu);letter-spacing:0.12em;text-align:right;line-height:1.6;}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#2d7a4a;box-shadow:0 0 5px rgba(45,122,74,0.5);animation:pulse 2.5s infinite;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green2);box-shadow:0 0 6px rgba(58,148,96,0.6);animation:pulse 2.5s infinite;}
 .key-btn{padding:5px 12px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;background:transparent;border:1px solid var(--bor2);color:var(--mu);cursor:pointer;transition:all 0.2s;}
 .key-btn:hover{border-color:var(--or);color:var(--or);}
 .key-btn.set{border-color:var(--green2);color:var(--green2);}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
-
-/* NAV */
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 .nav{display:flex;border-bottom:1px solid var(--bor);background:var(--s1);flex-shrink:0;overflow-x:auto;}
 .nav::-webkit-scrollbar{display:none;}
-.ntab{padding:11px 22px;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.18s;user-select:none;}
+.ntab{padding:11px 18px;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.18s;user-select:none;}
 .ntab:hover{color:var(--tx2);}
 .ntab.on{color:var(--or);border-bottom-color:var(--or);}
-
-/* MAIN */
 .main{flex:1;overflow:hidden;position:relative;}
 .panel{position:absolute;inset:0;overflow-y:auto;display:none;padding:24px 28px;background:var(--bg);}
 .panel.on{display:block;}
 .panel::-webkit-scrollbar{width:4px;}
 .panel::-webkit-scrollbar-thumb{background:var(--bor2);border-radius:2px;}
-
-/* SECTION LABEL */
-.sl{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gr);margin-bottom:12px;font-weight:400;}
+.sl{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--green2);margin-bottom:12px;font-weight:400;}
 .sl.or{color:var(--or);}.sl.mu{color:var(--mu);}
-
-/* KPI ROW */
 .kpi-row{display:grid;gap:1px;background:var(--bor);margin-bottom:20px;box-shadow:var(--shadow);}
+.kpi-row.c2{grid-template-columns:repeat(2,1fr);}
 .kpi-row.c3{grid-template-columns:repeat(3,1fr);}
 .kpi-row.c4{grid-template-columns:repeat(4,1fr);}
 .kpi-row.c5{grid-template-columns:repeat(5,1fr);}
 .kpi-row.c6{grid-template-columns:repeat(6,1fr);}
-.kpi{background:var(--s1);padding:16px 16px;}
+.kpi{background:var(--s1);padding:16px;}
 .kpi-lbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mu);margin-bottom:6px;}
 .kpi-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1;margin-bottom:4px;color:var(--tx);}
-.kpi-val.lg{font-size:34px;}
-.kpi-val.sm{font-size:20px;}
+.kpi-val.lg{font-size:34px;}.kpi-val.sm{font-size:20px;}
 .kpi-sub{font-size:9px;letter-spacing:0.08em;}
 .kpi-sub.up{color:var(--green2);}.kpi-sub.dn{color:var(--or);}.kpi-sub.nu{color:var(--mu);}
-
-/* FLAGS */
 .flags{margin-bottom:20px;}
 .flag{display:flex;gap:10px;padding:10px 12px;margin-bottom:4px;border-left:3px solid transparent;background:var(--s1);}
-.flag.al{border-left-color:var(--or);background:#fff8f6;}
-.flag.ok{border-left-color:var(--green2);background:#f6fbf8;}
-.flag.in{border-left-color:var(--ye);background:#fdfbf3;}
+.flag.al{border-left-color:var(--or);background:rgba(200,64,26,0.08);}
+.flag.ok{border-left-color:var(--green2);background:rgba(45,122,74,0.08);}
+.flag.in{border-left-color:var(--ye);background:rgba(139,116,32,0.08);}
 .fi{font-size:10px;margin-top:1px;flex-shrink:0;}
 .ft{font-size:11px;color:var(--tx2);line-height:1.6;}
-
-/* ANALYSIS */
-.analysis{background:var(--s1);border:1px solid var(--bor);border-left:3px solid var(--gr);padding:16px 18px;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);min-height:72px;}
+.analysis{background:var(--s1);border:1px solid var(--bor);border-left:3px solid var(--green2);padding:16px 18px;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);min-height:72px;}
 .analysis.empty{color:var(--mu);font-style:normal;font-size:12px;border-left-color:var(--bor);}
-
-/* UPLOAD */
 .upload-zone{border:2px dashed var(--bor2);padding:18px;text-align:center;cursor:pointer;position:relative;transition:all 0.2s;margin-bottom:8px;background:var(--s2);}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--gr);background:#f0f5f1;}
+.upload-zone:hover{border-color:var(--green2);}
 .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.uz-icon{font-size:20px;color:var(--gr);margin-bottom:4px;}
+.uz-icon{font-size:20px;color:var(--green2);margin-bottom:4px;}
 .uz-text{font-size:11px;color:var(--mu);}.uz-text strong{color:var(--tx2);display:block;font-weight:400;margin-bottom:2px;}
 .uz-fmts{font-size:9px;color:var(--bor2);margin-top:4px;letter-spacing:0.12em;}
-.file-ok{display:none;align-items:center;gap:8px;padding:7px 10px;background:#f0fbf5;border:1px solid #b8dfc8;font-size:10px;color:var(--green2);margin-bottom:7px;}
+.file-ok{display:none;align-items:center;gap:8px;padding:7px 10px;background:rgba(45,122,74,0.15);border:1px solid rgba(45,122,74,0.3);font-size:10px;color:var(--green2);margin-bottom:7px;}
 .file-ok.on{display:flex;}
 .file-ok-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .file-x{cursor:pointer;color:var(--mu);font-size:14px;}.file-x:hover{color:var(--or);}
 .dor{text-align:center;font-size:9px;color:var(--mu);letter-spacing:0.25em;text-transform:uppercase;margin:8px 0;}
-textarea,input[type=text],input[type=password],input[type=number]{width:100%;background:var(--s1);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:11px;line-height:1.6;padding:10px 12px;resize:vertical;outline:none;transition:border-color 0.2s;}
-textarea:focus,input[type=text]:focus,input[type=password]:focus,input[type=number]:focus{border-color:var(--gr);}
+textarea,input[type=text],input[type=password],input[type=number]{width:100%;background:var(--s2);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:11px;line-height:1.6;padding:10px 12px;resize:vertical;outline:none;transition:border-color 0.2s;}
+textarea:focus,input:focus{border-color:var(--green2);}
 textarea::placeholder,input::placeholder{color:var(--bor2);}
 textarea{min-height:90px;}
-
-/* CONTEXT FIELD */
+select{width:100%;background:var(--s2);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:10px;padding:8px 10px;outline:none;appearance:none;cursor:pointer;margin-bottom:8px;}
+select:focus{border-color:var(--green2);}
 .ctx-block{background:var(--s1);border:1px solid var(--bor);padding:14px;margin-bottom:10px;}
 .ctx-title{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--mu);margin-bottom:10px;}
 .ctx-checks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
 .ctx-check{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--tx2);cursor:pointer;}
-.ctx-check input[type=checkbox]{accent-color:var(--gr);width:13px;height:13px;cursor:pointer;}
-.ctx-select,.ctx-month-sel{width:100%;background:var(--s1);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:10px;padding:8px 10px;outline:none;appearance:none;cursor:pointer;margin-bottom:8px;}
-.ctx-select:focus,.ctx-month-sel:focus{border-color:var(--gr);}
-
-/* BUTTONS */
+.ctx-check input[type=checkbox]{accent-color:var(--green2);width:13px;height:13px;cursor:pointer;}
 .btn{width:100%;padding:11px;border:none;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.btn.primary{background:var(--gr);color:white;}.btn.primary:hover{background:#265c35;}
+.btn.primary{background:var(--green2);color:#fff;}.btn.primary:hover{background:#4aad72;}
 .btn.secondary{background:transparent;color:var(--mu);border:1px solid var(--bor);margin-top:5px;}.btn.secondary:hover{border-color:var(--or);color:var(--or);}
-.btn.orange{background:var(--or);color:white;}.btn.orange:hover{background:#a83415;}
 .btn.sm{width:auto;padding:6px 14px;font-size:9px;}
-.btn:disabled{opacity:0.4;cursor:not-allowed;}
-.status-line{font-size:9px;color:var(--gr);letter-spacing:0.15em;height:13px;text-transform:uppercase;margin:5px 0;}
-
-/* LAYOUT */
+.btn:disabled{opacity:0.35;cursor:not-allowed;}
+.status-line{font-size:9px;color:var(--green2);letter-spacing:0.15em;height:13px;text-transform:uppercase;margin:5px 0;}
 .two-col{display:grid;grid-template-columns:1fr 290px;gap:24px;}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
 .divider{width:24px;height:1px;background:var(--bor2);margin:16px 0;}
 .section-divider{height:1px;background:var(--bor);margin:24px 0;}
-
-/* CHARTS */
 .chart-wrap{background:var(--s1);border:1px solid var(--bor);padding:18px;margin-bottom:20px;box-shadow:var(--shadow);}
-.chart-title{font-size:10px;font-weight:400;color:var(--tx);margin-bottom:2px;}
+.chart-title{font-size:10px;color:var(--tx);margin-bottom:2px;}
 .chart-sub{font-size:9px;color:var(--mu);margin-bottom:12px;}
-.chart-canvas{height:180px;}
-.chart-canvas.tall{height:260px;}
+.chart-canvas{height:180px;}.chart-canvas.tall{height:260px;}
 .metric-btns{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap;}
 .mb{padding:5px 11px;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;border:1px solid var(--bor);background:transparent;color:var(--mu);cursor:pointer;transition:all 0.15s;}
-.mb.on{background:var(--gr);color:white;border-color:var(--gr);}
-.mb:hover:not(.on){border-color:var(--gr);color:var(--gr);}
-
-/* TABLE */
+.mb.on{background:var(--green2);color:#fff;border-color:var(--green2);}
+.mb:hover:not(.on){border-color:var(--green2);color:var(--green2);}
 .tbl{width:100%;border-collapse:collapse;font-size:10px;}
 .tbl th{text-align:left;padding:7px 10px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mu);border-bottom:2px solid var(--bor);font-weight:300;background:var(--s2);}
 .tbl td{padding:7px 10px;border-bottom:1px solid var(--bor);color:var(--tx2);}
 .tbl tr:hover td{background:var(--s2);color:var(--tx);}
 .tbl .up{color:var(--green2);}.tbl .dn{color:var(--or);}
-.tbl .right{text-align:right;}
 .bar-bg{background:var(--s3);height:5px;}
-.bar-fg{height:5px;background:var(--gr);}
-.bar-fg.or{background:var(--or);}
-
-/* INSIGHT CARDS */
+.bar-fg{height:5px;background:var(--green2);}.bar-fg.or{background:var(--or);}
 .insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-.insight{background:var(--s1);border:1px solid var(--bor);padding:16px;border-top:3px solid transparent;box-shadow:var(--shadow);}
-.insight.red{border-top-color:var(--or);}
-.insight.grn{border-top-color:var(--green2);}
-.insight.yel{border-top-color:#c8a020;}
-.insight.blu{border-top-color:var(--blue);}
+.insight{background:var(--s1);border:1px solid var(--bor);padding:16px;border-top:3px solid transparent;}
+.insight.red{border-top-color:var(--or);}.insight.grn{border-top-color:var(--green2);}
+.insight.yel{border-top-color:#c8a020;}.insight.blu{border-top-color:var(--blue);}
 .ins-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;line-height:1;margin-bottom:5px;}
 .ins-lbl{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);margin-bottom:7px;}
 .ins-txt{font-size:10px;color:var(--tx2);line-height:1.7;}
-
-/* CALLOUT */
 .callout-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;}
-.callout{background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--or);padding:16px;box-shadow:var(--shadow);}
+.callout{background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--or);padding:16px;}
 .callout.grn{border-left-color:var(--green2);}
 .callout-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--or);line-height:1;}
 .callout.grn .callout-num{color:var(--green2);}
 .callout-lbl{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mu);margin-top:4px;margin-bottom:7px;}
 .callout-txt{font-size:10px;color:var(--tx2);line-height:1.7;}
-
-/* DOW GRID */
-.dow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--bor);margin-bottom:20px;box-shadow:var(--shadow);}
+.dow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--bor);margin-bottom:20px;}
 .dow-cell{background:var(--s1);padding:12px 8px;text-align:center;}
-.dow-cell.worst{background:#fff8f6;}
+.dow-cell.worst{background:rgba(200,64,26,0.06);}
+.dow-cell.best{background:rgba(45,122,74,0.06);}
 .dow-name{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mu);margin-bottom:5px;}
-.dow-val{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--tx);}
-.dow-delta{font-size:9px;margin-top:3px;}
-
-/* HISTORY */
+.dow-val{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--tx);}
+.dow-sub{font-size:8px;color:var(--mu);margin-top:3px;}
 .hist-entries{margin-top:12px;}
-.he{padding:7px 0;border-bottom:1px solid var(--bor);cursor:pointer;transition:background 0.15s;}
+.he{padding:7px 0;border-bottom:1px solid var(--bor);cursor:pointer;transition:all 0.15s;}
 .he:hover{background:var(--s2);padding-left:6px;}
-.he-date{font-size:9px;color:var(--gr);letter-spacing:0.1em;margin-bottom:2px;}
+.he-date{font-size:9px;color:var(--green2);letter-spacing:0.1em;margin-bottom:2px;}
 .he-prev{font-size:10px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
-/* ─── P&L STYLES ─── */
+/* P&L */
 .month-selector{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
 .msel{padding:7px 16px;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;border:1px solid var(--bor);background:var(--s1);color:var(--mu);cursor:pointer;transition:all 0.15s;}
-.msel.on{background:var(--gr);color:white;border-color:var(--gr);}
-.msel:hover:not(.on){border-color:var(--gr);color:var(--gr);}
-.msel.estimated{border-style:dashed;}
-
-.pnl-wrap{background:var(--s1);border:1px solid var(--bor);box-shadow:var(--shadow);overflow:hidden;}
-.pnl-section-hdr{background:var(--s2);padding:8px 14px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gr);border-bottom:1px solid var(--bor);font-weight:400;}
-.pnl-row{display:grid;grid-template-columns:1fr 110px 80px 80px;padding:7px 14px;border-bottom:1px solid var(--bor);align-items:center;transition:background 0.12s;}
+.msel.on{background:var(--green2);color:#fff;border-color:var(--green2);}
+.msel:hover:not(.on){border-color:var(--green2);color:var(--green2);}
+.msel.est{border-style:dashed;}
+.pnl-wrap{background:var(--s1);border:1px solid var(--bor);overflow:hidden;}
+.pnl-sh{background:var(--s2);padding:8px 14px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green2);border-bottom:1px solid var(--bor);}
+.pnl-row{display:grid;grid-template-columns:1fr 110px 80px 70px;padding:7px 14px;border-bottom:1px solid var(--bor);align-items:center;transition:background 0.12s;}
 .pnl-row:hover{background:var(--s2);}
-.pnl-row.subtotal{background:var(--s2);font-weight:400;}
-.pnl-row.total{background:var(--s3);padding:10px 14px;}
-.pnl-row.profit{background:#f0fbf5;}
-.pnl-row.loss{background:#fff8f6;}
-.pnl-row.ebitda{border-top:2px solid var(--bor2);padding:12px 14px;}
-.pnl-row.net{border-top:2px solid var(--tx);padding:12px 14px;}
-.pnl-label{font-size:11px;color:var(--tx2);}
-.pnl-label.indent{padding-left:16px;color:var(--mu);font-size:10px;}
-.pnl-label.group{font-size:10px;color:var(--tx);font-weight:400;letter-spacing:0.05em;}
-.pnl-label.big{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--tx);}
-.pnl-amount{text-align:right;font-size:11px;color:var(--tx2);}
-.pnl-amount.neg{color:var(--or);}
-.pnl-amount.pos{color:var(--green2);}
-.pnl-amount.bold{font-weight:400;color:var(--tx);}
+.pnl-row.sub{background:var(--s2);}
+.pnl-row.profit{background:rgba(45,122,74,0.08);}
+.pnl-row.loss{background:rgba(200,64,26,0.08);}
+.pnl-row.ebitda-row{border-top:2px solid var(--bor2);padding:12px 14px;}
+.pnl-row.net-row{border-top:2px solid var(--tx);padding:12px 14px;}
+.pnl-lbl{font-size:11px;color:var(--tx2);}
+.pnl-lbl.ind{padding-left:16px;color:var(--mu);font-size:10px;}
+.pnl-lbl.grp{font-size:10px;color:var(--tx);}
+.pnl-lbl.big{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--tx);}
+.pnl-amt{text-align:right;font-size:11px;color:var(--tx2);}
+.pnl-amt.neg{color:var(--or);}.pnl-amt.pos{color:var(--green2);}.pnl-amt.bold{font-weight:400;color:var(--tx);}
 .pnl-pct{text-align:right;font-size:9px;color:var(--mu);}
 .pnl-bench{text-align:right;font-size:9px;}
-.bench-ok{color:var(--green2);}
-.bench-warn{color:var(--ye);}
-.bench-bad{color:var(--or);}
-
-.pnl-header-row{display:grid;grid-template-columns:1fr 110px 80px 80px;padding:7px 14px;border-bottom:2px solid var(--bor);}
-.pnl-col-hdr{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);text-align:right;}
-.pnl-col-hdr:first-child{text-align:left;}
-
-.data-quality{display:inline-flex;align-items:center;gap:4px;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:2px 7px;border:1px solid;margin-left:8px;}
-.dq-real{color:var(--green2);border-color:rgba(45,122,74,0.3);background:#f6fbf8;}
-.dq-est{color:var(--ye);border-color:rgba(139,116,32,0.3);background:#fdfbf3;}
-.dq-pend{color:var(--or);border-color:rgba(200,64,26,0.3);background:#fff8f6;}
-
+.bok{color:var(--green2);}.bwarn{color:var(--ye);}.bbad{color:var(--or);}
+.pnl-hdr{display:grid;grid-template-columns:1fr 110px 80px 70px;padding:7px 14px;border-bottom:2px solid var(--bor);}
+.pnl-col{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);text-align:right;}
+.pnl-col:first-child{text-align:left;}
 .pnl-note{font-size:9px;color:var(--mu);padding:8px 14px;border-top:1px solid var(--bor);background:var(--s2);line-height:1.6;}
-
-.edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;}
-.edit-overlay.on{display:flex;}
-.edit-box{background:var(--s1);border:1px solid var(--bor);padding:24px;width:420px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.edit-title{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:14px;}
-.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
-.edit-field{display:flex;flex-direction:column;gap:4px;}
-.edit-field label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);}
-.edit-field input{padding:7px 10px;font-size:11px;}
-.edit-btns{display:flex;gap:8px;}
-.edit-btns .btn{width:auto;flex:1;padding:9px;}
-
-/* ─── EJECUTIVO STYLES ─── */
+.dq{display:inline-flex;align-items:center;gap:4px;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:2px 7px;border:1px solid;}
+.dq-r{color:var(--green2);border-color:rgba(45,122,74,0.3);}
+.dq-e{color:var(--ye);border-color:rgba(139,116,32,0.3);}
+.dq-p{color:var(--or);border-color:rgba(200,64,26,0.3);}
+/* Edit overlay */
+.eov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;}
+.eov.on{display:flex;}
+.ebox{background:var(--s1);border:1px solid var(--bor);padding:24px;width:440px;max-width:90vw;}
+.ebox-title{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:14px;color:var(--tx);}
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.ef{display:flex;flex-direction:column;gap:4px;}
+.ef label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);}
+.ef input{padding:7px 10px;font-size:11px;margin-bottom:0;}
+.ebtns{display:flex;gap:8px;}
+.ebtns .btn{width:auto;flex:1;padding:9px;}
+/* Menu */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.icard{background:var(--s1);border:1px solid var(--bor);padding:12px 14px;display:flex;gap:12px;align-items:center;}
+.icard:hover{background:var(--s2);}
+.irank{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--or);opacity:0.5;width:28px;flex-shrink:0;text-align:center;line-height:1;}
+.iinfo{flex:1;}
+.iname{font-size:11px;color:var(--tx);margin-bottom:3px;line-height:1.4;}
+.imeta{font-size:9px;color:var(--mu);}
+.irev{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--green2);flex-shrink:0;}
+.srv-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--bor);background:var(--s1);}
+.srv-name{font-size:11px;color:var(--tx);width:180px;flex-shrink:0;}
+.srv-bar-wrap{flex:1;background:var(--s3);height:5px;}
+.srv-bar{height:5px;background:var(--green2);}
+.srv-rev{font-size:10px;color:var(--green2);width:70px;text-align:right;flex-shrink:0;}
+.srv-tag{font-size:8px;color:var(--mu);width:70px;text-align:right;flex-shrink:0;}
+/* Clientes */
+.ot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bor);margin-bottom:20px;}
+.ot-kpi{background:var(--s1);padding:16px;text-align:center;}
+.ot-val{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--tx);line-height:1;margin-bottom:4px;}
+.ot-lbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mu);}
+.ot-sub{font-size:9px;margin-top:4px;}
+.gcard{background:var(--s1);border:1px solid var(--bor);padding:10px 14px;margin-bottom:3px;display:flex;align-items:center;gap:12px;}
+.gnum{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--or);width:36px;text-align:center;flex-shrink:0;}
+.ginfo{flex:1;}
+.gname{font-size:11px;color:var(--tx);margin-bottom:2px;}
+.gmeta{font-size:9px;color:var(--mu);}
+.gvisits{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--green2);flex-shrink:0;}
+.src-row{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--bor);background:var(--s1);}
+.src-name{font-size:10px;color:var(--tx2);width:160px;}
+.src-bw{flex:1;background:var(--s3);height:5px;}
+.src-bf{height:5px;}
+.src-pct{font-size:10px;color:var(--mu);width:48px;text-align:right;}
+.pill{display:inline-block;padding:1px 6px;font-size:8px;border-radius:1px;letter-spacing:0.1em;text-transform:uppercase;}
+.pill.vip{background:rgba(200,64,26,0.15);color:var(--or);}
+.pill.reg{background:rgba(45,122,74,0.15);color:var(--green2);}
+/* Ejecutivo */
 .exec-wrap{max-width:900px;margin:0 auto;}
-.exec-header{text-align:center;padding:28px 0 20px;border-bottom:2px solid var(--bor);margin-bottom:24px;}
-.exec-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:4px;}
+.exec-hdr{text-align:center;padding:28px 0 20px;border-bottom:2px solid var(--bor);margin-bottom:24px;}
+.exec-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:4px;color:var(--tx);}
 .exec-sub{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--mu);}
-.exec-period{font-size:10px;color:var(--gr);margin-top:6px;}
-.exec-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bor);margin-bottom:24px;box-shadow:var(--shadow);}
+.exec-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bor);margin-bottom:24px;}
 .exec-kpi{background:var(--s1);padding:20px;text-align:center;}
-.exec-kpi-val{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1;margin-bottom:6px;}
-.exec-kpi-lbl{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
-.exec-kpi-delta{font-size:10px;}
-.exec-narrative{background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--gr);padding:20px 22px;margin-bottom:24px;font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;line-height:1.9;color:var(--tx);}
-.exec-narrative.empty{font-style:normal;font-size:12px;color:var(--mu);font-family:'DM Mono',monospace;}
-.exec-waterfall{background:var(--s1);border:1px solid var(--bor);padding:20px;margin-bottom:24px;}
+.exec-val{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;line-height:1;margin-bottom:6px;}
+.exec-lbl{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
+.exec-delta{font-size:10px;}
+.exec-narrative{background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--green2);padding:20px 22px;margin-bottom:24px;font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;line-height:1.9;color:var(--tx);}
 .exec-footer{display:flex;gap:8px;justify-content:center;padding:16px 0;border-top:1px solid var(--bor);}
-.exec-footer .btn{width:auto;padding:9px 20px;}
-
-.waterfall-chart{height:220px;position:relative;}
-
-/* AI CHAT */
+/* Chat */
 .chat-layout{display:flex;flex-direction:column;height:calc(100vh - 170px);}
-.chat-messages{flex:1;overflow-y:auto;padding-bottom:12px;padding-right:4px;}
-.chat-messages::-webkit-scrollbar{width:3px;}
-.chat-messages::-webkit-scrollbar-thumb{background:var(--bor2);}
+.chat-msgs{flex:1;overflow-y:auto;padding-bottom:12px;}
+.chat-msgs::-webkit-scrollbar{width:3px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--bor2);}
 .msg{display:flex;gap:10px;margin-bottom:14px;animation:fadeIn 0.22s ease;}
 .msg.user{flex-direction:row-reverse;}
-.msg-avatar{width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:0.1em;font-weight:400;}
-.msg-avatar.ai{background:var(--gr);color:white;}
-.msg-avatar.us{background:var(--or);color:white;}
-.msg-body{max-width:76%;background:var(--s1);border:1px solid var(--bor);padding:11px 14px;font-size:11px;line-height:1.75;color:var(--tx2);box-shadow:var(--shadow);}
-.msg.user .msg-body{background:#fff8f6;border-color:#e8c8be;color:var(--tx);}
-.chat-input-row{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--bor);flex-shrink:0;}
-.chat-input{flex:1;background:var(--s1);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:11px;padding:10px 12px;outline:none;resize:none;height:42px;transition:border-color 0.2s;line-height:1.4;}
-.chat-input:focus{border-color:var(--gr);}
-.chat-send{padding:0 18px;background:var(--gr);color:white;border:none;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;flex-shrink:0;transition:background 0.2s;}
-.chat-send:hover{background:#265c35;}.chat-send:disabled{opacity:0.4;cursor:not-allowed;}
-.chat-suggestions{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;}
+.msg-av{width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:0.1em;}
+.msg-av.ai{background:var(--green2);color:#fff;}
+.msg-av.us{background:var(--or);color:#fff;}
+.msg-body{max-width:76%;background:var(--s1);border:1px solid var(--bor);padding:11px 14px;font-size:11px;line-height:1.75;color:var(--tx2);}
+.msg.user .msg-body{background:rgba(200,64,26,0.08);border-color:var(--bor3);color:var(--tx);}
+.chat-ir{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--bor);flex-shrink:0;}
+.chat-in{flex:1;background:var(--s2);border:1px solid var(--bor);color:var(--tx);font-family:'DM Mono',monospace;font-size:11px;padding:10px 12px;outline:none;resize:none;height:42px;transition:border-color 0.2s;line-height:1.4;}
+.chat-in:focus{border-color:var(--green2);}
+.chat-send{padding:0 18px;background:var(--green2);color:#fff;border:none;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;flex-shrink:0;}
+.chat-send:hover{background:#4aad72;}.chat-send:disabled{opacity:0.35;cursor:not-allowed;}
+.chat-sug{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;}
 .cs{padding:5px 10px;font-size:9px;background:var(--s1);border:1px solid var(--bor);color:var(--mu);cursor:pointer;letter-spacing:0.1em;transition:all 0.15s;}
-.cs:hover{border-color:var(--gr);color:var(--gr);}
+.cs:hover{border-color:var(--green2);color:var(--green2);}
 .typing{display:flex;gap:4px;align-items:center;padding:8px 0;}
-.typing span{width:5px;height:5px;background:var(--gr);border-radius:50%;animation:blink 1.2s infinite;}
+.typing span{width:5px;height:5px;background:var(--green2);border-radius:50%;animation:blink 1.2s infinite;}
 .typing span:nth-child(2){animation-delay:0.2s;}.typing span:nth-child(3){animation-delay:0.4s;}
 @keyframes blink{0%,80%,100%{opacity:0.15;}40%{opacity:1;}}
-
-/* API KEY MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;display:none;align-items:center;justify-content:center;}
-.modal-overlay.on{display:flex;}
-.modal{background:var(--s1);border:1px solid var(--bor);padding:28px;width:420px;max-width:90vw;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:6px;}
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;display:none;align-items:center;justify-content:center;}
+.modal-ov.on{display:flex;}
+.modal{background:var(--s1);border:1px solid var(--bor);padding:28px;width:420px;max-width:90vw;}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:6px;color:var(--tx);}
 .modal-sub{font-size:10px;color:var(--mu);margin-bottom:18px;line-height:1.6;}
-.modal-label{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mu);margin-bottom:6px;display:block;}
+.modal-lbl{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mu);margin-bottom:6px;display:block;}
 .modal-note{font-size:9px;color:var(--mu);margin-top:8px;line-height:1.6;padding:8px;background:var(--s2);border-left:2px solid var(--bor2);}
 .modal-btns{display:flex;gap:8px;margin-top:16px;}
 .modal-btns .btn{width:auto;flex:1;padding:10px;}
-
-/* MISC */
 @keyframes fadeIn{from{opacity:0;transform:translateY(3px);}to{opacity:1;transform:translateY(0);}}
 .fade{animation:fadeIn 0.28s ease forwards;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.spin{display:inline-block;width:8px;height:8px;border:1px solid rgba(30,77,43,0.25);border-top-color:var(--gr);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:6px;vertical-align:middle;}
+.spin{display:inline-block;width:8px;height:8px;border:1px solid rgba(58,148,96,0.25);border-top-color:var(--green2);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:6px;vertical-align:middle;}
 .empty-state{color:var(--mu);font-size:11px;line-height:1.8;padding:8px 0;}
 .tag{display:inline-block;padding:1px 6px;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;border:1px solid;}
-.tag.or{color:var(--or);border-color:rgba(200,64,26,0.3);background:#fff8f6;}
-.tag.gr{color:var(--green2);border-color:rgba(45,122,74,0.3);background:#f6fbf8;}
-
+.tag.or{color:var(--or);border-color:rgba(200,64,26,0.3);}
+.tag.gr{color:var(--green2);border-color:rgba(45,122,74,0.3);}
 @media(max-width:768px){
   .hdr{padding:12px 16px;}.panel{padding:16px;}
   .two-col{grid-template-columns:1fr;}
   .kpi-row.c4,.kpi-row.c5,.kpi-row.c6{grid-template-columns:repeat(2,1fr);}
-  .insight-grid,.callout-grid,.three-col{grid-template-columns:1fr;}
+  .insight-grid,.callout-grid,.menu-grid{grid-template-columns:1fr;}
+  .ot-grid{grid-template-columns:repeat(2,1fr);}
   .dow-grid{grid-template-columns:repeat(4,1fr);}
-  .brand{font-size:18px;}
-  .chat-layout{height:calc(100vh - 200px);}
   .exec-kpis{grid-template-columns:repeat(2,1fr);}
-  .pnl-row,.pnl-header-row{grid-template-columns:1fr 100px 70px;}
+  .pnl-row,.pnl-hdr{grid-template-columns:1fr 100px 70px;}
   .pnl-bench{display:none;}
 }
 </style>
 </head>
 <body>
-
-<!-- API KEY MODAL -->
-<div class="modal-overlay" id="key-modal">
+<div class="modal-ov" id="key-modal">
   <div class="modal">
     <div class="modal-title">Configurar API Key</div>
-    <div class="modal-sub">Tu key se guarda solo en este navegador. Nadie más tiene acceso a ella.</div>
-    <label class="modal-label">Anthropic API Key</label>
+    <div class="modal-sub">Tu key se guarda solo en este navegador.</div>
+    <label class="modal-lbl">Anthropic API Key</label>
     <input type="password" id="key-input" placeholder="sk-ant-..." autocomplete="off">
-    <div class="modal-note">Obtén tu key en <strong>console.anthropic.com</strong> → API Keys → Create Key.</div>
+    <div class="modal-note">Obtén tu key en <strong>console.anthropic.com</strong> → API Keys</div>
     <div class="modal-btns">
       <button class="btn secondary" onclick="closeModal()">Cancelar</button>
-      <button class="btn primary" onclick="saveKey()">Guardar key</button>
+      <button class="btn primary" onclick="saveKey()">Guardar</button>
     </div>
   </div>
 </div>
-
-<!-- EDIT P&L OVERLAY -->
-<div class="edit-overlay" id="edit-overlay">
-  <div class="edit-box">
-    <div class="edit-title" id="edit-title">Editar mes</div>
-    <div class="edit-grid" id="edit-grid"></div>
-    <div class="edit-btns">
+<div class="eov" id="eov">
+  <div class="ebox">
+    <div class="ebox-title" id="ebox-title">Editar mes</div>
+    <div class="egrid" id="egrid"></div>
+    <div class="ebtns">
       <button class="btn secondary" onclick="closeEdit()">Cancelar</button>
       <button class="btn primary" onclick="saveEdit()">Guardar</button>
     </div>
   </div>
 </div>
-
-<!-- HEADER -->
 <div class="hdr">
   <div class="hdr-left">
-    <div>
-      <div class="grupo">Grupo Zeru</div>
-      <div class="brand">Casa <b>Zeru</b></div>
-    </div>
+    <div><div class="grupo">Grupo Zeru</div><div class="brand">Casa <b>Zeru</b></div></div>
     <div class="sep"></div>
     <div style="font-size:9px;color:var(--mu);letter-spacing:0.2em;text-transform:uppercase;">Central de Inteligencia</div>
   </div>
   <div class="hdr-right">
     <div class="date-chip" id="dateChip"></div>
     <button class="key-btn" id="key-btn" onclick="openModal()">⚙ API Key</button>
-    <div class="status-dot" title="Sistema activo"></div>
+    <div class="status-dot"></div>
   </div>
 </div>
-
-<!-- NAV -->
 <div class="nav">
   <div class="ntab on" onclick="goTab('hoy',this)">Hoy</div>
   <div class="ntab" onclick="goTab('historico',this)">Histórico</div>
   <div class="ntab" onclick="goTab('inteligencia',this)">Inteligencia</div>
   <div class="ntab" onclick="goTab('pnl',this)">P&amp;L</div>
+  <div class="ntab" onclick="goTab('menu',this)">Menú &amp; Servicio</div>
+  <div class="ntab" onclick="goTab('clientes',this)">Clientes</div>
   <div class="ntab" onclick="goTab('ejecutivo',this)">Ejecutivo</div>
   <div class="ntab" onclick="goTab('asistente',this)">Asistente IA</div>
 </div>
-
 <div class="main">
 
-<!-- ══════════ HOY ══════════ -->
 <div class="panel on" id="p-hoy">
   <div class="two-col">
-    <div class="left">
+    <div>
       <div class="sl">Performance del día</div>
       <div class="kpi-row c3">
         <div class="kpi"><div class="kpi-lbl">Ventas netas</div><div class="kpi-val lg" id="k-sales">—</div><div class="kpi-sub nu" id="k-sales-d">sin datos</div></div>
@@ -391,7 +351,7 @@ textarea{min-height:90px;}
       <div class="sl">Historial de sesión</div>
       <div class="hist-entries" id="hist-list"><div class="empty-state">Los reportes procesados aparecen aquí.</div></div>
     </div>
-    <div class="right">
+    <div>
       <div class="sl">Cargar reporte Toast</div>
       <div class="upload-zone" id="uz">
         <input type="file" id="file-in" accept=".csv,.txt,.xlsx,.xls,.zip" onchange="handleFile(event)">
@@ -399,10 +359,7 @@ textarea{min-height:90px;}
         <div class="uz-text"><strong>Subir archivo de Toast</strong>Toca o arrastra aquí</div>
         <div class="uz-fmts">CSV · TXT · XLSX · ZIP</div>
       </div>
-      <div class="file-ok" id="file-ok-bar">
-        <span>✓</span><span class="file-ok-name" id="file-ok-name"></span>
-        <span class="file-x" onclick="clearFile()">✕</span>
-      </div>
+      <div class="file-ok" id="file-ok-bar"><span>✓</span><span class="file-ok-name" id="file-ok-name"></span><span class="file-x" onclick="clearFile()">✕</span></div>
       <div class="dor">o pega el texto del email</div>
       <textarea id="email-in" placeholder="Pega aquí el contenido del email diario de Toast..."></textarea>
       <div class="divider"></div>
@@ -410,28 +367,24 @@ textarea{min-height:90px;}
       <div class="ctx-block">
         <div class="ctx-title">¿Qué pasó hoy?</div>
         <div class="ctx-checks">
-          <label class="ctx-check"><input type="checkbox" id="ctx-event"> Hubo evento / cantante</label>
+          <label class="ctx-check"><input type="checkbox" id="ctx-event"> Evento / cantante</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-rain"> Llovió</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-street"> Cerraron la calle</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-holiday"> Feriado / fecha especial</label>
-          <label class="ctx-check"><input type="checkbox" id="ctx-promo"> Hubo promoción</label>
+          <label class="ctx-check"><input type="checkbox" id="ctx-promo"> Promoción activa</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-vip"> Mesa VIP / grupo privado</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-short"> Personal reducido</label>
           <label class="ctx-check"><input type="checkbox" id="ctx-conv"> Convención en zona</label>
         </div>
-        <div style="font-size:9px;color:var(--mu);margin-bottom:5px;letter-spacing:0.15em;text-transform:uppercase;">Tipo de evento (si aplica)</div>
-        <select class="ctx-select" id="ctx-event-type">
+        <div style="font-size:9px;color:var(--mu);margin-bottom:5px;letter-spacing:0.15em;text-transform:uppercase;">Tipo de evento</div>
+        <select id="ctx-event-type">
           <option value="">Sin evento</option>
-          <option>Cantante en vivo</option>
-          <option>Cena privada / buyout</option>
-          <option>Cumpleaños VIP</option>
-          <option>Evento corporativo</option>
-          <option>Maridaje / wine dinner</option>
-          <option>Chef invitado</option>
-          <option>Otro evento</option>
+          <option>Cantante en vivo</option><option>Cena privada / buyout</option>
+          <option>Cumpleaños VIP</option><option>Evento corporativo</option>
+          <option>Maridaje / wine dinner</option><option>Chef invitado</option><option>Otro</option>
         </select>
-        <div style="font-size:9px;color:var(--mu);margin-bottom:5px;letter-spacing:0.15em;text-transform:uppercase;">Notas adicionales</div>
-        <textarea id="ctx-notes" style="min-height:60px;font-size:10px;" placeholder="Ej: F1 weekend, construcción frente, equipo nuevo..."></textarea>
+        <div style="font-size:9px;color:var(--mu);margin-bottom:5px;letter-spacing:0.15em;text-transform:uppercase;">Notas</div>
+        <textarea id="ctx-notes" style="min-height:60px;font-size:10px;" placeholder="F1 weekend, construcción, staff nuevo..."></textarea>
       </div>
       <div class="status-line" id="hoy-status"></div>
       <button class="btn primary" id="analyze-btn" onclick="analyzeReport()">Analizar reporte</button>
@@ -440,7 +393,6 @@ textarea{min-height:90px;}
   </div>
 </div>
 
-<!-- ══════════ HISTÓRICO ══════════ -->
 <div class="panel" id="p-historico">
   <div class="sl">Resumen general · Mar 2023 – Abr 2026</div>
   <div class="kpi-row c5">
@@ -452,7 +404,7 @@ textarea{min-height:90px;}
   </div>
   <div class="chart-wrap">
     <div class="chart-title">Tendencia mensual</div>
-    <div class="chart-sub">Naranja = post-rebrand (nov 2025 en adelante)</div>
+    <div class="chart-sub">Rojo = post-rebrand (nov 2025 en adelante)</div>
     <div class="metric-btns">
       <button class="mb on" onclick="setMetric('avg_daily',this)">Prom. diario</button>
       <button class="mb" onclick="setMetric('net_sales',this)">Ventas totales</button>
@@ -461,21 +413,25 @@ textarea{min-height:90px;}
     </div>
     <div class="chart-canvas"><canvas id="main-chart"></canvas></div>
   </div>
-  <div class="sl">Day of week — post-rebrand actual</div>
+  <div class="sl">Day of Week · Oct 2025 – May 2026 (datos reales Toast)</div>
   <div class="dow-grid">
-    <div class="dow-cell"><div class="dow-name">Lun</div><div class="dow-val">$2,862</div><div class="dow-delta kpi-sub dn">-50% vs antes</div></div>
-    <div class="dow-cell worst"><div class="dow-name">Mar</div><div class="dow-val" style="color:var(--or)">$2,752</div><div class="dow-delta kpi-sub dn">-60% vs antes</div></div>
-    <div class="dow-cell"><div class="dow-name">Mié</div><div class="dow-val">$4,736</div><div class="dow-delta kpi-sub dn">-40% vs antes</div></div>
-    <div class="dow-cell worst"><div class="dow-name">Jue</div><div class="dow-val" style="color:var(--or)">$4,079</div><div class="dow-delta kpi-sub dn">-56% vs antes</div></div>
-    <div class="dow-cell"><div class="dow-name">Vie</div><div class="dow-val">$6,770</div><div class="dow-delta kpi-sub dn">-45% vs antes</div></div>
-    <div class="dow-cell"><div class="dow-name">Sáb</div><div class="dow-val">$7,225</div><div class="dow-delta kpi-sub dn">-34% vs antes</div></div>
-    <div class="dow-cell worst"><div class="dow-name">Dom</div><div class="dow-val" style="color:var(--or)">$426</div><div class="dow-delta kpi-sub dn">-95% / cerrado</div></div>
+    <div class="dow-cell worst"><div class="dow-name">Lun</div><div class="dow-val" style="color:var(--or)">$89,460</div><div class="dow-sub">268 órd · 714 cvrs</div></div>
+    <div class="dow-cell worst"><div class="dow-name">Mar</div><div class="dow-val" style="color:var(--or)">$88,478</div><div class="dow-sub">279 órd · 821 cvrs</div></div>
+    <div class="dow-cell"><div class="dow-name">Mié</div><div class="dow-val">$126,858</div><div class="dow-sub">357 órd · 1,000 cvrs</div></div>
+    <div class="dow-cell"><div class="dow-name">Jue</div><div class="dow-val">$122,933</div><div class="dow-sub">539 órd · 1,282 cvrs</div></div>
+    <div class="dow-cell best"><div class="dow-name">Vie</div><div class="dow-val" style="color:var(--green2)">$204,013</div><div class="dow-sub">765 órd · 2,002 cvrs</div></div>
+    <div class="dow-cell best"><div class="dow-name">Sáb</div><div class="dow-val" style="color:var(--green2)">$211,363</div><div class="dow-sub">721 órd · 2,040 cvrs</div></div>
+    <div class="dow-cell worst"><div class="dow-name">Dom</div><div class="dow-val" style="color:var(--or)">$14,451</div><div class="dow-sub">9 órd · 81 cvrs</div></div>
+  </div>
+  <div class="kpi-row c3" style="margin-bottom:20px;">
+    <div class="kpi"><div class="kpi-lbl">Dinner (6-11pm)</div><div class="kpi-val">$768,599</div><div class="kpi-sub nu">89.6% del revenue · 2,599 órdenes</div></div>
+    <div class="kpi"><div class="kpi-lbl">Lunch (12-4pm)</div><div class="kpi-val">$88,959</div><div class="kpi-sub nu">10.4% del revenue · 339 órdenes</div></div>
+    <div class="kpi"><div class="kpi-lbl">Hora pico</div><div class="kpi-val">7pm</div><div class="kpi-sub nu">$247,077 · 812 órdenes</div></div>
   </div>
   <div class="sl">Detalle mensual completo</div>
-  <table class="tbl"><thead><tr><th>Mes</th><th>Ventas</th><th>Días</th><th>Prom/día</th><th>Covers</th><th>Check</th><th>vs anterior</th><th style="width:90px;">Tendencia</th></tr></thead><tbody id="monthly-tbody"></tbody></table>
+  <table class="tbl"><thead><tr><th>Mes</th><th>Ventas</th><th>Días</th><th>Prom/día</th><th>Covers</th><th>Check</th><th>vs anterior</th><th style="width:80px;">Tendencia</th></tr></thead><tbody id="monthly-tbody"></tbody></table>
 </div>
 
-<!-- ══════════ INTELIGENCIA ══════════ -->
 <div class="panel" id="p-inteligencia">
   <div class="sl or">Análisis de impacto · Rebrand noviembre 2025</div>
   <div class="callout-grid">
@@ -487,9 +443,9 @@ textarea{min-height:90px;}
   <div class="sl">Descomposición de la pérdida</div>
   <div class="insight-grid">
     <div class="insight red"><div class="ins-lbl">Covers perdidos por noche</div><div class="ins-num" style="color:var(--or)">-29.5</div><div class="ins-txt">De 76 covers/noche a 46.6. Recuperar el baseline requiere 29 personas adicionales por noche, todos los días.</div></div>
-    <div class="insight red"><div class="ins-lbl">Caída de check promedio</div><div class="ins-num" style="color:var(--or)">-$10.79</div><div class="ins-txt">De $118.88 a $108.09. Representa $820/día de pérdida adicional. El cliente nuevo del rebrand gasta menos.</div></div>
-    <div class="insight yel"><div class="ins-lbl">Día más afectado</div><div class="ins-num" style="color:#8B7420">Martes</div><div class="ins-txt">-60% post-rebrand. De $6,942 a $2,752. El cliente corporativo de entre semana no regresó. Jueves también cayó 56%.</div></div>
-    <div class="insight grn"><div class="ins-lbl">Única señal positiva</div><div class="ins-num" style="color:var(--green2)">Abr +4%</div><div class="ins-txt">Check promedio abril 2026 ($104.07) superó abril 2025 ($120.01)... primera mejora YoY en check desde el rebrand.</div></div>
+    <div class="insight red"><div class="ins-lbl">Caída de check promedio</div><div class="ins-num" style="color:var(--or)">-$10.79</div><div class="ins-txt">De $118.88 a $108.09. Representa $820/día de pérdida adicional. El cliente nuevo gasta menos.</div></div>
+    <div class="insight yel"><div class="ins-lbl">Día más afectado</div><div class="ins-num" style="color:#c8a020">Martes</div><div class="ins-txt">$88,478 en 7 meses. El cliente corporativo lun-mar no regresó. Vie+Sáb concentran el 53% del revenue total.</div></div>
+    <div class="insight grn"><div class="ins-lbl">Clientes con 10+ visitas</div><div class="ins-num" style="color:var(--green2)">700</div><div class="ins-txt">700 personas con más de 10 visitas en OpenTable. Base leal existente. Top cliente: 71 visitas registradas.</div></div>
   </div>
   <div class="section-divider"></div>
   <div class="sl">YoY mes a mes — 2025 vs 2026</div>
@@ -499,17 +455,9 @@ textarea{min-height:90px;}
       <tr><td>Enero</td><td>$6,187</td><td>$5,047</td><td class="dn">-18%</td><td>58</td><td>53</td><td class="dn">-10%</td><td>$101</td><td>$93</td><td class="dn">-9%</td></tr>
       <tr><td>Febrero</td><td>$9,671</td><td>$6,649</td><td class="dn">-31%</td><td>85</td><td>66</td><td class="dn">-22%</td><td>$150</td><td>$107</td><td class="dn">-29%</td></tr>
       <tr><td>Marzo</td><td>$6,512</td><td>$3,764</td><td class="dn">-42%</td><td>60</td><td>38</td><td class="dn">-37%</td><td>$109</td><td>$98</td><td class="dn">-10%</td></tr>
-      <tr><td>Abril</td><td>$6,079</td><td>$3,638</td><td class="dn">-40%</td><td>51</td><td>35</td><td class="dn">-31%</td><td>$144</td><td><strong style="color:var(--green2)">$104</strong></td><td class="dn">-28%</td></tr>
+      <tr><td>Abril</td><td>$6,079</td><td>$3,638</td><td class="dn">-40%</td><td>51</td><td>35</td><td class="dn">-31%</td><td>$144</td><td>$104</td><td class="dn">-28%</td></tr>
     </tbody>
   </table>
-  <div class="section-divider"></div>
-  <div class="sl">Temporada alta — comparativa Nov-Abr</div>
-  <div class="kpi-row c4">
-    <div class="kpi"><div class="kpi-lbl">Temporada 24–25</div><div class="kpi-val">$1.14M</div><div class="kpi-sub nu">155 días · $7,346/día</div></div>
-    <div class="kpi"><div class="kpi-lbl">Temporada 25–26</div><div class="kpi-val" style="color:var(--or)">$706K</div><div class="kpi-sub dn">-38% · $4,742/día</div></div>
-    <div class="kpi"><div class="kpi-lbl">Covers/día 24–25</div><div class="kpi-val">65</div><div class="kpi-sub nu">promedio noche</div></div>
-    <div class="kpi"><div class="kpi-lbl">Covers/día 25–26</div><div class="kpi-val" style="color:var(--or)">45</div><div class="kpi-sub dn">-31%</div></div>
-  </div>
   <div class="section-divider"></div>
   <div class="sl">Estacionalidad histórica pre-rebrand</div>
   <div class="chart-wrap">
@@ -517,461 +465,381 @@ textarea{min-height:90px;}
     <div class="chart-sub">Referencia de comportamiento orgánico de la demanda en Brickell</div>
     <div class="chart-canvas"><canvas id="seasonal-chart"></canvas></div>
   </div>
-  <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--gr);padding:16px 18px;margin-bottom:16px;">
-    <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gr);margin-bottom:8px;">Conclusión estratégica</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);">El rebrand eliminó al cliente corporativo de entre semana — el segmento que representaba el 60% del volumen de lunes a jueves. El fin de semana resistió mejor (-34% sábado vs -60% martes). La única señal positiva es el check de abril 2026, primera mejora YoY desde el rebrand. La pregunta que el ownership tiene que responder: ¿el nuevo posicionamiento tiene intención de recuperar ese cliente, o está apostando a sustituirlo?</div>
+  <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--green2);padding:16px 18px;margin-bottom:16px;">
+    <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--green2);margin-bottom:8px;">Conclusión estratégica</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);">El rebrand eliminó al cliente corporativo de entre semana. El 92% de las reservaciones actuales son clientes que ya conocían el restaurante — sin reposición visible: solo 38 primeras visitas en 7 meses. El marketing digital a $14,490/mes no está convirtiendo clientes nuevos. Viernes y sábado concentran el 53% del revenue. La pregunta que ownership debe responder: ¿el nuevo posicionamiento recupera al cliente corporativo, o apuesta a sustituirlo?</div>
   </div>
 </div>
 
-<!-- ══════════ P&L ══════════ -->
 <div class="panel" id="p-pnl">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
     <div class="sl" style="margin-bottom:0;">Estado de Resultados · Casa Zeru Miami</div>
     <div style="display:flex;gap:8px;align-items:center;">
       <span style="font-size:9px;color:var(--mu);">
-        <span class="data-quality dq-real">● Real</span>
-        <span class="data-quality dq-est">◐ Estimado</span>
-        <span class="data-quality dq-pend">○ Pendiente</span>
+        <span class="dq dq-r">● Real</span>&nbsp;
+        <span class="dq dq-e">◐ Estimado</span>&nbsp;
+        <span class="dq dq-p">○ Pendiente</span>
       </span>
-      <button class="btn sm secondary" onclick="openEdit(currentPnlMonth)">Editar mes</button>
+      <button class="btn sm secondary" onclick="openEdit(curPnlM)">Editar mes</button>
     </div>
   </div>
+  <div class="month-selector" id="pnl-sel"></div>
+  <div id="pnl-content"><div class="empty-state">Selecciona un mes.</div></div>
+</div>
 
-  <div class="month-selector" id="pnl-month-selector"></div>
-
-  <div id="pnl-content">
-    <div class="empty-state">Selecciona un mes para ver el estado de resultados.</div>
+<div class="panel" id="p-menu">
+  <div class="sl">Top 15 ítems por revenue · Oct 2025 – May 2026</div>
+  <div class="kpi-row c3" style="margin-bottom:20px;">
+    <div class="kpi"><div class="kpi-lbl">Dover Sole — #1 revenue</div><div class="kpi-val">$23,031</div><div class="kpi-sub nu">516 unidades · $45 avg</div></div>
+    <div class="kpi"><div class="kpi-lbl">Menu Night — mayor ticket</div><div class="kpi-val">$250</div><div class="kpi-sub nu">71 vendidos · $17,750 total</div></div>
+    <div class="kpi"><div class="kpi-lbl">Iberian Croquettes — #1 qty</div><div class="kpi-val">1,026</div><div class="kpi-sub nu">unidades · $20,882 total</div></div>
+  </div>
+  <div id="menu-grid" class="menu-grid"></div>
+  <div class="section-divider"></div>
+  <div class="sl">Mix de ventas por categoría · Abril 2026</div>
+  <div class="kpi-row c4" style="margin-bottom:20px;">
+    <div class="kpi"><div class="kpi-lbl">Food</div><div class="kpi-val">$57,699</div><div class="kpi-sub nu">61% del revenue</div></div>
+    <div class="kpi"><div class="kpi-lbl">Wine Bottle</div><div class="kpi-val">$13,876</div><div class="kpi-sub nu">15% del revenue</div></div>
+    <div class="kpi"><div class="kpi-lbl">Licores</div><div class="kpi-val">$7,615</div><div class="kpi-sub nu">8% del revenue</div></div>
+    <div class="kpi"><div class="kpi-lbl">Bev + Wine copa</div><div class="kpi-val">$7,118</div><div class="kpi-sub nu">8% del revenue</div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="sl">Performance por servidor · Oct 2025 – May 2026</div>
+  <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:20px;" id="srv-block"></div>
+  <div class="section-divider"></div>
+  <div class="sl">Observaciones estratégicas</div>
+  <div class="insight-grid">
+    <div class="insight yel"><div class="ins-lbl">Menu Night — oportunidad</div><div class="ins-num" style="color:#c8a020">71</div><div class="ins-txt">Solo 71 ventas en 7 meses a $250. Duplicar su frecuencia añade $17K sin tocar estructura. Mayor ROI por unidad del menú.</div></div>
+    <div class="insight grn"><div class="ins-lbl">Iberian Croquettes — no tocar</div><div class="ins-num" style="color:var(--green2)">1,026</div><div class="ins-txt">El ítem más vendido con precio real. Presente en top 5 de todos los servidores. Si cambia o falta, el cliente lo nota.</div></div>
+    <div class="insight red"><div class="ins-lbl">Dover Sole — sensible a costo</div><div class="ins-num" style="color:var(--or)">$45</div><div class="ins-txt">Mayor revenue del menú. Si AD Maiora sube el precio del turbot o sole, es el primer margen que se comprime.</div></div>
+    <div class="insight blu"><div class="ins-lbl">Sile y Ely — concentración</div><div class="ins-num" style="color:var(--blue)">81%</div><div class="ins-txt">Las dos generan el 81% del revenue de sala. Si cualquiera sale, el impacto es inmediato y cuantificable.</div></div>
   </div>
 </div>
 
-<!-- ══════════ EJECUTIVO ══════════ -->
+<div class="panel" id="p-clientes">
+  <div class="sl">Base de clientes · OpenTable · Oct 2025 – May 2026</div>
+  <div class="ot-grid">
+    <div class="ot-kpi"><div class="ot-val">6,284</div><div class="ot-lbl">Reservaciones totales</div><div class="ot-sub kpi-sub nu">5,918 completadas</div></div>
+    <div class="ot-kpi"><div class="ot-val" style="color:var(--or)">38</div><div class="ot-lbl">Clientes nuevos</div><div class="ot-sub kpi-sub dn">0.6% — crítico</div></div>
+    <div class="ot-kpi"><div class="ot-val" style="color:var(--green2)">700</div><div class="ot-lbl">VIP (10+ visitas)</div><div class="ot-sub kpi-sub up">Base leal consolidada</div></div>
+    <div class="ot-kpi"><div class="ot-val">1,246</div><div class="ot-lbl">Frecuentes (5+)</div><div class="ot-sub kpi-sub nu">20% del total</div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div>
+      <div class="sl">Top 20 clientes por visitas</div>
+      <div id="guests-block"></div>
+    </div>
+    <div>
+      <div class="sl">Fuente de reservaciones</div>
+      <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:20px;" id="src-block"></div>
+      <div class="section-divider"></div>
+      <div class="sl">Tamaño de grupo</div>
+      <div class="kpi-row c3">
+        <div class="kpi"><div class="kpi-lbl">Parejas (2)</div><div class="kpi-val">3,075</div><div class="kpi-sub nu">49% del total</div></div>
+        <div class="kpi"><div class="kpi-lbl">Grupos 3-4</div><div class="kpi-val">1,567</div><div class="kpi-sub nu">25% del total</div></div>
+        <div class="kpi"><div class="kpi-lbl">Grupos 5+</div><div class="kpi-val">502</div><div class="kpi-sub nu">8% del total</div></div>
+      </div>
+      <div class="section-divider"></div>
+      <div class="sl">Perfil del cliente (Guest Tags)</div>
+      <div class="kpi-row c2">
+        <div class="kpi"><div class="kpi-lbl">Alert the Manager</div><div class="kpi-val sm">1,149</div><div class="kpi-sub nu">18% de reservaciones</div></div>
+        <div class="kpi"><div class="kpi-lbl">Allergy</div><div class="kpi-val sm">660</div><div class="kpi-sub nu">10.5%</div></div>
+        <div class="kpi"><div class="kpi-lbl">VIP tag</div><div class="kpi-val sm">316</div><div class="kpi-sub nu">5%</div></div>
+        <div class="kpi"><div class="kpi-lbl">Good Spender</div><div class="kpi-val sm">217</div><div class="kpi-sub nu">3.5%</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-divider"></div>
+  <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--or);padding:16px 18px;">
+    <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--or);margin-bottom:8px;">Flag crítico</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);">El 92% de las reservaciones son clientes con visitas previas. Sin reposición visible — solo 38 primeras visitas en 7 meses. El marketing digital a $14,490/mes no está convirtiendo clientes nuevos. La base de 700 VIPs es el activo más valioso del negocio; ninguno tiene un programa de reconocimiento activo documentado.</div>
+  </div>
+</div>
+
 <div class="panel" id="p-ejecutivo">
   <div class="exec-wrap">
-    <div class="exec-header">
+    <div class="exec-hdr">
       <div class="exec-title" id="exec-title">Casa Zeru · Resumen Ejecutivo</div>
       <div class="exec-sub">Grupo Zeru · Brickell, Miami</div>
       <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;">
-        <select class="ctx-select" id="exec-month-sel" style="width:auto;margin-bottom:0;" onchange="renderExecutive(this.value)">
+        <select id="exec-sel" style="width:auto;margin-bottom:0;" onchange="renderExec(this.value)">
           <option value="">Seleccionar período</option>
         </select>
-        <button class="btn sm primary" onclick="genExecNarrative()">✦ Generar narrativa IA</button>
+        <button class="btn sm primary" onclick="genNarrative()">✦ Generar narrativa IA</button>
       </div>
     </div>
-
-    <div id="exec-body">
-      <div class="empty-state" style="text-align:center;padding:40px;">Selecciona un período para generar el resumen ejecutivo.</div>
-    </div>
+    <div id="exec-body"><div class="empty-state" style="text-align:center;padding:40px;">Selecciona un período.</div></div>
   </div>
 </div>
 
-<!-- ══════════ ASISTENTE IA ══════════ -->
 <div class="panel" id="p-asistente">
   <div class="chat-layout">
     <div class="sl" style="flex-shrink:0;margin-bottom:8px;">Asistente de inteligencia · Casa Zeru</div>
-    <div class="chat-suggestions">
-      <button class="cs" onclick="sendSuggestion(this)">¿Cómo vamos vs el año pasado?</button>
-      <button class="cs" onclick="sendSuggestion(this)">¿Cuál es el mejor día de la semana?</button>
-      <button class="cs" onclick="sendSuggestion(this)">¿Cuánto costó el rebrand?</button>
-      <button class="cs" onclick="sendSuggestion(this)">Analiza la estructura de costos</button>
-      <button class="cs" onclick="sendSuggestion(this)">¿Qué necesito para recuperar el baseline?</button>
-      <button class="cs" onclick="sendSuggestion(this)">¿Cuál es el piso fijo mensual?</button>
+    <div class="chat-sug">
+      <button class="cs" onclick="sendSug(this)">¿Cómo vamos vs el año pasado?</button>
+      <button class="cs" onclick="sendSug(this)">Analiza la estructura de costos</button>
+      <button class="cs" onclick="sendSug(this)">¿Cuántos clientes nuevos tenemos?</button>
+      <button class="cs" onclick="sendSug(this)">¿Cuál es el break-even mensual?</button>
+      <button class="cs" onclick="sendSug(this)">¿Qué necesito para recuperar el baseline?</button>
+      <button class="cs" onclick="sendSug(this)">¿Cuál es el ítem más rentable?</button>
     </div>
-    <div class="chat-messages" id="chat-msgs">
+    <div class="chat-msgs" id="chat-msgs">
       <div class="msg ai fade">
-        <div class="msg-avatar ai">CZ</div>
-        <div class="msg-body">Tengo acceso completo al histórico de Casa Zeru desde marzo 2023 — 1,029 días, $8.5M en revenue. Ahora también conozco la estructura de costos: $161K de piso fijo mensual (nómina + renta + sundry + marketing), con entretenimiento adicional de $5-14K/mes. Puedo analizar tendencias, calcular el break-even real, proyectar escenarios, o responder cualquier pregunta operativa con datos reales. ¿Por dónde empezamos?</div>
+        <div class="msg-av ai">CZ</div>
+        <div class="msg-body">Sistema v3.0 activo. Tengo acceso completo: 1,029 días de histórico · P&L con 5 meses · 15 ítems del menú · 6,284 reservaciones de OpenTable · performance por servidor. Vie+Sáb generan el 53% del revenue. 38 clientes nuevos en 7 meses. Dover Sole es el #1 por revenue. Break-even estimado: $200K+/mes — nunca alcanzado post-rebrand. ¿Por dónde empezamos?</div>
       </div>
     </div>
     <div id="chat-typing" style="display:none;padding-left:36px;"><div class="typing"><span></span><span></span><span></span></div></div>
-    <div class="chat-input-row">
-      <textarea class="chat-input" id="chat-in" placeholder="Pregunta lo que quieras sobre Casa Zeru..." onkeydown="chatKey(event)" rows="1"></textarea>
+    <div class="chat-ir">
+      <textarea class="chat-in" id="chat-in" placeholder="Pregunta lo que quieras sobre Casa Zeru..." onkeydown="chatKey(event)" rows="1"></textarea>
       <button class="chat-send" id="chat-btn" onclick="sendChat()">Enviar</button>
     </div>
   </div>
 </div>
 
-</div><!-- /main -->
-
+</div>
 <script>
-// ═══════════════════════════════════════════════════════
-// RESTAURANT CONFIG — Cambiar esto para otro restaurante
-// ═══════════════════════════════════════════════════════
-const RC = {
-  name: 'Casa Zeru',
-  brand: 'Casa <b>Zeru</b>',
-  group: 'Grupo Zeru',
-  concept: 'Fine Dining Mediterráneo · Brickell, Miami',
-  city: 'Miami, FL',
-  opened: '2023-03',
-  rebrand_date: '2025-11',
-  user_initials: 'AM',
-  // Performance targets
-  target_daily: [5500, 7000],
-  target_covers: [50, 65],
-  target_check: [100, 130],
-  // P&L benchmarks (% of net sales)
-  bench_food_pct: [28, 32],
-  bench_bev_pct: [18, 22],
-  bench_total_cogs: [28, 35],
-  bench_labor: [28, 35],
-  bench_prime: [50, 58],
-  bench_rent: [5, 8],
-  bench_ebitda: [10, 20],
-};
-
-// ═══════════════════════════════════════════════════════
-// SALES DATA (Toast) — replace with client data
-// ═══════════════════════════════════════════════════════
+const RC={user_initials:'AM',rebrand:'2025-11',bench_food:[28,32],bench_bev:[18,22],bench_cogs:[28,35],bench_labor:[28,35],bench_prime:[50,58],bench_rent:[5,8],bench_ebitda:[10,20]};
 const MONTHLY=[
-  {"label":"2023-03","net_sales":204914.06,"covers":1783,"avg_check":114.93,"avg_daily":10245.7,"days":20},
-  {"label":"2023-04","net_sales":390626.24,"covers":3050,"avg_check":128.07,"avg_daily":13020.87,"days":30},
-  {"label":"2023-05","net_sales":400603.38,"covers":2965,"avg_check":135.11,"avg_daily":12922.69,"days":31},
-  {"label":"2023-06","net_sales":366467.27,"covers":2889,"avg_check":126.85,"avg_daily":12215.58,"days":30},
-  {"label":"2023-07","net_sales":374730.4,"covers":3010,"avg_check":124.5,"avg_daily":12088.08,"days":31},
-  {"label":"2023-08","net_sales":433960.74,"covers":4020,"avg_check":107.95,"avg_daily":13998.73,"days":31},
-  {"label":"2023-09","net_sales":360751.62,"covers":3463,"avg_check":104.17,"avg_daily":12025.05,"days":30},
-  {"label":"2023-10","net_sales":378379.96,"covers":3316,"avg_check":114.11,"avg_daily":12205.81,"days":31},
-  {"label":"2023-11","net_sales":321982.67,"covers":2632,"avg_check":122.33,"avg_daily":10732.76,"days":30},
-  {"label":"2023-12","net_sales":413336.36,"covers":3111,"avg_check":132.86,"avg_daily":13333.43,"days":31},
-  {"label":"2024-01","net_sales":288026.84,"covers":2347,"avg_check":122.72,"avg_daily":9291.19,"days":31},
-  {"label":"2024-02","net_sales":349362.69,"covers":2937,"avg_check":118.95,"avg_daily":12046.99,"days":29},
-  {"label":"2024-03","net_sales":252285.02,"covers":1865,"avg_check":135.27,"avg_daily":8138.23,"days":31},
-  {"label":"2024-04","net_sales":220782.0,"covers":1755,"avg_check":125.8,"avg_daily":7359.4,"days":30},
-  {"label":"2024-05","net_sales":209612.59,"covers":1842,"avg_check":113.8,"avg_daily":7228.02,"days":29},
-  {"label":"2024-06","net_sales":216462.52,"covers":1760,"avg_check":122.99,"avg_daily":8325.48,"days":26},
-  {"label":"2024-07","net_sales":141092.81,"covers":1464,"avg_check":96.37,"avg_daily":5225.66,"days":27},
-  {"label":"2024-08","net_sales":241663.02,"covers":2610,"avg_check":92.59,"avg_daily":8950.48,"days":27},
-  {"label":"2024-09","net_sales":211484.12,"covers":2201,"avg_check":96.09,"avg_daily":8459.36,"days":25},
-  {"label":"2024-10","net_sales":200708.38,"covers":1739,"avg_check":115.42,"avg_daily":7433.64,"days":27},
-  {"label":"2024-11","net_sales":189280.63,"covers":1847,"avg_check":102.48,"avg_daily":7280.02,"days":26},
-  {"label":"2024-12","net_sales":213206.67,"covers":1714,"avg_check":124.39,"avg_daily":8528.27,"days":25},
-  {"label":"2025-01","net_sales":167050.0,"covers":1575,"avg_check":106.06,"avg_daily":6187.04,"days":27},
-  {"label":"2025-02","net_sales":241787.49,"covers":2117,"avg_check":114.21,"avg_daily":9671.5,"days":25},
-  {"label":"2025-03","net_sales":169323.29,"covers":1571,"avg_check":107.78,"avg_daily":6512.43,"days":26},
-  {"label":"2025-04","net_sales":158052.19,"covers":1317,"avg_check":120.01,"avg_daily":6078.93,"days":26},
-  {"label":"2025-05","net_sales":114839.9,"covers":906,"avg_check":126.75,"avg_daily":6379.99,"days":18},
-  {"label":"2025-06","net_sales":108217.03,"covers":997,"avg_check":108.54,"avg_daily":4162.19,"days":26},
-  {"label":"2025-07","net_sales":76576.85,"covers":716,"avg_check":106.95,"avg_daily":2945.26,"days":26},
-  {"label":"2025-08","net_sales":157345.29,"covers":1656,"avg_check":95.02,"avg_daily":6051.74,"days":26},
-  {"label":"2025-09","net_sales":139950.11,"covers":1371,"avg_check":102.08,"avg_daily":5598.0,"days":25},
-  {"label":"2025-10","net_sales":100300.76,"covers":924,"avg_check":108.55,"avg_daily":3714.84,"days":27},
-  {"label":"2025-11","net_sales":93081.93,"covers":712,"avg_check":130.73,"avg_daily":3580.07,"days":26},
-  {"label":"2025-12","net_sales":142177.53,"covers":1277,"avg_check":111.34,"avg_daily":5468.37,"days":26},
-  {"label":"2026-01","net_sales":131224.12,"covers":1369,"avg_check":95.85,"avg_daily":5047.08,"days":26},
-  {"label":"2026-02","net_sales":166236.81,"covers":1653,"avg_check":100.57,"avg_daily":6649.47,"days":25},
-  {"label":"2026-03","net_sales":97869.45,"covers":994,"avg_check":98.46,"avg_daily":3764.21,"days":26},
-  {"label":"2026-04","net_sales":94596.0,"covers":909,"avg_check":104.07,"avg_daily":3638.31,"days":26}
+  {"label":"2023-03","net_sales":204914,"covers":1783,"avg_check":114.93,"avg_daily":10245,"days":20},
+  {"label":"2023-04","net_sales":390626,"covers":3050,"avg_check":128.07,"avg_daily":13020,"days":30},
+  {"label":"2023-05","net_sales":400603,"covers":2965,"avg_check":135.11,"avg_daily":12922,"days":31},
+  {"label":"2023-06","net_sales":366467,"covers":2889,"avg_check":126.85,"avg_daily":12215,"days":30},
+  {"label":"2023-07","net_sales":374730,"covers":3010,"avg_check":124.5,"avg_daily":12088,"days":31},
+  {"label":"2023-08","net_sales":433960,"covers":4020,"avg_check":107.95,"avg_daily":13998,"days":31},
+  {"label":"2023-09","net_sales":360751,"covers":3463,"avg_check":104.17,"avg_daily":12025,"days":30},
+  {"label":"2023-10","net_sales":378379,"covers":3316,"avg_check":114.11,"avg_daily":12205,"days":31},
+  {"label":"2023-11","net_sales":321982,"covers":2632,"avg_check":122.33,"avg_daily":10732,"days":30},
+  {"label":"2023-12","net_sales":413336,"covers":3111,"avg_check":132.86,"avg_daily":13333,"days":31},
+  {"label":"2024-01","net_sales":288026,"covers":2347,"avg_check":122.72,"avg_daily":9291,"days":31},
+  {"label":"2024-02","net_sales":349362,"covers":2937,"avg_check":118.95,"avg_daily":12046,"days":29},
+  {"label":"2024-03","net_sales":252285,"covers":1865,"avg_check":135.27,"avg_daily":8138,"days":31},
+  {"label":"2024-04","net_sales":220782,"covers":1755,"avg_check":125.8,"avg_daily":7359,"days":30},
+  {"label":"2024-05","net_sales":209612,"covers":1842,"avg_check":113.8,"avg_daily":7228,"days":29},
+  {"label":"2024-06","net_sales":216462,"covers":1760,"avg_check":122.99,"avg_daily":8325,"days":26},
+  {"label":"2024-07","net_sales":141092,"covers":1464,"avg_check":96.37,"avg_daily":5225,"days":27},
+  {"label":"2024-08","net_sales":241663,"covers":2610,"avg_check":92.59,"avg_daily":8950,"days":27},
+  {"label":"2024-09","net_sales":211484,"covers":2201,"avg_check":96.09,"avg_daily":8459,"days":25},
+  {"label":"2024-10","net_sales":200708,"covers":1739,"avg_check":115.42,"avg_daily":7433,"days":27},
+  {"label":"2024-11","net_sales":189280,"covers":1847,"avg_check":102.48,"avg_daily":7280,"days":26},
+  {"label":"2024-12","net_sales":213206,"covers":1714,"avg_check":124.39,"avg_daily":8528,"days":25},
+  {"label":"2025-01","net_sales":167050,"covers":1575,"avg_check":106.06,"avg_daily":6187,"days":27},
+  {"label":"2025-02","net_sales":241787,"covers":2117,"avg_check":114.21,"avg_daily":9671,"days":25},
+  {"label":"2025-03","net_sales":169323,"covers":1571,"avg_check":107.78,"avg_daily":6512,"days":26},
+  {"label":"2025-04","net_sales":158052,"covers":1317,"avg_check":120.01,"avg_daily":6078,"days":26},
+  {"label":"2025-05","net_sales":114839,"covers":906,"avg_check":126.75,"avg_daily":6379,"days":18},
+  {"label":"2025-06","net_sales":108217,"covers":997,"avg_check":108.54,"avg_daily":4162,"days":26},
+  {"label":"2025-07","net_sales":76576,"covers":716,"avg_check":106.95,"avg_daily":2945,"days":26},
+  {"label":"2025-08","net_sales":157345,"covers":1656,"avg_check":95.02,"avg_daily":6051,"days":26},
+  {"label":"2025-09","net_sales":139950,"covers":1371,"avg_check":102.08,"avg_daily":5598,"days":25},
+  {"label":"2025-10","net_sales":100300,"covers":924,"avg_check":108.43,"avg_daily":3714,"days":27},
+  {"label":"2025-11","net_sales":93081,"covers":712,"avg_check":130.73,"avg_daily":3580,"days":26},
+  {"label":"2025-12","net_sales":142177,"covers":1277,"avg_check":111.34,"avg_daily":5468,"days":26},
+  {"label":"2026-01","net_sales":131224,"covers":1369,"avg_check":95.85,"avg_daily":5047,"days":26},
+  {"label":"2026-02","net_sales":166237,"covers":1653,"avg_check":100.57,"avg_daily":6649,"days":25},
+  {"label":"2026-03","net_sales":97869,"covers":994,"avg_check":98.46,"avg_daily":3764,"days":26},
+  {"label":"2026-04","net_sales":94596,"covers":909,"avg_check":104.07,"avg_daily":3638,"days":26}
 ];
-
-// ═══════════════════════════════════════════════════════
-// P&L DATA — Pre-populated months (edit inline or via UI)
-// "quality": "real" | "estimated" | "pending"
-// ═══════════════════════════════════════════════════════
-const PNL_MONTHS = {
-  '2025-10': {
-    label:'Octubre 2025', quality:'estimated',
-    note:'Compras estimadas al 34.9% histórico. Datos de nómina y fijos de cierre contable.',
-    source:'Toast + Cierres contables',
-    // Revenue
-    net_sales:100301, other_income:0,
-    // COGS (xtraCHEF purchases)
-    food_cost:35000, wine_cost:6000, bev_cost:2500, na_bev_cost:1500,
-    // Labor
-    payroll:122892,
-    // Occupancy
-    rent:32780,
-    // Fixed OpEx
-    sundry:23394, marketing:4500, reservations:800, toast_sw:309,
-    exec_info:0, gen_mgmt:0,
-    // Variable OpEx
-    entertainment:3000, cleaning_svc:1800, cleaning_prod:500,
-    ice:600, laundry:300, disposables:1200, pest:160, trash:793,
-    gas:200, coal:500, consulting:500, office:100, delivery:800,
-    printer:0, equipment:300, other:0,
-    // D&A
-    depreciation:0, amortization:0
-  },
-  '2026-01': {
-    label:'Enero 2026', quality:'estimated',
-    note:'Incluye $52,476 en ingresos extraordinarios (no operativos). Compras de xtraCHEF son promedio trimestral ene-mar.',
-    source:'Toast + Cierres + xtraCHEF (prom. Q1)',
-    net_sales:131224, other_income:52476,
-    food_cost:27973, wine_cost:9172, bev_cost:1869, na_bev_cost:2073,
-    payroll:109849,
-    rent:36307,
-    sundry:24745, marketing:4830, reservations:1274, toast_sw:309,
-    exec_info:6139, gen_mgmt:1473,
-    entertainment:14533, cleaning_svc:2604, cleaning_prod:621,
-    ice:856, laundry:340, disposables:1870, pest:160, trash:793,
-    gas:303, coal:732, consulting:2067, office:157, delivery:1374,
-    printer:2185, equipment:813, other:0,
-    depreciation:0, amortization:0
-  },
-  '2026-02': {
-    label:'Febrero 2026', quality:'estimated',
-    note:'Compras de xtraCHEF son promedio trimestral ene-mar. Mejor mes post-rebrand.',
-    source:'Toast + Cierres + xtraCHEF (prom. Q1)',
-    net_sales:166237, other_income:0,
-    food_cost:27973, wine_cost:9172, bev_cost:1869, na_bev_cost:2073,
-    payroll:91583,
-    rent:35347,
-    sundry:24656, marketing:4830, reservations:1274, toast_sw:309,
-    exec_info:6139, gen_mgmt:1473,
-    entertainment:14533, cleaning_svc:2604, cleaning_prod:621,
-    ice:856, laundry:340, disposables:1870, pest:160, trash:793,
-    gas:303, coal:732, consulting:2067, office:157, delivery:1374,
-    printer:2185, equipment:813, other:0,
-    depreciation:0, amortization:0
-  },
-  '2026-03': {
-    label:'Marzo 2026', quality:'estimated',
-    note:'Sundry $24,704 incluido (pendiente de aplicación contable). Compras de xtraCHEF son promedio trimestral ene-mar.',
-    source:'Toast + Cierres + xtraCHEF (prom. Q1)',
-    net_sales:97869, other_income:0,
-    food_cost:27973, wine_cost:9172, bev_cost:1869, na_bev_cost:2073,
-    payroll:85569,
-    rent:34183,
-    sundry:24704, marketing:4830, reservations:1274, toast_sw:309,
-    exec_info:6139, gen_mgmt:1473,
-    entertainment:14533, cleaning_svc:2604, cleaning_prod:621,
-    ice:856, laundry:340, disposables:1870, pest:160, trash:793,
-    gas:303, coal:732, consulting:2067, office:157, delivery:1374,
-    printer:2185, equipment:813, other:0,
-    depreciation:0, amortization:0
-  },
-  '2026-04': {
-    label:'Abril 2026', quality:'estimated',
-    note:'Compras xtraCHEF datos reales. Nómina pendiente — campo editable.',
-    source:'Toast + xtraCHEF abril (real)',
-    net_sales:94596, other_income:0,
-    food_cost:24298, wine_cost:6889, bev_cost:1678, na_bev_cost:2308,
-    payroll:0,
-    rent:34500,
-    sundry:24700, marketing:4800, reservations:1880, toast_sw:842,
-    exec_info:4800, gen_mgmt:1300,
-    entertainment:5100, cleaning_svc:1008, cleaning_prod:603,
-    ice:541, laundry:1737, disposables:1500, pest:248, trash:1190,
-    gas:0, coal:0, consulting:600, office:116, delivery:3193,
-    printer:0, equipment:228, other:305,
-    depreciation:0, amortization:0
-  }
+const TOP_ITEMS=[
+  {n:'Dover Sole fillet, caper & citric butter',q:516,p:45,r:23031,c:'Pescados'},
+  {n:'Iberian Croquettes',q:1026,p:20,r:20882,c:'Aperitivos'},
+  {n:'Pata Negra Platter',q:257,p:70,r:17979,c:'Ibéricos'},
+  {n:'Menu Night',q:71,p:250,r:17750,c:'Menú degustación'},
+  {n:'Filet Mignon and Foie',q:256,p:61,r:15552,c:'Carnes'},
+  {n:'Dover Sole Whole LB',q:329,p:46,r:14934,c:'Pescados'},
+  {n:'Gallega Octopus',q:495,p:30,r:14670,c:'Pescados'},
+  {n:'Branzino Whole LB',q:348,p:38,r:13362,c:'Pescados'},
+  {n:'Black Rice',q:395,p:33,r:13006,c:'Arroces'},
+  {n:'Rib Eye Rice',q:382,p:34,r:12981,c:'Arroces'},
+  {n:'Prefix Menu',q:97,p:115,r:12895,c:'Menú degustación'},
+  {n:'Kobe Rice',q:194,p:66,r:12778,c:'Arroces'},
+  {n:'Turbot Whole LB',q:271,p:45,r:12091,c:'Pescados'},
+  {n:'Linguine, Manchego & Truffle',q:404,p:29,r:11720,c:'Pastas'},
+  {n:'Prime Bone-in Ribeye 20oz',q:130,p:89,r:11567,c:'Carnes'},
+];
+const SERVERS=[
+  {n:'Silenay Fernandez',r:299827,i:10768,role:'Senior Server'},
+  {n:'Elizabeth (Ely) Ramil',r:295380,i:10909,role:'Senior Server'},
+  {n:'Luna Saavedra',r:79528,i:3401,role:'Bartender / Server'},
+  {n:'Server Events',r:49904,i:2077,role:'Eventos'},
+  {n:'Pablo Perez',r:13748,i:99,role:'AGM'},
+];
+const TOP_GUESTS=[
+  {n:'Edison Sabala',v:71,c:4},{n:'Fred Mann',v:68,c:90},
+  {n:'Scott Devereaux',v:61,c:23},{n:'Joseba Calvo',v:54,c:9},
+  {n:'Jack Morgan',v:44,c:52},{n:'Daniel Sanchez',v:39,c:4},
+  {n:'Carlos Zalles',v:37,c:16},{n:'Luis Tojeiro',v:37,c:52},
+  {n:'Karl White',v:35,c:8},{n:'Tony Diaz',v:35,c:29},
+  {n:'Horst Ferrero',v:30,c:21},{n:'Bankole Johnson',v:30,c:10},
+  {n:'Alejandro Rebolledo',v:29,c:10},{n:'Fernando Sandoval',v:29,c:22},
+  {n:'Juan Carlos Jurado',v:28,c:29},{n:'Giorgio Mariani',v:28,c:44},
+  {n:'Delano Andrade',v:27,c:9},{n:'Fran Anania',v:26,c:5},
+  {n:'Diego Pardo',v:26,c:37},{n:'Jose Barrios',v:26,c:37},
+];
+const SOURCES=[
+  {n:'Teléfono / In-house',c:2239,p:35.6,col:'#3a9460'},
+  {n:'OpenTable Network',c:1941,p:30.9,col:'#C8401A'},
+  {n:'Walk-in',c:1625,p:25.9,col:'#8B7420'},
+  {n:'Your Network',c:479,p:7.6,col:'#4a7a94'},
+];
+const PNL={
+  '2025-10':{label:'Octubre 2025',quality:'estimated',note:'Compras estimadas. Nómina y fijos de cierre contable. Marketing $4,500 (pre-rebrand).',source:'Toast + Cierres',net_sales:100301,other_income:0,food_cost:35000,wine_cost:6000,bev_cost:2500,na_bev_cost:1500,payroll:122892,rent:32780,sundry:23394,marketing:4500,reservations:800,toast_sw:309,exec_info:0,gen_mgmt:0,entertainment:3000,cleaning_svc:1800,cleaning_prod:500,ice:600,laundry:300,disposables:1200,pest:160,trash:793,gas:200,coal:500,consulting:500,office:100,delivery:800,printer:0,equipment:300,other:0,depreciation:0,amortization:0},
+  '2026-01':{label:'Enero 2026',quality:'estimated',note:'Incluye $52,476 otros ingresos. Marketing $14,490.',source:'Toast + Cierres + xtraCHEF Q1',net_sales:131224,other_income:52476,food_cost:27973,wine_cost:9172,bev_cost:1869,na_bev_cost:2073,payroll:109849,rent:36307,sundry:24745,marketing:14490,reservations:1274,toast_sw:309,exec_info:6139,gen_mgmt:1473,entertainment:14533,cleaning_svc:2604,cleaning_prod:621,ice:856,laundry:340,disposables:1870,pest:160,trash:793,gas:303,coal:732,consulting:2067,office:157,delivery:1374,printer:2185,equipment:813,other:0,depreciation:0,amortization:0},
+  '2026-02':{label:'Febrero 2026',quality:'estimated',note:'Mejor mes post-rebrand.',source:'Toast + Cierres + xtraCHEF Q1',net_sales:166237,other_income:0,food_cost:27973,wine_cost:9172,bev_cost:1869,na_bev_cost:2073,payroll:91583,rent:35347,sundry:24656,marketing:14490,reservations:1274,toast_sw:309,exec_info:6139,gen_mgmt:1473,entertainment:14533,cleaning_svc:2604,cleaning_prod:621,ice:856,laundry:340,disposables:1870,pest:160,trash:793,gas:303,coal:732,consulting:2067,office:157,delivery:1374,printer:2185,equipment:813,other:0,depreciation:0,amortization:0},
+  '2026-03':{label:'Marzo 2026',quality:'estimated',note:'Compras promedio Q1.',source:'Toast + Cierres + xtraCHEF Q1',net_sales:97869,other_income:0,food_cost:27973,wine_cost:9172,bev_cost:1869,na_bev_cost:2073,payroll:85569,rent:34183,sundry:24704,marketing:14430,reservations:1274,toast_sw:309,exec_info:6139,gen_mgmt:1473,entertainment:14533,cleaning_svc:2604,cleaning_prod:621,ice:856,laundry:340,disposables:1870,pest:160,trash:793,gas:303,coal:732,consulting:2067,office:157,delivery:1374,printer:2185,equipment:813,other:0,depreciation:0,amortization:0},
+  '2026-04':{label:'Abril 2026',quality:'estimated',note:'Compras xtraCHEF reales. Nómina pendiente.',source:'Toast + xtraCHEF abril',net_sales:94596,other_income:0,food_cost:24298,wine_cost:6889,bev_cost:1678,na_bev_cost:2308,payroll:0,rent:34500,sundry:24700,marketing:14490,reservations:1880,toast_sw:842,exec_info:4800,gen_mgmt:1300,entertainment:5100,cleaning_svc:1008,cleaning_prod:603,ice:541,laundry:1737,disposables:1500,pest:248,trash:1190,gas:0,coal:0,consulting:600,office:116,delivery:3193,printer:0,equipment:228,other:305,depreciation:0,amortization:0},
 };
-
-// Editable overrides stored in session
-let pnlOverrides = JSON.parse(sessionStorage.getItem('czPnlOverrides')||'{}');
-let currentPnlMonth = '2026-04';
-let currentEditMonth = null;
-
-// ═══════════════════════════════════════════════════════
-// AI CONTEXT — Updated with cost structure
-// ═══════════════════════════════════════════════════════
-const CZ_CONTEXT=`Eres el asistente de inteligencia operativa de Casa Zeru, restaurante fine dining mediterráneo-español en Brickell, Miami. Operado por Grupo Zeru.
-
-DATOS HISTÓRICOS (Mar 2023 – Abr 2026, 1029 días, ~$8.5M acumulado):
-Pre-rebrand (hasta Nov 14 2025): $8,820/día, 76 covers/noche, $118.88 check avg
-Post-rebrand (desde Nov 14 2025): $4,762/día, 46.6 covers, $108.09 check avg
-Impacto rebrand: -46% ventas, -39% covers, -9% check. Revenue perdido 137 días: $555,869. Pérdida anualizada: $1.48M.
-
-DOW post-rebrand: Lun $2,862(-50%) Mar $2,752(-60%) Mié $4,736(-40%) Jue $4,079(-56%) Vie $6,770(-45%) Sáb $7,225(-34%) Dom $426(-95%)
-
-YOY 2025→2026: Ene -18%ventas | Feb -31% | Mar -42% | Abr -40% (check: primera mejora positiva, +4%)
-
-ESTRUCTURA DE COSTOS (mensual post-rebrand):
-PISO FIJO MÍNIMO: ~$161,000/mes
-  - Nómina (variable): Oct $122K | Ene $109K | Feb $91K | Mar $85K
-  - Renta all-in: $34,500/mes
-  - Cargo corporativo (Sundry/préstamo): $24,700/mes
-  - Marketing digital: $4,830-14,490/mes (triplicado desde el rebrand)
-  
-COMPRAS DE PRODUCTO (xtraCHEF):
-  - Food purchases: $24-28K/mes (25-34% de ventas — sano)
-  - Wine purchases: $7-9K/mes
-  - Bebidas alcohólicas: $1.7-1.9K/mes
-  - Bebidas no alcohólicas: $2-2.3K/mes
-  
-GASTOS OPERATIVOS VARIABLES:
-  - Entretenimiento (DJ + 4 artistas): $5,100-14,533/mes (9-11% de ventas — excesivo)
-  - Limpieza overnight: $1,008-2,604/mes
-  - Laundría (mantelería): $340-1,737/mes
-  - Desechables, hielo, otros: ~$3,000-4,000/mes
-
-TOP VENDEDORES (Oct 25 – May 26):
-  Screen Media Group (marketing): $36,335 total ($5,190/mes)
-  Antonio Briceño (DJ): $29,000 total ($4,142/mes)
-  Senacamo (jamón ibérico): $27,726
-  Darien Produce (produce): $34,733
-  AD Maiora (mariscos): $32,766
-
-BREAK-EVEN ESTIMADO: ~$200,000+/mes en ventas netas para cubrir toda la estructura.
-PÉRDIDAS REPORTADAS: Oct -$208K | Ene -$165K | Feb -$115K | Mar -$158K+
-
-Benchmarks sanos para fine dining:
-Food cost: 28-32% | Labor: 28-35% | Prime cost: <58% | Rent: <8% | EBITDA: >15%
-
-Responde en español. Directo, con números reales. Sin relleno.`;
-
-// ═══ STATE ═══
-let sessionHist=JSON.parse(sessionStorage.getItem('czSess')||'[]');
-let fileContent='';
+let pnlOv=JSON.parse(sessionStorage.getItem('czPnlOv')||'{}');
+let curPnlM='2026-04';
+let curEditM=null;
+let sessHist=JSON.parse(sessionStorage.getItem('czSess')||'[]');
+let fileCont='';
 let mainChart=null;
-let currentMetric='avg_daily';
-let chatHistory=[];
+let curMetric='avg_daily';
+let chatHist=[];
 let execChart=null;
 
-// ═══ INIT ═══
-document.getElementById('dateChip').innerHTML=new Date().toLocaleDateString('es-MX',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).toUpperCase()+'<br>'+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
-checkKeyStatus();
-renderHistory();
-buildPnlMonthSelector();
-buildExecMonthSelector();
+const CZ_CTX=`Eres el asistente de inteligencia operativa de Casa Zeru, fine dining mediterráneo-español en Brickell, Miami. Grupo Zeru.
 
-// ═══ API KEY ═══
+HISTÓRICO (Mar 2023–Abr 2026, 1,029 días, $8.5M):
+Pre-rebrand: $8,820/día, 76 covers, $118.88 check
+Post-rebrand (nov 2025+): $4,762/día, 46.6 covers, $108.09 check
+Pérdida: -46% ventas, -39% covers. $555K en 137 días. Anualizado: $1.48M.
+
+DOW real (Oct 25–May 26): Lun $89K | Mar $88K | Mié $127K | Jue $123K | Vie $204K | Sáb $211K | Dom $14K
+Vie+Sáb = 53% revenue. Hora pico: 7pm. Dinner 89.6% / Lunch 10.4%.
+YOY: Ene -18% | Feb -31% | Mar -42% | Abr -40%
+
+COSTOS (post-rebrand):
+Nómina: Oct $122K | Ene $109K | Feb $91K | Mar $85K | Abr pendiente
+Renta all-in: $34,500/mes | Sundry (préstamo corp): $24,700/mes
+Marketing: $14,490/mes (triplicado sin retorno visible)
+Entretenimiento (DJ+4 artistas): $5,100-14,533/mes
+CC processing fees: ~$3,200/mes (no en P&L aún)
+PISO FIJO MÍNIMO: ~$175,000/mes. Break-even: $200K+/mes. Nunca alcanzado post-rebrand.
+
+MENÚ (Oct 25–May 26):
+#1 Dover Sole $23,031 (516u) | #2 Iberian Croquettes $20,882 (1,026u) | #3 Pata Negra $17,979
+#4 Menu Night $17,750 (71u a $250) | #5 Filet Mignon $15,552
+Food 61% / Wine 15% / Licores 8% del revenue (abril 2026)
+
+SERVIDORES: Sile $299K | Ely $295K | Luna $79K | Events $49K
+Sile+Ely = 81% del revenue de sala.
+
+CLIENTES (OpenTable, 6,284 reservaciones):
+Nuevos: 38 (0.6%) — crítico. Recurrentes: 5,823. VIPs 10+: 700.
+Fuentes: Teléfono 36% | OT Network 31% | Walk-in 26% | Your Network 8%
+Top cliente: Edison Sabala 71 visitas. Fred Mann 68 visitas, 90 covers.
+
+Responde en español. Directo, con números. Sin relleno.`;
+
+// INIT
+document.getElementById('dateChip').innerHTML=new Date().toLocaleDateString('es-MX',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).toUpperCase()+'<br>'+new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
+checkKey();renderHist();buildPnlSel();buildExecSel();renderMenu();renderClientes();
+
 function getKey(){return localStorage.getItem('czApiKey')||'';}
-function checkKeyStatus(){
-  const btn=document.getElementById('key-btn');
-  if(getKey()){btn.textContent='✓ API Key';btn.classList.add('set');}
-  else{btn.textContent='⚙ API Key';btn.classList.remove('set');}
-}
-function openModal(){
-  if(getKey())document.getElementById('key-input').value=getKey();
-  document.getElementById('key-modal').classList.add('on');
-  setTimeout(()=>document.getElementById('key-input').focus(),100);
-}
+function checkKey(){const b=document.getElementById('key-btn');if(getKey()){b.textContent='✓ API Key';b.classList.add('set');}else{b.textContent='⚙ API Key';b.classList.remove('set');}}
+function openModal(){if(getKey())document.getElementById('key-input').value=getKey();document.getElementById('key-modal').classList.add('on');setTimeout(()=>document.getElementById('key-input').focus(),100);}
 function closeModal(){document.getElementById('key-modal').classList.remove('on');}
-function saveKey(){
-  const k=document.getElementById('key-input').value.trim();
-  if(!k){alert('Ingresa una API key válida');return;}
-  localStorage.setItem('czApiKey',k);closeModal();checkKeyStatus();
-}
+function saveKey(){const k=document.getElementById('key-input').value.trim();if(!k)return;localStorage.setItem('czApiKey',k);closeModal();checkKey();}
 document.getElementById('key-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 
-// ═══ TABS ═══
 function goTab(id,el){
   document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('p-'+id).classList.add('on');
-  if(id==='historico'){setTimeout(()=>{renderMonthlyTable();initMainChart();initSeasonalChart('seasonal-chart-hist');},60);}
-  if(id==='inteligencia'){setTimeout(()=>initSeasonalChart('seasonal-chart'),60);}
-  if(id==='pnl'){renderPNL(currentPnlMonth);}
-  if(id==='ejecutivo'){
-    const sel=document.getElementById('exec-month-sel');
-    if(sel.value)renderExecutive(sel.value);
-  }
+  el.classList.add('on');document.getElementById('p-'+id).classList.add('on');
+  if(id==='historico')setTimeout(()=>{renderMonthly();initMain();},60);
+  if(id==='inteligencia')setTimeout(()=>initSeasonal('seasonal-chart'),60);
+  if(id==='pnl')renderPNL(curPnlM);
+  if(id==='ejecutivo'){const s=document.getElementById('exec-sel');if(s.value)renderExec(s.value);}
 }
 
-// ═══ FILE ═══
 const uz=document.getElementById('uz');
 uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag');});
 uz.addEventListener('dragleave',()=>uz.classList.remove('drag'));
 uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)processFile(f);});
 function handleFile(e){const f=e.target.files[0];if(f)processFile(f);}
-function processFile(f){
-  const r=new FileReader();
-  r.onload=e=>{fileContent=e.target.result;document.getElementById('file-ok-bar').classList.add('on');document.getElementById('file-ok-name').textContent=f.name;};
-  r.readAsText(f);
-}
-function clearFile(){fileContent='';document.getElementById('file-ok-bar').classList.remove('on');document.getElementById('file-ok-name').textContent='';document.getElementById('file-in').value='';}
+function processFile(f){const r=new FileReader();r.onload=e=>{fileCont=e.target.result;document.getElementById('file-ok-bar').classList.add('on');document.getElementById('file-ok-name').textContent=f.name;};r.readAsText(f);}
+function clearFile(){fileCont='';document.getElementById('file-ok-bar').classList.remove('on');document.getElementById('file-ok-name').textContent='';document.getElementById('file-in').value='';}
 function loadDemo(){clearFile();document.getElementById('email-in').value=`Casa Zeru - Daily Sales Report\nDate: ${new Date().toLocaleDateString('en-US')}\nNet Sales: $5,240.00\nTotal Guests: 54\nChecks: 31\nAverage Check: $97.04\nFood Sales: $2,980.00\nBeverage Sales: $2,260.00\nComps: $118.00\nVoids: $45.00`;}
 
-// ═══ ANALYZE HOY ═══
 async function analyzeReport(){
   const pasted=document.getElementById('email-in').value.trim();
-  const content=fileContent||pasted;
-  if(!content){setStatus('Carga un archivo o pega el texto');return;}
-  const key=getKey();if(!key){openModal();setStatus('Configura tu API key primero');return;}
-  const btn=document.getElementById('analyze-btn');
-  btn.disabled=true;setStatus('<span class="spin"></span>Analizando...');
-  const ctxParts=[];
-  if(document.getElementById('ctx-event').checked)ctxParts.push('Hubo evento/cantante esa noche');
-  if(document.getElementById('ctx-rain').checked)ctxParts.push('Llovió durante el servicio');
-  if(document.getElementById('ctx-street').checked)ctxParts.push('Cerraron la calle / hubo obras');
-  if(document.getElementById('ctx-holiday').checked)ctxParts.push('Era feriado o fecha especial');
-  if(document.getElementById('ctx-promo').checked)ctxParts.push('Hubo promoción activa');
-  if(document.getElementById('ctx-vip').checked)ctxParts.push('Hubo mesa VIP o grupo privado');
-  if(document.getElementById('ctx-short').checked)ctxParts.push('Personal reducido en el servicio');
-  if(document.getElementById('ctx-conv').checked)ctxParts.push('Había convención o evento grande en la zona');
-  const evType=document.getElementById('ctx-event-type').value;
-  if(evType)ctxParts.push('Tipo de evento: '+evType);
-  const notes=document.getElementById('ctx-notes').value.trim();
-  if(notes)ctxParts.push(notes);
-  const ctxStr=ctxParts.length?'\n\nCONTEXTO DEL DÍA:\n'+ctxParts.join('\n'):'';
-  const prompt=`Eres el sistema de análisis operativo de Casa Zeru Miami. Fine dining mediterráneo-español en Brickell.
-
-BENCHMARKS: Ventas objetivo $5,500-7,000/noche | Covers 50-65 | Check $100-130 | Food/bev 55/45 | Comps <3%
-PRE-REBRAND: $8,820/día, 76 covers, $118.88 check
-POST-REBRAND ACTUAL: $4,762/día, 46.6 covers, $108.09 check${ctxStr}
-
-Analiza el reporte. Responde SOLO JSON válido sin markdown:
-{"date":"...","net_sales":0,"covers":0,"checks":0,"avg_check":0,"food_sales":0,"bev_sales":0,"food_pct":0,"bev_pct":0,"comps":0,"comps_pct":0,"voids":0,"sales_vs_target":"above|below|on_target","covers_vs_target":"above|below|on_target","check_vs_target":"above|below|on_target","flags":[{"type":"alert|ok|info","text":"mensaje concreto en español"}],"analysis":"2-3 oraciones directas en español"}
-
+  const content=fileCont||pasted;
+  if(!content){setSt('Carga un archivo o pega el texto');return;}
+  const key=getKey();if(!key){openModal();return;}
+  const btn=document.getElementById('analyze-btn');btn.disabled=true;setSt('<span class="spin"></span>Analizando...');
+  const cp=[];
+  ['event','rain','street','holiday','promo','vip','short','conv'].forEach(id=>{if(document.getElementById('ctx-'+id).checked)cp.push(document.getElementById('ctx-'+id).parentElement.textContent.trim());});
+  const ev=document.getElementById('ctx-event-type').value;if(ev)cp.push('Tipo: '+ev);
+  const notes=document.getElementById('ctx-notes').value.trim();if(notes)cp.push(notes);
+  const prompt=`Analiza reporte Casa Zeru Miami. Fine dining mediterráneo, Brickell.
+Benchmarks: $5,500-7,000/noche|50-65 covers|check $100-130|food/bev 55/45|comps<3%
+Post-rebrand: $4,762/día, 46.6 covers, $108.09 check
+${cp.length?'Contexto: '+cp.join(', '):''}
+Responde SOLO JSON sin markdown:
+{"date":"","net_sales":0,"covers":0,"checks":0,"avg_check":0,"food_sales":0,"bev_sales":0,"food_pct":0,"bev_pct":0,"comps":0,"comps_pct":0,"voids":0,"sales_vs_target":"above|below|on_target","covers_vs_target":"above|below|on_target","check_vs_target":"above|below|on_target","flags":[{"type":"alert|ok|info","text":"..."}],"analysis":"2-3 oraciones directas"}
 REPORTE:\n${content.substring(0,4000)}`;
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})});
     const data=await r.json();
-    if(data.error){setStatus('Error API: '+data.error.message);return;}
+    if(data.error){setSt('Error: '+data.error.message);return;}
     const result=JSON.parse(data.content.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
-    renderDayResult(result);
-    sessionHist.unshift({date:result.date,net_sales:result.net_sales,covers:result.covers,avg_check:result.avg_check,result,ts:new Date().toISOString()});
-    if(sessionHist.length>15)sessionHist=sessionHist.slice(0,15);
-    sessionStorage.setItem('czSess',JSON.stringify(sessionHist));
-    renderHistory();setStatus('✓ Análisis completado');setTimeout(()=>setStatus(''),3000);
-  }catch(err){setStatus('Error de conexión');console.error(err);}
-  finally{btn.disabled=false;}
+    renderDay(result);
+    sessHist.unshift({date:result.date,net_sales:result.net_sales,covers:result.covers,avg_check:result.avg_check,result,ts:new Date().toISOString()});
+    if(sessHist.length>15)sessHist=sessHist.slice(0,15);
+    sessionStorage.setItem('czSess',JSON.stringify(sessHist));
+    renderHist();setSt('✓ Análisis completado');setTimeout(()=>setSt(''),3000);
+  }catch(e){setSt('Error de conexión');}finally{btn.disabled=false;}
 }
-function renderDayResult(d){
-  const fmt=n=>n?'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0}):'—';
-  const pct=n=>n?Number(n).toFixed(1)+'%':'—';
-  document.getElementById('k-sales').textContent=fmt(d.net_sales);
+function renderDay(d){
+  const fm=n=>n?'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0}):'—';
+  const pt=n=>n?Number(n).toFixed(1)+'%':'—';
+  document.getElementById('k-sales').textContent=fm(d.net_sales);
   document.getElementById('k-covers').textContent=d.covers||'—';
   document.getElementById('k-check').textContent=d.avg_check?'$'+Number(d.avg_check).toFixed(0):'—';
-  document.getElementById('k-food').textContent=pct(d.food_pct);
-  document.getElementById('k-bev').textContent=pct(d.bev_pct);
-  document.getElementById('k-comps').textContent=pct(d.comps_pct);
-  if(d.comps_pct>3)document.getElementById('k-comps').style.color='var(--or)';
-  setDelta('k-sales-d',d.sales_vs_target);setDelta('k-covers-d',d.covers_vs_target);setDelta('k-check-d',d.check_vs_target);
-  const icons={alert:'▲',ok:'●',info:'◆'};
-  if(d.flags?.length)document.getElementById('flags-zone').innerHTML=d.flags.map(f=>`<div class="flag ${f.type==='alert'?'al':f.type==='ok'?'ok':'in'} fade"><div class="fi">${icons[f.type]||'◆'}</div><div class="ft">${f.text}</div></div>`).join('');
+  document.getElementById('k-food').textContent=pt(d.food_pct);
+  document.getElementById('k-bev').textContent=pt(d.bev_pct);
+  document.getElementById('k-comps').textContent=pt(d.comps_pct);
+  setD('k-sales-d',d.sales_vs_target);setD('k-covers-d',d.covers_vs_target);setD('k-check-d',d.check_vs_target);
+  const ic={alert:'▲',ok:'●',info:'◆'};
+  if(d.flags?.length)document.getElementById('flags-zone').innerHTML=d.flags.map(f=>`<div class="flag ${f.type==='alert'?'al':f.type==='ok'?'ok':'in'} fade"><div class="fi">${ic[f.type]||'◆'}</div><div class="ft">${f.text}</div></div>`).join('');
   const an=document.getElementById('analysis-block');an.classList.remove('empty');an.textContent=d.analysis||'—';an.classList.add('fade');
 }
-function setDelta(id,val){
+function setD(id,val){
   const el=document.getElementById(id);if(!el)return;
   if(val==='above'){el.textContent='↑ sobre objetivo';el.className='kpi-sub up';}
   else if(val==='below'){el.textContent='↓ bajo objetivo';el.className='kpi-sub dn';}
   else{el.textContent='→ en objetivo';el.className='kpi-sub nu';}
 }
-function renderHistory(){
+function renderHist(){
   const el=document.getElementById('hist-list');
-  if(!sessionHist.length){el.innerHTML='<div class="empty-state">Los reportes procesados aparecen aquí.</div>';return;}
-  el.innerHTML=sessionHist.map(h=>`<div class="he" onclick='renderDayResult(${JSON.stringify(h.result)})'><div class="he-date">${h.date||''}</div><div class="he-prev">${h.net_sales?'$'+Number(h.net_sales).toLocaleString():'—'} · ${h.covers||'—'} cvrs · $${h.avg_check||'—'} avg</div></div>`).join('');
+  if(!sessHist.length){el.innerHTML='<div class="empty-state">Los reportes procesados aparecen aquí.</div>';return;}
+  el.innerHTML=sessHist.map(h=>`<div class="he" onclick='renderDay(${JSON.stringify(h.result)})'><div class="he-date">${h.date||''}</div><div class="he-prev">${h.net_sales?'$'+Number(h.net_sales).toLocaleString():'—'} · ${h.covers||'—'} cvrs · $${h.avg_check||'—'} avg</div></div>`).join('');
 }
-function setStatus(html){document.getElementById('hoy-status').innerHTML=html;}
+function setSt(html){document.getElementById('hoy-status').innerHTML=html;}
 
-// ═══ CHARTS ═══
-function initMainChart(){
-  const canvas=document.getElementById('main-chart');if(!canvas)return;
+function initMain(){
+  const c=document.getElementById('main-chart');if(!c)return;
   if(mainChart)mainChart.destroy();
   const labels=MONTHLY.map(m=>{const[y,mo]=m.label.split('-');return new Date(+y,+mo-1,1).toLocaleDateString('es-MX',{month:'short',year:'2-digit'}).toUpperCase();});
-  const vals=MONTHLY.map(m=>m[currentMetric]);
-  const rebrandIdx=MONTHLY.findIndex(m=>m.label==='2025-11');
-  const colors=MONTHLY.map((_,i)=>i>=rebrandIdx?'rgba(200,64,26,0.65)':'rgba(30,77,43,0.65)');
-  mainChart=new Chart(canvas.getContext('2d'),{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#d4cfc8',borderWidth:1,titleColor:'#1a1a18',bodyColor:'#3d3d38',titleFont:{family:'DM Mono',size:9},bodyFont:{family:'DM Mono',size:10},callbacks:{label:c=>{const v=c.raw;return'$'+v.toLocaleString('en-US',{maximumFractionDigits:0});}}}},scales:{x:{grid:{display:false},ticks:{color:'#7a7570',font:{family:'DM Mono',size:8},maxRotation:45}},y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{color:'#7a7570',font:{family:'DM Mono',size:8},callback:v=>currentMetric==='covers'?v.toLocaleString():'$'+Math.round(v/1000)+'K'}}}}});
+  const vals=MONTHLY.map(m=>m[curMetric]);
+  const ri=MONTHLY.findIndex(m=>m.label==='2025-11');
+  const colors=MONTHLY.map((_,i)=>i>=ri?'rgba(200,64,26,0.7)':'rgba(58,148,96,0.65)');
+  mainChart=new Chart(c.getContext('2d'),{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>'$'+c.raw.toLocaleString('en-US',{maximumFractionDigits:0})}}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},maxRotation:45}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>curMetric==='covers'?v.toLocaleString():'$'+Math.round(v/1000)+'K'}}}}});
 }
-function setMetric(m,btn){
-  currentMetric=m;
-  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  if(mainChart)initMainChart();
-}
-function initSeasonalChart(id){
-  const canvas=document.getElementById(id);if(!canvas)return;
-  const preData=MONTHLY.filter(m=>m.label<'2025-11');
-  const byMonth={};preData.forEach(m=>{const mo=parseInt(m.label.split('-')[1]);if(!byMonth[mo])byMonth[mo]=[];byMonth[mo].push(m.avg_daily);});
+function setMetric(m,btn){curMetric=m;document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');if(mainChart)initMain();}
+function initSeasonal(id){
+  const c=document.getElementById(id);if(!c)return;
+  const pre=MONTHLY.filter(m=>m.label<'2025-11');
+  const bm={};pre.forEach(m=>{const mo=parseInt(m.label.split('-')[1]);if(!bm[mo])bm[mo]=[];bm[mo].push(m.avg_daily);});
   const months=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  const vals=months.map((_,i)=>{const arr=byMonth[i+1];return arr?Math.round(arr.reduce((a,b)=>a+b,0)/arr.length):0;});
-  if(canvas._chart)canvas._chart.destroy();
-  canvas._chart=new Chart(canvas.getContext('2d'),{type:'line',data:{labels:months,datasets:[{data:vals,borderColor:'rgba(30,77,43,0.8)',backgroundColor:'rgba(30,77,43,0.07)',borderWidth:2,fill:true,tension:0.35,pointBackgroundColor:'rgba(30,77,43,0.9)',pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#d4cfc8',borderWidth:1,titleColor:'#1a1a18',bodyColor:'#3d3d38',titleFont:{family:'DM Mono',size:9},bodyFont:{family:'DM Mono',size:10},callbacks:{label:c=>'$'+c.raw.toLocaleString()+'/día'}}},scales:{x:{grid:{display:false},ticks:{color:'#7a7570',font:{family:'DM Mono',size:9}}},y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{color:'#7a7570',font:{family:'DM Mono',size:8},callback:v=>'$'+Math.round(v/1000)+'K'}}}}});
+  const vals=months.map((_,i)=>{const a=bm[i+1];return a?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0;});
+  if(c._ch)c._ch.destroy();
+  c._ch=new Chart(c.getContext('2d'),{type:'line',data:{labels:months,datasets:[{data:vals,borderColor:'rgba(58,148,96,0.8)',backgroundColor:'rgba(58,148,96,0.08)',borderWidth:2,fill:true,tension:0.35,pointBackgroundColor:'rgba(58,148,96,0.9)',pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>'$'+c.raw.toLocaleString()+'/día'}}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>'$'+Math.round(v/1000)+'K'}}}}});
 }
-function renderMonthlyTable(){
+function renderMonthly(){
   const max=Math.max(...MONTHLY.map(m=>m.avg_daily));
   const rows=[...MONTHLY].reverse();
   document.getElementById('monthly-tbody').innerHTML=rows.map((m,i)=>{
@@ -981,437 +849,254 @@ function renderMonthlyTable(){
     const bw=Math.round((m.avg_daily/max)*100);
     const[y,mo]=m.label.split('-');
     const lbl=new Date(+y,+mo-1,1).toLocaleDateString('es-MX',{month:'short',year:'2-digit'}).toUpperCase();
-    const isPost=m.label>='2025-11';
-    return`<tr><td style="color:${isPost?'var(--or)':'inherit'}">${lbl}${isPost?' <span class="tag or">post</span>':''}</td><td>$${Math.round(m.net_sales).toLocaleString()}</td><td>${m.days}</td><td>$${Math.round(m.avg_daily).toLocaleString()}</td><td>${m.covers.toLocaleString()}</td><td>$${m.avg_check}</td><td>${ds}</td><td><div class="bar-bg"><div class="bar-fg${isPost?' or':''}" style="width:${bw}%"></div></div></td></tr>`;
+    const isP=m.label>='2025-11';
+    return`<tr><td style="color:${isP?'var(--or)':'inherit'}">${lbl}${isP?' <span class="tag or">post</span>':''}</td><td>$${Math.round(m.net_sales).toLocaleString()}</td><td>${m.days}</td><td>$${Math.round(m.avg_daily).toLocaleString()}</td><td>${m.covers.toLocaleString()}</td><td>$${m.avg_check}</td><td>${ds}</td><td><div class="bar-bg"><div class="bar-fg${isP?' or':''}" style="width:${bw}%"></div></div></td></tr>`;
   }).join('');
 }
 
-// ═══ P&L ENGINE ═══
-function getMergedMonth(key){
-  const base=PNL_MONTHS[key];
-  const overrides=pnlOverrides[key]||{};
-  return Object.assign({},base,overrides);
+function renderMenu(){
+  const maxR=TOP_ITEMS[0].r;
+  document.getElementById('menu-grid').innerHTML=TOP_ITEMS.map((item,i)=>`
+    <div class="icard">
+      <div class="irank">${i+1}</div>
+      <div class="iinfo">
+        <div class="iname">${item.n}</div>
+        <div class="imeta">${item.q.toLocaleString()} uds · $${item.p} avg · ${item.c}</div>
+        <div class="bar-bg" style="margin-top:6px;"><div class="bar-fg" style="width:${Math.round(item.r/maxR*100)}%"></div></div>
+      </div>
+      <div class="irev">$${Math.round(item.r/1000)}K</div>
+    </div>`).join('');
+  const maxRev=SERVERS[0].r;
+  document.getElementById('srv-block').innerHTML=SERVERS.map(s=>`
+    <div class="srv-row">
+      <div class="srv-name">${s.n}</div>
+      <div class="srv-bar-wrap"><div class="srv-bar" style="width:${Math.round(s.r/maxRev*100)}%"></div></div>
+      <div class="srv-rev">$${Math.round(s.r/1000)}K</div>
+      <div class="srv-tag">${s.role}</div>
+    </div>`).join('');
 }
 
-function calcPNL(m){
-  const net=m.net_sales||0;
-  const totalRev=net+(m.other_income||0);
-  const foodC=m.food_cost||0, wineC=m.wine_cost||0, bevC=m.bev_cost||0, naC=m.na_bev_cost||0;
-  const totalCOGS=foodC+wineC+bevC+naC;
-  const grossProfit=net-totalCOGS; // vs operational sales only
-  const grossMargin=net>0?(grossProfit/net*100):0;
-  const labor=m.payroll||0;
-  const primeCost=totalCOGS+labor;
-  const primePct=net>0?(primeCost/net*100):0;
-  const rent=m.rent||0;
-  const sundry=m.sundry||0,mktg=m.marketing||0,res=m.reservations||0,toast=m.toast_sw||0,execI=m.exec_info||0,genM=m.gen_mgmt||0;
-  const fixedOpEx=sundry+mktg+res+toast+execI+genM;
-  const ent=m.entertainment||0,clSvc=m.cleaning_svc||0,clProd=m.cleaning_prod||0,ice=m.ice||0,laun=m.laundry||0,disp=m.disposables||0,pest=m.pest||0,trash=m.trash||0,gas=m.gas||0,coal=m.coal||0,cons=m.consulting||0,off=m.office||0,del=m.delivery||0,print=m.printer||0,equip=m.equipment||0,other=m.other||0;
-  const varOpEx=ent+clSvc+clProd+ice+laun+disp+pest+trash+gas+coal+cons+off+del+print+equip+other;
-  const totalOpEx=rent+fixedOpEx+varOpEx;
-  const ebitda=totalRev-totalCOGS-labor-totalOpEx;
-  const ebitdaPct=totalRev>0?(ebitda/totalRev*100):0;
-  const dep=m.depreciation||0,amor=m.amortization||0,da=dep+amor;
-  const netIncome=ebitda-da;
-  const netPct=totalRev>0?(netIncome/totalRev*100):0;
-  const foodPct=net>0?(foodC/net*100):0;
-  const totalBevCost=wineC+bevC+naC;
-  const bevPct=net>0?(totalBevCost/net*100):0;
-  const laborPct=net>0?(labor/net*100):0;
-  const rentPct=net>0?(rent/net*100):0;
-  return{totalRev,net,foodC,wineC,bevC,naC,totalCOGS,grossProfit,grossMargin,labor,primeCost,primePct,rent,rentPct,sundry,mktg,res,toast,execI,genM,fixedOpEx,ent,clSvc,clProd,ice,laun,disp,pest,trash,gas,coal,cons,off,del,print,equip,other,varOpEx,totalOpEx,ebitda,ebitdaPct,da,dep,amor,netIncome,netPct,foodPct,bevPct,totalBevCost,laborPct};
+function renderClientes(){
+  document.getElementById('guests-block').innerHTML=TOP_GUESTS.map((g,i)=>`
+    <div class="gcard">
+      <div class="gnum">${i+1}</div>
+      <div class="ginfo">
+        <div class="gname">${g.n}${g.v>=50?` <span class="pill vip">VIP</span>`:g.v>=20?` <span class="pill reg">Frecuente</span>`:''}</div>
+        <div class="gmeta">${g.c} covers totales</div>
+      </div>
+      <div class="gvisits">${g.v}</div>
+    </div>`).join('');
+  const maxS=SOURCES[0].c;
+  document.getElementById('src-block').innerHTML=SOURCES.map(s=>`
+    <div class="src-row">
+      <div class="src-name">${s.n}</div>
+      <div class="src-bw"><div class="src-bf" style="width:${Math.round(s.c/maxS*100)}%;background:${s.col};height:5px;"></div></div>
+      <div class="src-pct">${s.p}%</div>
+    </div>`).join('');
 }
 
-function benchColor(val,lo,hi,inverse=false){
-  if(inverse){if(val<=lo)return'bench-ok';if(val<=hi)return'bench-warn';return'bench-bad';}
-  if(val>=lo&&val<=hi)return'bench-ok';
-  if(val>hi)return'bench-bad';
-  return'bench-warn';
+// P&L
+function getM(k){return Object.assign({},PNL[k],pnlOv[k]||{});}
+function calcP(m){
+  const net=m.net_sales||0,tot=net+(m.other_income||0);
+  const fc=m.food_cost||0,wc=m.wine_cost||0,bc=m.bev_cost||0,nc=m.na_bev_cost||0;
+  const cogs=fc+wc+bc+nc,gp=net-cogs,gm=net>0?gp/net*100:0;
+  const lab=m.payroll||0,prime=cogs+lab,pPct=net>0?prime/net*100:0;
+  const rent=m.rent||0,sun=m.sundry||0,mkt=m.marketing||0,res=m.reservations||0,tst=m.toast_sw||0,ei=m.exec_info||0,gm2=m.gen_mgmt||0;
+  const fixOp=sun+mkt+res+tst+ei+gm2;
+  const ent=m.entertainment||0,cs=m.cleaning_svc||0,cp=m.cleaning_prod||0,ice=m.ice||0,lau=m.laundry||0,dis=m.disposables||0,pest=m.pest||0,trash=m.trash||0,gas=m.gas||0,coal=m.coal||0,con=m.consulting||0,off=m.office||0,del=m.delivery||0,pri=m.printer||0,equ=m.equipment||0,oth=m.other||0;
+  const varOp=ent+cs+cp+ice+lau+dis+pest+trash+gas+coal+con+off+del+pri+equ+oth;
+  const totOp=rent+fixOp+varOp;
+  const ebitda=tot-cogs-lab-totOp,ePct=tot>0?ebitda/tot*100:0;
+  const da=(m.depreciation||0)+(m.amortization||0),netI=ebitda-da,nPct=tot>0?netI/tot*100:0;
+  return{tot,net,fc,wc,bc,nc,cogs,gp,gm,lab,prime,pPct,rent,sun,mkt,res,tst,ei,gm2,fixOp,ent,cs,cp,ice,lau,dis,pest,trash,gas,coal,con,off,del,pri,equ,oth,varOp,totOp,ebitda,ePct,da,netI,nPct,fPct:net>0?fc/net*100:0,bPct:net>0?(wc+bc+nc)/net*100:0,lPct:net>0?lab/net*100:0,rPct:net>0?rent/net*100:0};
 }
-function pctColor(pct,lo,hi){
-  if(pct<0)return'pnl-amount neg';
-  if(pct>=lo&&pct<=hi)return'pnl-amount pos';
-  if(pct>hi+5)return'pnl-amount neg';
-  return'pnl-amount';
-}
+function $m(n){if(!n&&n!==0)return'—';const v=Math.abs(n);const s='$'+v.toLocaleString('en-US',{maximumFractionDigits:0});return n<0?`(${s})`:s;}
+function $p(n){if(n===null||isNaN(n))return'—';return n.toFixed(1)+'%';}
+function bch(v,lo,hi,inv=false){if(inv){if(v<=lo)return'bok';if(v<=hi)return'bwarn';return'bbad';}if(v>=lo&&v<=hi)return'bok';if(v>hi)return'bbad';return'bwarn';}
 
-function buildPnlMonthSelector(){
-  const container=document.getElementById('pnl-month-selector');
-  container.innerHTML=Object.entries(PNL_MONTHS).map(([key,m])=>`
-    <button class="msel${m.quality==='estimated'?' estimated':''}${key===currentPnlMonth?' on':''}" onclick="selectPnlMonth('${key}',this)">${m.label}</button>
-  `).join('');
+function buildPnlSel(){
+  document.getElementById('pnl-sel').innerHTML=Object.entries(PNL).map(([k,m])=>`<button class="msel${m.quality==='estimated'?' est':''}${k===curPnlM?' on':''}" onclick="selPnl('${k}',this)">${m.label}</button>`).join('');
 }
-function buildExecMonthSelector(){
-  const sel=document.getElementById('exec-month-sel');
-  sel.innerHTML='<option value="">Seleccionar período</option>'+
-    Object.entries(PNL_MONTHS).map(([key,m])=>`<option value="${key}">${m.label}</option>`).join('');
+function buildExecSel(){
+  const s=document.getElementById('exec-sel');
+  s.innerHTML='<option value="">Seleccionar período</option>'+Object.entries(PNL).map(([k,m])=>`<option value="${k}">${m.label}</option>`).join('');
 }
-function selectPnlMonth(key,btn){
-  currentPnlMonth=key;
-  document.querySelectorAll('.msel').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderPNL(key);
-}
+function selPnl(k,btn){curPnlM=k;document.querySelectorAll('.msel').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderPNL(k);}
 
-function $m(n){if(n===0||n===null||n===undefined)return'—';const v=Math.abs(n);const s='$'+v.toLocaleString('en-US',{maximumFractionDigits:0});return n<0?`(${s})`:s;}
-function $pct(n){if(n===null||n===undefined||isNaN(n))return'—';return n.toFixed(1)+'%';}
-
-function renderPNL(key){
-  const m=getMergedMonth(key);
-  if(!m){document.getElementById('pnl-content').innerHTML='<div class="empty-state">Mes no disponible.</div>';return;}
-  const c=calcPNL(m);
-  const qMap={real:'<span class="data-quality dq-real">● Real</span>',estimated:'<span class="data-quality dq-est">◐ Estimado</span>',pending:'<span class="data-quality dq-pend">○ Pendiente</span>'};
-  const q=qMap[m.quality]||'';
-  const missingPayroll=!m.payroll||m.payroll===0;
-  
-  const row=(label,amount,pct,bench,indent=false,extraClass='')=>{
-    const lClass=indent?'pnl-label indent':'pnl-label';
-    const aClass=amount<0?'pnl-amount neg':amount>0?'pnl-amount':'pnl-amount';
-    return`<div class="pnl-row ${extraClass}">
-      <div class="${lClass}">${label}</div>
-      <div class="${aClass} right">${$m(amount)}</div>
-      <div class="pnl-pct right">${pct!==null?$pct(pct):''}</div>
-      <div class="pnl-bench right ${bench||''}">${bench?'●':''}</div>
-    </div>`;
-  };
-  const subtotalRow=(label,amount,pct,benchClass='',extraCls='subtotal')=>`
-    <div class="pnl-row ${extraCls}">
-      <div class="pnl-label group">${label}</div>
-      <div class="pnl-amount bold right${amount<0?' neg':amount>0?' pos':''}">${$m(amount)}</div>
-      <div class="pnl-pct right">${pct!==null?$pct(pct):''}</div>
-      <div class="pnl-bench right ${benchClass}">●</div>
-    </div>`;
-  const bigRow=(label,amount,pct,extraCls='')=>{
-    const pos=amount>=0;
-    return`<div class="pnl-row ${extraCls} ${pos?'profit':'loss'}">
-      <div class="pnl-label big">${label}</div>
-      <div class="pnl-amount bold right${pos?' pos':' neg'}" style="font-family:'Cormorant Garamond',serif;font-size:18px;">${$m(amount)}</div>
-      <div class="pnl-pct right" style="font-size:10px;">${pct!==null?$pct(pct):''}</div>
-      <div class="pnl-bench right"></div>
-    </div>`;
-  };
-
-  const foodBench=benchColor(c.foodPct,...RC.bench_food_pct,true);
-  const bevBench=benchColor(c.bevPct,...RC.bench_bev_pct,true);
-  const cogsBench=benchColor(c.totalCOGS/c.net*100,...RC.bench_total_cogs,true);
-  const laborBench=benchColor(c.laborPct,...RC.bench_labor,true);
-  const primeBench=benchColor(c.primePct,...RC.bench_prime,true);
-  const rentBench=benchColor(c.rentPct,...RC.bench_rent,true);
-  const ebitdaBench=benchColor(c.ebitdaPct,...RC.bench_ebitda);
+function renderPNL(k){
+  const m=getM(k);if(!m){document.getElementById('pnl-content').innerHTML='<div class="empty-state">Mes no disponible.</div>';return;}
+  const c=calcP(m);
+  const qm={real:'<span class="dq dq-r">● Real</span>',estimated:'<span class="dq dq-e">◐ Estimado</span>',pending:'<span class="dq dq-p">○ Pendiente</span>'};
+  const noP=!m.payroll||m.payroll===0;
+  const R=(lbl,amt,pct,bench,ind=false)=>`<div class="pnl-row"><div class="pnl-lbl${ind?' ind':''}">${lbl}</div><div class="pnl-amt${amt<0?' neg':''}" style="text-align:right">${$m(amt)}</div><div class="pnl-pct" style="text-align:right">${pct!==null?$p(pct):''}</div><div class="pnl-bench" style="text-align:right;${bench?'':''}"><span class="${bench||''}">${bench?'●':''}</span></div></div>`;
+  const S=(lbl,amt,pct,bc='')=>`<div class="pnl-row sub"><div class="pnl-lbl grp">${lbl}</div><div class="pnl-amt bold${amt<0?' neg':amt>0?' pos':''}" style="text-align:right">${$m(amt)}</div><div class="pnl-pct" style="text-align:right">${pct!==null?$p(pct):''}</div><div class="pnl-bench" style="text-align:right"><span class="${bc}">${bc?'●':''}</span></div></div>`;
+  const B=(lbl,amt,pct,cls='')=>`<div class="pnl-row ${cls} ${amt>=0?'profit':'loss'}"><div class="pnl-lbl big">${lbl}</div><div class="pnl-amt bold${amt>=0?' pos':' neg'}" style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:18px;">${$m(amt)}</div><div class="pnl-pct" style="text-align:right;font-size:10px;">${pct!==null?$p(pct):''}</div><div class="pnl-bench"></div></div>`;
 
   document.getElementById('pnl-content').innerHTML=`
-    <div class="pnl-wrap">
-      <div style="padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bor);background:var(--s1);">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;">${m.label} ${q}</div>
-        <div style="font-size:9px;color:var(--mu);">Fuente: ${m.source||'—'}</div>
-      </div>
-
-      ${missingPayroll?`<div style="background:#fff8f6;border-bottom:1px solid var(--bor3);padding:8px 14px;font-size:9px;color:var(--or);">⚠ Nómina de este mes pendiente — ingresa el monto para completar el P&L</div>`:''}
-
-      <div class="pnl-header-row">
-        <div class="pnl-col-hdr">Concepto</div>
-        <div class="pnl-col-hdr">Importe</div>
-        <div class="pnl-col-hdr">% Vtas</div>
-        <div class="pnl-col-hdr">Bench</div>
-      </div>
-
-      <!-- REVENUE -->
-      <div class="pnl-section-hdr">INGRESOS</div>
-      ${row('Ventas netas (POS)',c.net,100,null,false)}
-      ${m.other_income?row('Otros ingresos / Extraordinarios',m.other_income,m.other_income/c.net*100,null,true):''}
-      ${subtotalRow('TOTAL INGRESOS',c.totalRev,null,'','subtotal')}
-
-      <!-- COGS -->
-      <div class="pnl-section-hdr">COSTO DE PRODUCTO</div>
-      ${row('Alimentos (Food Purchases)',c.foodC,c.foodPct,foodBench,true)}
-      ${row('Vinos',c.wineC,c.net>0?c.wineC/c.net*100:null,null,true)}
-      ${row('Bebidas alcohólicas',c.bevC,c.net>0?c.bevC/c.net*100:null,null,true)}
-      ${row('Bebidas no alcohólicas',c.naC,c.net>0?c.naC/c.net*100:null,null,true)}
-      ${subtotalRow('TOTAL COGS',c.totalCOGS,c.net>0?c.totalCOGS/c.net*100:null,cogsBench)}
-      ${bigRow('UTILIDAD BRUTA',c.grossProfit,c.grossMargin)}
-
-      <!-- LABOR -->
-      <div class="pnl-section-hdr">NÓMINA</div>
-      ${row('Total nómina'+(missingPayroll?' (pendiente)':''),c.labor,c.laborPct,laborBench,false)}
-      ${subtotalRow('PRIME COST (COGS + Nómina)',c.primeCost,c.primePct,primeBench)}
-
-      <!-- OCCUPANCY -->
-      <div class="pnl-section-hdr">RENTA</div>
-      ${row('Renta + gastos all-in',c.rent,c.rentPct,rentBench,false)}
-
-      <!-- FIXED OPEX -->
-      <div class="pnl-section-hdr">GASTOS OPERATIVOS — FIJOS</div>
-      ${row('Cargo corporativo (Sundry / Préstamo)',m.sundry,c.net>0?m.sundry/c.net*100:null,null,true)}
-      ${row('Marketing digital',m.marketing,c.net>0?m.marketing/c.net*100:null,null,true)}
-      ${row('Plataformas de reservas',m.reservations,null,null,true)}
-      ${row('Software Toast',m.toast_sw,null,null,true)}
-      ${m.exec_info?row('Información ejecutiva / OpenTable extra',m.exec_info,null,null,true):''}
-      ${m.gen_mgmt?row('Gestión general',m.gen_mgmt,null,null,true):''}
-      ${subtotalRow('Subtotal gastos fijos',c.fixedOpEx,c.net>0?c.fixedOpEx/c.net*100:null,'')}
-
-      <!-- VARIABLE OPEX -->
-      <div class="pnl-section-hdr">GASTOS OPERATIVOS — VARIABLES</div>
-      ${m.entertainment?row('Entretenimiento (músicos / artistas)',m.entertainment,c.net>0?m.entertainment/c.net*100:null,null,true):''}
-      ${m.cleaning_svc?row('Servicio de limpieza',m.cleaning_svc,null,null,true):''}
-      ${m.cleaning_prod?row('Productos de limpieza',m.cleaning_prod,null,null,true):''}
-      ${m.ice?row('Servicio de hielo',m.ice,null,null,true):''}
-      ${m.laundry?row('Lavandería (mantelería)',m.laundry,null,null,true):''}
-      ${m.disposables?row('Desechables',m.disposables,null,null,true):''}
-      ${m.pest?row('Control de plagas',m.pest,null,null,true):''}
-      ${m.trash?row('Recolección de basura',m.trash,null,null,true):''}
-      ${m.gas?row('Gas LP',m.gas,null,null,true):''}
-      ${m.coal?row('Carbón',m.coal,null,null,true):''}
-      ${m.consulting?row('Consultoría / Legal',m.consulting,null,null,true):''}
-      ${m.office?row('Suministros de oficina',m.office,null,null,true):''}
-      ${m.delivery?row('Logística / Delivery / Cintas',m.delivery,null,null,true):''}
-      ${m.printer?row('Renta de equipo (impresora)',m.printer,null,null,true):''}
-      ${m.equipment?row('Equipo reemplazable',m.equipment,null,null,true):''}
-      ${m.other?row('Otros',m.other,null,null,true):''}
-      ${subtotalRow('Subtotal gastos variables',c.varOpEx,c.net>0?c.varOpEx/c.net*100:null,'')}
-      ${subtotalRow('TOTAL GASTOS OPERATIVOS',c.totalOpEx,c.net>0?c.totalOpEx/c.net*100:null,'','subtotal')}
-
-      <!-- EBITDA -->
-      ${bigRow('EBITDA',c.ebitda,c.ebitdaPct,'ebitda')}
-
-      <!-- D&A -->
-      <div class="pnl-section-hdr">DEPRECIACIÓN &amp; AMORTIZACIÓN</div>
-      ${row('Depreciación',m.depreciation||0,null,null,true)}
-      ${row('Amortización',m.amortization||0,null,null,true)}
-      ${subtotalRow('Total D&A',c.da,null,'')}
-
-      <!-- NET -->
-      ${bigRow('UTILIDAD / PÉRDIDA NETA',c.netIncome,c.netPct,'net')}
-
-      ${m.note?`<div class="pnl-note">📝 ${m.note}</div>`:''}
+  <div class="pnl-wrap">
+    <div style="padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bor);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--tx);">${m.label} ${qm[m.quality]||''}</div>
+      <div style="font-size:9px;color:var(--mu);">${m.source||''}</div>
     </div>
-
-    <!-- QUICK KPIs -->
-    <div style="margin-top:20px;">
-      <div class="sl">Ratios clave</div>
-      <div class="kpi-row c6">
-        <div class="kpi"><div class="kpi-lbl">Food Cost %</div><div class="kpi-val sm" style="color:${c.foodPct>32?'var(--or)':c.foodPct>0?'var(--green2)':'var(--mu)'}">${c.foodPct>0?$pct(c.foodPct):'—'}</div><div class="kpi-sub nu">Target 28-32%</div></div>
-        <div class="kpi"><div class="kpi-lbl">Bev Cost %</div><div class="kpi-val sm" style="color:${c.bevPct>22?'var(--or)':c.bevPct>0?'var(--green2)':'var(--mu)'}">${c.bevPct>0?$pct(c.bevPct):'—'}</div><div class="kpi-sub nu">Target 18-22%</div></div>
-        <div class="kpi"><div class="kpi-lbl">Labor %</div><div class="kpi-val sm" style="color:${c.laborPct>45?'var(--or)':c.laborPct>35?'var(--ye)':c.laborPct>0?'var(--green2)':'var(--mu)'}">${c.laborPct>0?$pct(c.laborPct):'—'}</div><div class="kpi-sub nu">Target 28-35%</div></div>
-        <div class="kpi"><div class="kpi-lbl">Prime Cost</div><div class="kpi-val sm" style="color:${c.primePct>65?'var(--or)':c.primePct>58?'var(--ye)':c.primePct>0?'var(--green2)':'var(--mu)'}">${c.primePct>0?$pct(c.primePct):'—'}</div><div class="kpi-sub nu">Target &lt;58%</div></div>
-        <div class="kpi"><div class="kpi-lbl">EBITDA %</div><div class="kpi-val sm" style="color:${c.ebitdaPct<0?'var(--or)':c.ebitdaPct<10?'var(--ye)':'var(--green2)'}">${$pct(c.ebitdaPct)}</div><div class="kpi-sub nu">Target &gt;15%</div></div>
-        <div class="kpi"><div class="kpi-lbl">Margen neto</div><div class="kpi-val sm" style="color:${c.netPct<0?'var(--or)':'var(--green2)'}">${$pct(c.netPct)}</div><div class="kpi-sub nu">Target &gt;10%</div></div>
-      </div>
-    </div>
-
-    <!-- PAYROLL INPUT if missing -->
-    ${missingPayroll?`
-    <div style="margin-top:16px;background:var(--s1);border:1px solid var(--bor);padding:16px;">
-      <div class="sl" style="margin-bottom:10px;">Ingresar nómina — ${m.label}</div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <input type="number" id="payroll-input" placeholder="Ej: 85000" style="max-width:200px;padding:8px 12px;">
-        <button class="btn primary sm" onclick="savePayroll('${key}')">Guardar</button>
-      </div>
-    </div>`:''}
-  `;
+    ${noP?`<div style="background:rgba(200,64,26,0.1);border-bottom:1px solid var(--bor3);padding:8px 14px;font-size:9px;color:var(--or);">⚠ Nómina pendiente — ingresa el monto para completar el P&L</div>`:''}
+    <div class="pnl-hdr"><div class="pnl-col" style="text-align:left">Concepto</div><div class="pnl-col">Importe</div><div class="pnl-col">% Vtas</div><div class="pnl-col">Bench</div></div>
+    <div class="pnl-sh">INGRESOS</div>
+    ${R('Ventas netas (POS)',c.net,100,null)}
+    ${m.other_income?R('Otros ingresos / Extraordinarios',m.other_income,m.other_income/c.net*100,null,true):''}
+    ${S('TOTAL INGRESOS',c.tot,null)}
+    <div class="pnl-sh">COSTO DE PRODUCTO</div>
+    ${R('Alimentos',c.fc,c.fPct,bch(c.fPct,...RC.bench_food,true),true)}
+    ${R('Vinos',c.wc,c.net>0?c.wc/c.net*100:null,null,true)}
+    ${R('Bebidas alcohólicas',c.bc,c.net>0?c.bc/c.net*100:null,null,true)}
+    ${R('Bebidas no alcohólicas',c.nc,c.net>0?c.nc/c.net*100:null,null,true)}
+    ${S('TOTAL COGS',c.cogs,c.net>0?c.cogs/c.net*100:null,bch(c.cogs/c.net*100,...RC.bench_cogs,true))}
+    ${B('UTILIDAD BRUTA',c.gp,c.gm)}
+    <div class="pnl-sh">NÓMINA</div>
+    ${R('Total nómina'+(noP?' (pendiente)':''),c.lab,c.lPct,bch(c.lPct,...RC.bench_labor,true))}
+    ${S('PRIME COST',c.prime,c.pPct,bch(c.pPct,...RC.bench_prime,true))}
+    <div class="pnl-sh">RENTA</div>
+    ${R('Renta + gastos all-in',c.rent,c.rPct,bch(c.rPct,...RC.bench_rent,true))}
+    <div class="pnl-sh">GASTOS FIJOS</div>
+    ${R('Cargo corporativo (Sundry / Préstamo)',m.sundry,c.net>0?m.sundry/c.net*100:null,null,true)}
+    ${R('Marketing digital',m.marketing,c.net>0?m.marketing/c.net*100:null,null,true)}
+    ${R('Plataformas de reservas',m.reservations,null,null,true)}
+    ${R('Software Toast',m.toast_sw,null,null,true)}
+    ${m.exec_info?R('Información ejecutiva / OpenTable',m.exec_info,null,null,true):''}
+    ${m.gen_mgmt?R('Gestión general',m.gen_mgmt,null,null,true):''}
+    ${S('Subtotal fijos',c.fixOp,c.net>0?c.fixOp/c.net*100:null)}
+    <div class="pnl-sh">GASTOS VARIABLES</div>
+    ${m.entertainment?R('Entretenimiento (músicos)',m.entertainment,c.net>0?m.entertainment/c.net*100:null,null,true):''}
+    ${m.cleaning_svc?R('Limpieza overnight',m.cleaning_svc,null,null,true):''}
+    ${m.cleaning_prod?R('Productos de limpieza',m.cleaning_prod,null,null,true):''}
+    ${m.ice?R('Hielo',m.ice,null,null,true):''}
+    ${m.laundry?R('Lavandería',m.laundry,null,null,true):''}
+    ${m.disposables?R('Desechables',m.disposables,null,null,true):''}
+    ${m.pest?R('Control de plagas',m.pest,null,null,true):''}
+    ${m.trash?R('Recolección de basura',m.trash,null,null,true):''}
+    ${m.gas?R('Gas LP',m.gas,null,null,true):''}
+    ${m.coal?R('Carbón',m.coal,null,null,true):''}
+    ${m.consulting?R('Consultoría',m.consulting,null,null,true):''}
+    ${m.office?R('Oficina',m.office,null,null,true):''}
+    ${m.delivery?R('Logística / Cintas',m.delivery,null,null,true):''}
+    ${m.printer?R('Renta equipo',m.printer,null,null,true):''}
+    ${m.equipment?R('Equipo',m.equipment,null,null,true):''}
+    ${m.other?R('Otros',m.other,null,null,true):''}
+    ${S('Subtotal variables',c.varOp,c.net>0?c.varOp/c.net*100:null)}
+    ${S('TOTAL GASTOS OPERATIVOS',c.totOp,c.net>0?c.totOp/c.net*100:null)}
+    ${B('EBITDA',c.ebitda,c.ePct,'ebitda-row')}
+    <div class="pnl-sh">DEPRECIACIÓN &amp; AMORTIZACIÓN</div>
+    ${R('Depreciación',m.depreciation||0,null,null,true)}
+    ${R('Amortización',m.amortization||0,null,null,true)}
+    ${S('Total D&A',c.da,null)}
+    ${B('RESULTADO NETO',c.netI,c.nPct,'net-row')}
+    ${m.note?`<div class="pnl-note">📝 ${m.note}</div>`:''}
+  </div>
+  <div style="margin-top:20px;"><div class="sl">Ratios clave</div>
+  <div class="kpi-row c6">
+    <div class="kpi"><div class="kpi-lbl">Food Cost %</div><div class="kpi-val sm" style="color:${c.fPct>32?'var(--or)':c.fPct>0?'var(--green2)':'var(--mu)'}">${c.fPct>0?$p(c.fPct):'—'}</div><div class="kpi-sub nu">Target 28-32%</div></div>
+    <div class="kpi"><div class="kpi-lbl">Bev Cost %</div><div class="kpi-val sm" style="color:${c.bPct>22?'var(--or)':c.bPct>0?'var(--green2)':'var(--mu)'}">${c.bPct>0?$p(c.bPct):'—'}</div><div class="kpi-sub nu">Target 18-22%</div></div>
+    <div class="kpi"><div class="kpi-lbl">Labor %</div><div class="kpi-val sm" style="color:${c.lPct>45?'var(--or)':c.lPct>35?'var(--ye)':c.lPct>0?'var(--green2)':'var(--mu)'}">${c.lPct>0?$p(c.lPct):'—'}</div><div class="kpi-sub nu">Target 28-35%</div></div>
+    <div class="kpi"><div class="kpi-lbl">Prime Cost</div><div class="kpi-val sm" style="color:${c.pPct>65?'var(--or)':c.pPct>58?'var(--ye)':c.pPct>0?'var(--green2)':'var(--mu)'}">${c.pPct>0?$p(c.pPct):'—'}</div><div class="kpi-sub nu">Target &lt;58%</div></div>
+    <div class="kpi"><div class="kpi-lbl">EBITDA %</div><div class="kpi-val sm" style="color:${c.ePct<0?'var(--or)':c.ePct<10?'var(--ye)':'var(--green2)'}">${$p(c.ePct)}</div><div class="kpi-sub nu">Target &gt;15%</div></div>
+    <div class="kpi"><div class="kpi-lbl">Margen neto</div><div class="kpi-val sm" style="color:${c.nPct<0?'var(--or)':'var(--green2)'}">${$p(c.nPct)}</div><div class="kpi-sub nu">Target &gt;10%</div></div>
+  </div></div>
+  ${noP?`<div style="margin-top:16px;background:var(--s1);border:1px solid var(--bor);padding:16px;"><div class="sl" style="margin-bottom:10px;">Ingresar nómina — ${m.label}</div><div style="display:flex;gap:8px;"><input type="number" id="payroll-inp" placeholder="Ej: 85000" style="max-width:200px;"><button class="btn primary sm" onclick="savePay('${k}')">Guardar</button></div></div>`:''}`;
 }
+function savePay(k){const v=parseFloat(document.getElementById('payroll-inp').value);if(!v)return;if(!pnlOv[k])pnlOv[k]={};pnlOv[k].payroll=v;sessionStorage.setItem('czPnlOv',JSON.stringify(pnlOv));renderPNL(k);}
 
-function savePayroll(key){
-  const val=parseFloat(document.getElementById('payroll-input').value);
-  if(!val||val<=0){alert('Ingresa un monto válido');return;}
-  if(!pnlOverrides[key])pnlOverrides[key]={};
-  pnlOverrides[key].payroll=val;
-  sessionStorage.setItem('czPnlOverrides',JSON.stringify(pnlOverrides));
-  renderPNL(key);
-}
+const EF=[{k:'payroll',l:'Nómina total'},{k:'rent',l:'Renta all-in'},{k:'sundry',l:'Cargo corporativo'},{k:'marketing',l:'Marketing digital'},{k:'entertainment',l:'Entretenimiento'},{k:'food_cost',l:'Food purchases'},{k:'wine_cost',l:'Wine purchases'},{k:'bev_cost',l:'AB purchases'},{k:'na_bev_cost',l:'NA Bev'},{k:'depreciation',l:'Depreciación'},{k:'amortization',l:'Amortización'},{k:'other_income',l:'Otros ingresos'}];
+function openEdit(k){if(!PNL[k])return;curEditM=k;const m=getM(k);document.getElementById('ebox-title').textContent='Editar: '+m.label;document.getElementById('egrid').innerHTML=EF.map(f=>`<div class="ef"><label>${f.l}</label><input type="number" id="ef-${f.k}" value="${m[f.k]||0}"></div>`).join('');document.getElementById('eov').classList.add('on');}
+function closeEdit(){document.getElementById('eov').classList.remove('on');curEditM=null;}
+function saveEdit(){if(!curEditM)return;if(!pnlOv[curEditM])pnlOv[curEditM]={};EF.forEach(f=>{const el=document.getElementById('ef-'+f.k);if(el)pnlOv[curEditM][f.k]=parseFloat(el.value)||0;});sessionStorage.setItem('czPnlOv',JSON.stringify(pnlOv));closeEdit();renderPNL(curEditM);}
+document.getElementById('eov').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEdit();});
 
-// ═══ EDIT P&L ═══
-const EDITABLE_FIELDS=[
-  {key:'payroll',label:'Nómina total'},
-  {key:'rent',label:'Renta all-in'},
-  {key:'sundry',label:'Cargo corporativo (Sundry)'},
-  {key:'marketing',label:'Marketing digital'},
-  {key:'entertainment',label:'Entretenimiento'},
-  {key:'food_cost',label:'Food purchases (xtraCHEF)'},
-  {key:'wine_cost',label:'Wine purchases'},
-  {key:'bev_cost',label:'AB purchases'},
-  {key:'na_bev_cost',label:'NA Bev purchases'},
-  {key:'depreciation',label:'Depreciación'},
-  {key:'amortization',label:'Amortización'},
-  {key:'other_income',label:'Otros ingresos'},
-];
-function openEdit(key){
-  if(!PNL_MONTHS[key])return;
-  currentEditMonth=key;
-  const m=getMergedMonth(key);
-  document.getElementById('edit-title').textContent='Editar: '+m.label;
-  document.getElementById('edit-grid').innerHTML=EDITABLE_FIELDS.map(f=>`
-    <div class="edit-field">
-      <label>${f.label}</label>
-      <input type="number" id="ef-${f.key}" value="${m[f.key]||0}" min="0">
-    </div>`).join('');
-  document.getElementById('edit-overlay').classList.add('on');
-}
-function closeEdit(){document.getElementById('edit-overlay').classList.remove('on');currentEditMonth=null;}
-function saveEdit(){
-  if(!currentEditMonth)return;
-  if(!pnlOverrides[currentEditMonth])pnlOverrides[currentEditMonth]={};
-  EDITABLE_FIELDS.forEach(f=>{
-    const el=document.getElementById('ef-'+f.key);
-    if(el)pnlOverrides[currentEditMonth][f.key]=parseFloat(el.value)||0;
-  });
-  sessionStorage.setItem('czPnlOverrides',JSON.stringify(pnlOverrides));
-  closeEdit();renderPNL(currentEditMonth);
-}
-document.getElementById('edit-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEdit();});
-
-// ═══ EJECUTIVO ═══
-function renderExecutive(key){
-  if(!key||!PNL_MONTHS[key]){document.getElementById('exec-body').innerHTML='<div class="empty-state" style="text-align:center;padding:40px;">Selecciona un período.</div>';return;}
-  const m=getMergedMonth(key);
-  const c=calcPNL(m);
-  const prev=getPrevMonth(key);
-  const prevC=prev?calcPNL(getMergedMonth(prev)):null;
-  const fmtDelta=(curr,prevV)=>{if(!prevV||prevV===0)return'';const d=((curr-prevV)/Math.abs(prevV)*100).toFixed(1);return d>0?`<span style="color:var(--green2)">↑${d}%</span>`:`<span style="color:var(--or)">↓${Math.abs(d)}%</span>`;};
+function renderExec(k){
+  if(!k||!PNL[k]){document.getElementById('exec-body').innerHTML='<div class="empty-state" style="text-align:center;padding:40px;">Selecciona un período.</div>';return;}
+  const m=getM(k),c=calcP(m);
+  const keys=Object.keys(PNL),idx=keys.indexOf(k);
+  const pC=idx>0?calcP(getM(keys[idx-1])):null;
+  const fd=(curr,pv)=>{if(!pv)return'';const d=((curr-pv)/Math.abs(pv)*100).toFixed(1);return +d>0?`<span style="color:var(--green2)">↑${d}%</span>`:`<span style="color:var(--or)">↓${Math.abs(d)}%</span>`;};
+  const mo=MONTHLY.find(x=>x.label===k);
   document.getElementById('exec-title').textContent=`Casa Zeru · ${m.label}`;
-  const body=`
-    <div class="exec-kpis">
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">Ventas Netas</div>
-        <div class="exec-kpi-val">${$m(c.net)}</div>
-        <div class="exec-kpi-delta">${prevC?fmtDelta(c.net,prevC.net):''}</div>
-      </div>
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">Utilidad Bruta</div>
-        <div class="exec-kpi-val" style="color:${c.grossMargin>50?'var(--green2)':'var(--or)'}">${$pct(c.grossMargin)}</div>
-        <div class="exec-kpi-delta" style="font-size:9px;color:var(--mu);">margen sobre ventas netas</div>
-      </div>
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">Nómina</div>
-        <div class="exec-kpi-val" style="color:${c.laborPct>45?'var(--or)':c.laborPct>35?'var(--ye)':'var(--green2)'}">${c.labor>0?$pct(c.laborPct):'—'}</div>
-        <div class="exec-kpi-delta" style="font-size:9px;color:var(--mu);">% de ventas · target 28-35%</div>
-      </div>
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">EBITDA</div>
-        <div class="exec-kpi-val" style="color:${c.ebitda>=0?'var(--green2)':'var(--or)'}">${$m(c.ebitda)}</div>
-        <div class="exec-kpi-delta" style="font-size:9px;color:var(--mu);">${$pct(c.ebitdaPct)} del revenue total</div>
-      </div>
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">Resultado Neto</div>
-        <div class="exec-kpi-val" style="color:${c.netIncome>=0?'var(--green2)':'var(--or)'}">${$m(c.netIncome)}</div>
-        <div class="exec-kpi-delta" style="color:${c.netPct>=0?'var(--green2)':'var(--or)'};">${$pct(c.netPct)}</div>
-      </div>
-      <div class="exec-kpi">
-        <div class="exec-kpi-lbl">Covers / Noche</div>
-        <div class="exec-kpi-val">${Math.round(MONTHLY.find(x=>x.label===key)?.covers/MONTHLY.find(x=>x.label===key)?.days||0)}</div>
-        <div class="exec-kpi-delta" style="font-size:9px;color:var(--mu);">target 50-65</div>
-      </div>
-    </div>
-
-    <div class="exec-waterfall">
-      <div class="chart-title">Distribución del revenue — ${m.label}</div>
-      <div class="chart-sub">Dónde va cada dólar de ingreso</div>
-      <div class="waterfall-chart"><canvas id="waterfall-canvas"></canvas></div>
-    </div>
-
-    <div class="exec-narrative ${''}" id="exec-narrative-block">
-      <span style="font-size:9px;color:var(--mu);font-family:'DM Mono',monospace;font-style:normal;">Presiona "✦ Generar narrativa IA" para obtener el resumen ejecutivo inteligente de este período.</span>
-    </div>
-
-    <div class="exec-footer">
-      <button class="btn secondary sm" onclick="window.print()">Imprimir</button>
-      <button class="btn primary sm" onclick="genExecNarrative()">✦ Generar narrativa</button>
-    </div>
-  `;
-  document.getElementById('exec-body').innerHTML=body;
-  setTimeout(()=>initWaterfallChart(c,m),60);
+  document.getElementById('exec-body').innerHTML=`
+  <div class="exec-kpis">
+    <div class="exec-kpi"><div class="exec-lbl">Ventas Netas</div><div class="exec-val">${$m(c.net)}</div><div class="exec-delta">${pC?fd(c.net,pC.net):''}</div></div>
+    <div class="exec-kpi"><div class="exec-lbl">Utilidad Bruta</div><div class="exec-val" style="color:${c.gm>50?'var(--green2)':'var(--or)'}">${$p(c.gm)}</div><div class="exec-delta" style="font-size:9px;color:var(--mu);">margen operativo</div></div>
+    <div class="exec-kpi"><div class="exec-lbl">Labor %</div><div class="exec-val" style="color:${c.lPct>45?'var(--or)':c.lPct>35?'var(--ye)':c.lPct>0?'var(--green2)':'var(--mu)'}">${c.lab>0?$p(c.lPct):'—'}</div><div class="exec-delta" style="font-size:9px;color:var(--mu);">target 28-35%</div></div>
+    <div class="exec-kpi"><div class="exec-lbl">EBITDA</div><div class="exec-val" style="color:${c.ebitda>=0?'var(--green2)':'var(--or)'}">${$m(c.ebitda)}</div><div class="exec-delta" style="color:${c.ePct>=0?'var(--green2)':'var(--or)'};">${$p(c.ePct)}</div></div>
+    <div class="exec-kpi"><div class="exec-lbl">Resultado Neto</div><div class="exec-val" style="color:${c.netI>=0?'var(--green2)':'var(--or)'}">${$m(c.netI)}</div><div class="exec-delta" style="color:${c.nPct>=0?'var(--green2)':'var(--or)'};">${$p(c.nPct)}</div></div>
+    <div class="exec-kpi"><div class="exec-lbl">Covers / Noche</div><div class="exec-val">${mo?Math.round(mo.covers/mo.days):'—'}</div><div class="exec-delta" style="font-size:9px;color:var(--mu);">target 50-65</div></div>
+  </div>
+  <div class="chart-wrap">
+    <div class="chart-title">Dónde va cada dólar — ${m.label}</div>
+    <div class="chart-sub" style="margin-bottom:6px;">Izquierda: Ingresos · Derecha: desglose de costos</div>
+    <div class="chart-canvas tall"><canvas id="wf-c"></canvas></div>
+  </div>
+  <div class="exec-narrative" id="exec-narr"><span style="font-size:9px;color:var(--mu);font-family:'DM Mono',monospace;font-style:normal;">Presiona "✦ Generar narrativa IA" para el resumen ejecutivo de este período.</span></div>
+  <div class="exec-footer">
+    <button class="btn secondary sm" onclick="window.print()">Imprimir</button>
+    <button class="btn primary sm" onclick="genNarrative()">✦ Generar narrativa</button>
+  </div>`;
+  setTimeout(()=>initWF(c,m),60);
 }
-
-function getPrevMonth(key){
-  const keys=Object.keys(PNL_MONTHS);
-  const idx=keys.indexOf(key);
-  return idx>0?keys[idx-1]:null;
-}
-
-function initWaterfallChart(c,m){
-  const canvas=document.getElementById('waterfall-canvas');if(!canvas)return;
+function initWF(c,m){
+  const cv=document.getElementById('wf-c');if(!cv)return;
   if(execChart)execChart.destroy();
-  const rev=c.totalRev;
   const items=[
-    {label:'Ingresos',value:rev,color:'rgba(30,77,43,0.75)'},
-    {label:'COGS',value:-c.totalCOGS,color:'rgba(200,64,26,0.7)'},
-    {label:'Nómina',value:-c.labor,color:'rgba(200,64,26,0.6)'},
-    {label:'Renta',value:-c.rent,color:'rgba(139,116,32,0.7)'},
-    {label:'Mktg',value:-m.marketing,color:'rgba(139,116,32,0.5)'},
-    {label:'Sundry',value:-m.sundry,color:'rgba(122,111,101,0.6)'},
-    {label:'Entret.',value:-m.entertainment,color:'rgba(107,37,53,0.5)'},
-    {label:'Otros ops',value:-(c.varOpEx-m.entertainment),color:'rgba(122,111,101,0.4)'},
-  ].filter(i=>i.value!==0);
-  const labels=items.map(i=>i.label);
-  const values=items.map(i=>Math.abs(i.value)/rev*100);
-  const colors=items.map(i=>i.color);
-  execChart=new Chart(canvas.getContext('2d'),{
-    type:'bar',
-    data:{labels,datasets:[{data:values,backgroundColor:colors,borderWidth:0}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#d4cfc8',borderWidth:1,titleColor:'#1a1a18',bodyColor:'#3d3d38',titleFont:{family:'DM Mono',size:9},bodyFont:{family:'DM Mono',size:10},callbacks:{label:c=>`${c.raw.toFixed(1)}% del revenue`}}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{color:'#7a7570',font:{family:'DM Mono',size:8},callback:v=>v+'%'},max:110},y:{grid:{display:false},ticks:{color:'#7a7570',font:{family:'DM Mono',size:9}}}}}
-  });
+    {l:'Ingresos',v:c.tot,col:'rgba(58,148,96,0.8)'},
+    {l:'COGS',v:-c.cogs,col:'rgba(200,64,26,0.7)'},
+    {l:'Nómina',v:-c.lab,col:'rgba(200,64,26,0.55)'},
+    {l:'Renta',v:-c.rent,col:'rgba(139,116,32,0.7)'},
+    {l:'Marketing',v:-(m.marketing||0),col:'rgba(139,116,32,0.5)'},
+    {l:'Sundry',v:-(m.sundry||0),col:'rgba(138,125,109,0.6)'},
+    {l:'Entretenimiento',v:-(m.entertainment||0),col:'rgba(107,37,53,0.7)'},
+    {l:'Otros',v:-(c.varOp-(m.entertainment||0)),col:'rgba(138,125,109,0.4)'},
+  ].filter(i=>i.v!==0);
+  execChart=new Chart(cv.getContext('2d'),{type:'bar',data:{labels:items.map(i=>i.l),datasets:[{data:items.map(i=>Math.abs(i.v)/c.tot*100),backgroundColor:items.map(i=>i.col),borderWidth:0}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>`${c.raw.toFixed(1)}% del revenue · ${$m(items[c.dataIndex].v)}`}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>v+'%'},max:110},y:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:9}}}}}});
 }
-
-async function genExecNarrative(){
-  const key=document.getElementById('exec-month-sel').value;
-  if(!key){alert('Selecciona un mes primero');return;}
+async function genNarrative(){
+  const k=document.getElementById('exec-sel').value;if(!k){alert('Selecciona un mes');return;}
   const apiKey=getKey();if(!apiKey){openModal();return;}
-  const m=getMergedMonth(key);
-  const c=calcPNL(m);
-  const nb=document.getElementById('exec-narrative-block');
-  if(!nb)return;
-  nb.innerHTML='<span class="spin"></span><span style="font-size:10px;color:var(--mu);">Generando análisis ejecutivo...</span>';
-  const prompt=`Eres el director de operaciones de Casa Zeru, restaurante fine dining mediterráneo-español en Brickell, Miami. Redacta un resumen ejecutivo de máximo 4 oraciones para el período ${m.label}. Tono ejecutivo, directo, en español. Sin bullet points. Solo prosa.
-
-Datos del período:
-- Ventas netas: $${Math.round(c.net).toLocaleString()} | Revenue total: $${Math.round(c.totalRev).toLocaleString()}
-- Utilidad bruta: ${c.grossMargin.toFixed(1)}%
-- Nómina: $${Math.round(c.labor).toLocaleString()} (${c.laborPct.toFixed(1)}% de ventas)
-- EBITDA: $${Math.round(c.ebitda).toLocaleString()} (${c.ebitdaPct.toFixed(1)}%)
-- Resultado neto: $${Math.round(c.netIncome).toLocaleString()}
-- Food cost: ${c.foodPct.toFixed(1)}% | Prime cost: ${c.primePct.toFixed(1)}%
-- Entretenimiento: $${Math.round(m.entertainment||0).toLocaleString()}/mes
-- Marketing: $${Math.round(m.marketing||0).toLocaleString()}/mes
-- Cargo corporativo: $${Math.round(m.sundry||0).toLocaleString()}/mes
-- Contexto: post-rebrand nov 2025, covers -39% vs año anterior
-
-Benchmark sano: food cost 28-32%, labor 28-35%, prime cost <58%, EBITDA >15%.`;
+  const m=getM(k),c=calcP(m);
+  const nb=document.getElementById('exec-narr');if(!nb)return;
+  nb.innerHTML='<span class="spin"></span><span style="font-size:10px;color:var(--mu);">Generando análisis...</span>';
+  const prompt=`Redacta un resumen ejecutivo de 4 oraciones para Casa Zeru Miami, ${m.label}. Tono ejecutivo, directo, en español. Solo prosa, sin bullets ni listas.
+Datos: Ventas $${Math.round(c.net).toLocaleString()} | Margen bruto ${c.gm.toFixed(1)}% | Labor ${c.lPct.toFixed(1)}% | EBITDA $${Math.round(c.ebitda).toLocaleString()} (${c.ePct.toFixed(1)}%) | Resultado neto $${Math.round(c.netI).toLocaleString()} | Food cost ${c.fPct.toFixed(1)}% | Prime cost ${c.pPct.toFixed(1)}% | Marketing $${Math.round(m.marketing||0).toLocaleString()}/mes | Entretenimiento $${Math.round(m.entertainment||0).toLocaleString()}/mes | Sundry $${Math.round(m.sundry||0).toLocaleString()}/mes
+Contexto: post-rebrand nov 2025, -40% covers YOY, 92% clientes recurrentes, 38 clientes nuevos en 7 meses, break-even $200K+/mes nunca alcanzado.`;
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})});
     const data=await r.json();
     if(data.error){nb.textContent='Error: '+data.error.message;return;}
-    const text=data.content.map(i=>i.text||'').join('');
-    nb.textContent=text;
+    nb.textContent=data.content.map(i=>i.text||'').join('');
   }catch(e){nb.textContent='Error de conexión.';}
 }
 
-// ═══ AI CHAT ═══
 async function sendChat(){
-  const input=document.getElementById('chat-in');
-  const msg=input.value.trim();if(!msg)return;
+  const input=document.getElementById('chat-in');const msg=input.value.trim();if(!msg)return;
   const key=getKey();if(!key){openModal();return;}
   input.value='';addMsg('user',msg);
-  document.getElementById('chat-btn').disabled=true;
-  document.getElementById('chat-typing').style.display='block';scrollChat();
-  chatHistory.push({role:'user',content:msg});
+  document.getElementById('chat-btn').disabled=true;document.getElementById('chat-typing').style.display='block';scrollC();
+  chatHist.push({role:'user',content:msg});
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CZ_CONTEXT,messages:chatHistory.slice(-10)})});
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CZ_CTX,messages:chatHist.slice(-10)})});
     const data=await r.json();
-    if(data.error){document.getElementById('chat-typing').style.display='none';addMsg('ai','Error API: '+data.error.message);return;}
+    if(data.error){document.getElementById('chat-typing').style.display='none';addMsg('ai','Error: '+data.error.message);return;}
     const reply=data.content.map(i=>i.text||'').join('');
-    chatHistory.push({role:'assistant',content:reply});
+    chatHist.push({role:'assistant',content:reply});
     document.getElementById('chat-typing').style.display='none';addMsg('ai',reply);
-  }catch(err){document.getElementById('chat-typing').style.display='none';addMsg('ai','Error de conexión.');}
+  }catch(e){document.getElementById('chat-typing').style.display='none';addMsg('ai','Error de conexión.');}
   finally{document.getElementById('chat-btn').disabled=false;}
 }
 function addMsg(role,text){
   const el=document.getElementById('chat-msgs');
   const d=document.createElement('div');d.className=`msg ${role} fade`;
-  d.innerHTML=`<div class="msg-avatar ${role==='ai'?'ai':'us'}">${role==='ai'?'CZ':RC.user_initials}</div><div class="msg-body">${text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
-  el.appendChild(d);scrollChat();
+  d.innerHTML=`<div class="msg-av ${role==='ai'?'ai':'us'}">${role==='ai'?'CZ':RC.user_initials}</div><div class="msg-body">${text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
+  el.appendChild(d);scrollC();
 }
-function scrollChat(){const m=document.getElementById('chat-msgs');m.scrollTop=m.scrollHeight;}
+function scrollC(){const m=document.getElementById('chat-msgs');m.scrollTop=m.scrollHeight;}
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
-function sendSuggestion(btn){document.getElementById('chat-in').value=btn.textContent;sendChat();}
+function sendSug(btn){document.getElementById('chat-in').value=btn.textContent;sendChat();}
 </script>
 </body>
 </html>
