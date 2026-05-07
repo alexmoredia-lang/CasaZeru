@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Casa Zeru · Central de Inteligencia</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
@@ -17,7 +17,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);color:var(--tx);font-family:'DM Mono',monospace;font-weight:300;display:flex;flex-direction:column;font-size:13px;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Mono',monospace;font-weight:400;display:flex;flex-direction:column;font-size:13px;}
 .hdr{padding:14px 28px;border-bottom:1px solid var(--bor);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--s1);box-shadow:var(--shadow);}
 .hdr-left{display:flex;align-items:center;gap:16px;}
 .brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--tx);}
@@ -323,6 +323,8 @@ select:focus{border-color:var(--green2);}
   <div class="ntab" onclick="goTab('pnl',this)">P&amp;L</div>
   <div class="ntab" onclick="goTab('menu',this)">Menú &amp; Servicio</div>
   <div class="ntab" onclick="goTab('clientes',this)">Clientes</div>
+  <div class="ntab" onclick="goTab('comparar',this)">Comparar</div>
+  <div class="ntab" onclick="goTab('invoices',this)">Compras</div>
   <div class="ntab" onclick="goTab('ejecutivo',this)">Ejecutivo</div>
   <div class="ntab" onclick="goTab('asistente',this)">Asistente IA</div>
 </div>
@@ -445,7 +447,7 @@ select:focus{border-color:var(--green2);}
     <div class="insight red"><div class="ins-lbl">Covers perdidos por noche</div><div class="ins-num" style="color:var(--or)">-29.5</div><div class="ins-txt">De 76 covers/noche a 46.6. Recuperar el baseline requiere 29 personas adicionales por noche, todos los días.</div></div>
     <div class="insight red"><div class="ins-lbl">Caída de check promedio</div><div class="ins-num" style="color:var(--or)">-$10.79</div><div class="ins-txt">De $118.88 a $108.09. Representa $820/día de pérdida adicional. El cliente nuevo gasta menos.</div></div>
     <div class="insight yel"><div class="ins-lbl">Día más afectado</div><div class="ins-num" style="color:#c8a020">Martes</div><div class="ins-txt">$88,478 en 7 meses. El cliente corporativo lun-mar no regresó. Vie+Sáb concentran el 53% del revenue total.</div></div>
-    <div class="insight grn"><div class="ins-lbl">Clientes con 10+ visitas</div><div class="ins-num" style="color:var(--green2)">700</div><div class="ins-txt">700 personas con más de 10 visitas en OpenTable. Base leal existente. Top cliente: 71 visitas registradas.</div></div>
+    <div class="insight grn"><div class="ins-lbl">Top cliente por revenue</div><div class="ins-num" style="color:var(--green2)">$42K</div><div class="ins-txt">Joseba Calvo: 54 visitas, $42,290 lifetime spend. El cliente más valioso del restaurante. Activo — última visita marzo 2026. Ángel Mieres ($31K) y Cristina Mieres ($31K) completan el podio.</div></div>
   </div>
   <div class="section-divider"></div>
   <div class="sl">YoY mes a mes — 2025 vs 2026</div>
@@ -468,6 +470,34 @@ select:focus{border-color:var(--green2);}
   <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--green2);padding:16px 18px;margin-bottom:16px;">
     <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--green2);margin-bottom:8px;">Conclusión estratégica</div>
     <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);">El rebrand eliminó al cliente corporativo de entre semana. El 92% de las reservaciones actuales son clientes que ya conocían el restaurante — sin reposición visible: solo 38 primeras visitas en 7 meses. El marketing digital a $14,490/mes no está convirtiendo clientes nuevos. Viernes y sábado concentran el 53% del revenue. La pregunta que ownership debe responder: ¿el nuevo posicionamiento recupera al cliente corporativo, o apuesta a sustituirlo?</div>
+  </div>
+
+  <div class="section-divider"></div>
+  <div class="sl">Cruce de fuentes · Toast × OpenTable × xtraCHEF</div>
+  <div style="background:var(--s1);border:1px solid var(--bor);padding:10px 14px;margin-bottom:10px;font-size:10px;color:var(--tx2);line-height:1.7;">Toast captura todos los covers. OpenTable solo reservaciones. La diferencia = walk-ins. Cuando OT supera a Toast hay un problema de datos en OT (no-shows o reservaciones futuras en el export).</div>
+  <div style="overflow-x:auto;margin-bottom:20px;">
+  <table class="tbl" style="min-width:700px;">
+    <thead><tr>
+      <th>Mes</th><th style="text-align:right">Covers Toast</th><th style="text-align:right">Covers OT</th>
+      <th style="text-align:right">Walk-ins</th><th style="text-align:right">% Walk-in</th>
+      <th style="text-align:right">Rev/Reservación</th><th style="text-align:right">Compras/Cover</th><th>Flag</th>
+    </tr></thead>
+    <tbody id="cross-tbody">
+      <tr><td>Oct 25</td><td class="right">924</td><td class="right">868</td><td class="right up">+56</td><td class="right">6.1%</td><td class="right">$374</td><td class="right">$75</td><td></td></tr>
+      <tr><td>Nov 25</td><td class="right">712</td><td class="right">724</td><td class="right dn">−12</td><td class="right" style="color:var(--or)">−1.7%</td><td class="right">$454</td><td class="right" style="color:var(--or)">$174</td><td><span style="font-size:9px;color:var(--or)">⚠ OT&gt;Toast</span></td></tr>
+      <tr><td>Dic 25</td><td class="right">1,277</td><td class="right">1,154</td><td class="right up">+123</td><td class="right">9.6%</td><td class="right">$426</td><td class="right">$74</td><td></td></tr>
+      <tr><td>Ene 26</td><td class="right">1,369</td><td class="right">1,227</td><td class="right up">+142</td><td class="right">10.4%</td><td class="right">$381</td><td class="right">$79</td><td></td></tr>
+      <tr><td>Feb 26</td><td class="right">1,653</td><td class="right">1,313</td><td class="right up" style="color:var(--green2)">+340</td><td class="right" style="color:var(--green2)">20.6%</td><td class="right">$432</td><td class="right">$50</td><td><span style="font-size:9px;color:var(--green2)">✓ Pico walk-in</span></td></tr>
+      <tr><td>Mar 26</td><td class="right">994</td><td class="right">852</td><td class="right up">+142</td><td class="right">14.3%</td><td class="right">$333</td><td class="right">$66</td><td></td></tr>
+      <tr><td>Abr 26</td><td class="right">909</td><td class="right">961</td><td class="right dn">−52</td><td class="right" style="color:var(--or)">−5.7%</td><td class="right">$357</td><td class="right">$67</td><td><span style="font-size:9px;color:var(--or)">⚠ OT&gt;Toast</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="insight-grid">
+    <div class="insight blu"><div class="ins-lbl">Walk-ins totales estimados</div><div class="ins-num" style="color:var(--blue)">9.4%</div><div class="ins-txt">739 covers de 7,838 totales llegaron sin reservación. Esos clientes no están siendo capturados en OpenTable para seguimiento ni CRM.</div></div>
+    <div class="insight yel"><div class="ins-lbl">Revenue por reservación OT</div><div class="ins-num" style="color:#c8a020">$333–454</div><div class="ins-txt">Cada reservación OT genera entre $333 (mar) y $454 (nov) en revenue. Noviembre y diciembre son los meses de mayor valor por reservación.</div></div>
+    <div class="insight red"><div class="ins-lbl">Anomalía Nov y Abr</div><div class="ins-num" style="color:var(--or)">−12/−52</div><div class="ins-txt">OT reporta más covers que Toast. Probable causa: no-shows contados como completados o reservaciones futuras en el export. No es error operativo.</div></div>
+    <div class="insight grn"><div class="ins-lbl">Febrero — walk-in outlier</div><div class="ins-num" style="color:var(--green2)">20.6%</div><div class="ins-txt">El mejor mes post-rebrand tuvo 340 walk-ins. Algo generó tráfico orgánico en febrero. Identificar qué fue y replicarlo es una palanca de crecimiento sin costo adicional.</div></div>
   </div>
 </div>
 
@@ -517,30 +547,55 @@ select:focus{border-color:var(--green2);}
 </div>
 
 <div class="panel" id="p-clientes">
-  <div class="sl">Base de clientes · OpenTable · Oct 2025 – May 2026</div>
-  <div class="ot-grid">
-    <div class="ot-kpi"><div class="ot-val">6,284</div><div class="ot-lbl">Reservaciones totales</div><div class="ot-sub kpi-sub nu">5,918 completadas</div></div>
-    <div class="ot-kpi"><div class="ot-val" style="color:var(--or)">38</div><div class="ot-lbl">Clientes nuevos</div><div class="ot-sub kpi-sub dn">0.6% — crítico</div></div>
-    <div class="ot-kpi"><div class="ot-val" style="color:var(--green2)">700</div><div class="ot-lbl">VIP (10+ visitas)</div><div class="ot-sub kpi-sub up">Base leal consolidada</div></div>
-    <div class="ot-kpi"><div class="ot-val">1,246</div><div class="ot-lbl">Frecuentes (5+)</div><div class="ot-sub kpi-sub nu">20% del total</div></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div class="sl" style="margin-bottom:0;">Base de clientes · OpenTable · Histórico completo</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span style="font-size:9px;color:var(--mu);letter-spacing:0.15em;text-transform:uppercase;">Filtrar por última visita:</span>
+      <select id="cliente-month-filter" style="width:auto;margin-bottom:0;font-size:9px;padding:5px 10px;" onchange="applyClienteFilter()">
+        <option value="all">Todos los períodos</option>
+        <option value="2026-04">Abril 2026</option>
+        <option value="2026-03">Marzo 2026</option>
+        <option value="2026-02">Febrero 2026</option>
+        <option value="2026-01">Enero 2026</option>
+        <option value="2025-12">Dic 2025</option>
+        <option value="2025-11">Nov 2025</option>
+        <option value="2025-10">Oct 2025</option>
+        <option value="lapsed_90">Lapsed 90+ días</option>
+        <option value="lapsed_180">Lapsed 180+ días</option>
+      </select>
+    </div>
   </div>
+  <div class="ot-grid">
+    <div class="ot-kpi"><div class="ot-val">3,476</div><div class="ot-lbl">Perfiles totales</div><div class="ot-sub kpi-sub nu">Revenue trackeado: $3.19M</div></div>
+    <div class="ot-kpi"><div class="ot-val" style="color:var(--green2)">2,396</div><div class="ot-lbl">Primera visita</div><div class="ot-sub kpi-sub nu">69% del total de perfiles</div></div>
+    <div class="ot-kpi"><div class="ot-val" style="color:var(--or)">89</div><div class="ot-lbl">Clientes $5K+ lifetime</div><div class="ot-sub kpi-sub up">Top tier de valor</div></div>
+    <div class="ot-kpi"><div class="ot-val">$989</div><div class="ot-lbl">Spend promedio/cliente</div><div class="ot-sub kpi-sub nu">Entre perfiles con spend</div></div>
+  </div>
+
+  <!-- TABS de las 3 vistas -->
+  <div style="display:flex;gap:4px;margin-bottom:16px;">
+    <button class="mb on" onclick="switchGuestView('revenue',this)">Por Revenue</button>
+    <button class="mb" onclick="switchGuestView('covers',this)">Por Covers</button>
+    <button class="mb" onclick="switchGuestView('visits',this)">Por Visitas</button>
+    <button class="mb" onclick="switchGuestView('lapsed',this)">Lapsed 🔴</button>
+    <button class="mb" onclick="switchGuestView('recent',this)">Activos Recientes ✅</button>
+  </div>
+
+  <div id="guest-view-container"></div>
+
   <div class="section-divider"></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
     <div>
-      <div class="sl">Top 20 clientes por visitas</div>
-      <div id="guests-block"></div>
-    </div>
-    <div>
       <div class="sl">Fuente de reservaciones</div>
-      <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:20px;" id="src-block"></div>
-      <div class="section-divider"></div>
+      <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:16px;" id="src-block"></div>
       <div class="sl">Tamaño de grupo</div>
       <div class="kpi-row c3">
         <div class="kpi"><div class="kpi-lbl">Parejas (2)</div><div class="kpi-val">3,075</div><div class="kpi-sub nu">49% del total</div></div>
         <div class="kpi"><div class="kpi-lbl">Grupos 3-4</div><div class="kpi-val">1,567</div><div class="kpi-sub nu">25% del total</div></div>
         <div class="kpi"><div class="kpi-lbl">Grupos 5+</div><div class="kpi-val">502</div><div class="kpi-sub nu">8% del total</div></div>
       </div>
-      <div class="section-divider"></div>
+    </div>
+    <div>
       <div class="sl">Perfil del cliente (Guest Tags)</div>
       <div class="kpi-row c2">
         <div class="kpi"><div class="kpi-lbl">Alert the Manager</div><div class="kpi-val sm">1,149</div><div class="kpi-sub nu">18% de reservaciones</div></div>
@@ -548,13 +603,70 @@ select:focus{border-color:var(--green2);}
         <div class="kpi"><div class="kpi-lbl">VIP tag</div><div class="kpi-val sm">316</div><div class="kpi-sub nu">5%</div></div>
         <div class="kpi"><div class="kpi-lbl">Good Spender</div><div class="kpi-val sm">217</div><div class="kpi-sub nu">3.5%</div></div>
       </div>
+      <div class="section-divider"></div>
+      <div class="sl">Acción inmediata</div>
+      <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--or);padding:14px 16px;">
+        <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--or);margin-bottom:8px;">Lapsed — llamar esta semana</div>
+        <div style="font-size:11px;color:var(--tx2);line-height:1.8;">
+          Angel Mieres · $31,617 · 5 meses sin venir<br>
+          Luis Perez · $26,544 · 4 meses sin venir<br>
+          Jose Alonso · $14,199 · 4 meses sin venir<br>
+          Horst Ferrero · $15,580 · 5 meses sin venir<br>
+          Joel Sardiñas · $11,861 · 5 meses sin venir
+        </div>
+      </div>
     </div>
   </div>
-  <div class="section-divider"></div>
-  <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--or);padding:16px 18px;">
-    <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--or);margin-bottom:8px;">Flag crítico</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;line-height:1.85;color:var(--tx);">El 92% de las reservaciones son clientes con visitas previas. Sin reposición visible — solo 38 primeras visitas en 7 meses. El marketing digital a $14,490/mes no está convirtiendo clientes nuevos. La base de 700 VIPs es el activo más valioso del negocio; ninguno tiene un programa de reconocimiento activo documentado.</div>
+</div>
+
+<div class="panel" id="p-comparar">
+  <div class="sl">Comparador de períodos · Selecciona dos meses para ver lado a lado</div>
+
+  <!-- Period selectors -->
+  <div style="display:grid;grid-template-columns:1fr 40px 1fr;gap:12px;align-items:center;margin-bottom:20px;">
+    <div style="background:var(--s1);border:1px solid var(--bor);padding:14px;">
+      <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green2);margin-bottom:8px;">Período A</div>
+      <select id="cmp-a" style="margin-bottom:0;" onchange="renderComparar()">
+        <option value="">Seleccionar</option>
+      </select>
+    </div>
+    <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--mu);">vs</div>
+    <div style="background:var(--s1);border:1px solid var(--bor);padding:14px;">
+      <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--or);margin-bottom:8px;">Período B</div>
+      <select id="cmp-b" style="margin-bottom:0;" onchange="renderComparar()">
+        <option value="">Seleccionar</option>
+      </select>
+    </div>
   </div>
+
+  <div id="cmp-content"><div class="empty-state" style="text-align:center;padding:40px;">Selecciona dos períodos para comparar.</div></div>
+</div>
+
+<div class="panel" id="p-invoices">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div class="sl" style="margin-bottom:0;">Compras · xtraCHEF · Oct 2025 – Abr 2026</div>
+    <div style="display:flex;gap:6px;align-items:center;">
+      <select id="inv-month-filter" style="width:auto;margin-bottom:0;font-size:9px;padding:5px 10px;" onchange="renderInvoices()">
+        <option value="all">Todos los meses</option>
+        <option value="2025-10">Oct 2025</option>
+        <option value="2025-11">Nov 2025</option>
+        <option value="2025-12">Dic 2025</option>
+        <option value="2026-01">Ene 2026</option>
+        <option value="2026-02">Feb 2026</option>
+        <option value="2026-03">Mar 2026</option>
+        <option value="2026-04">Abr 2026</option>
+      </select>
+      <div style="display:flex;gap:4px;">
+        <button class="mb on" id="inv-view-vendor" onclick="setInvView('vendor',this)">Por proveedor</button>
+        <button class="mb" id="inv-view-cat" onclick="setInvView('cat',this)">Por categoría</button>
+        <button class="mb" id="inv-view-trend" onclick="setInvView('trend',this)">Tendencia</button>
+        <button class="mb" id="inv-view-analysis" onclick="setInvView('analysis',this)">Análisis ↗</button>
+      </div>
+    </div>
+  </div>
+  <div class="kpi-row c4" id="inv-kpis" style="margin-bottom:20px;"></div>
+  <div id="inv-flags" style="margin-bottom:16px;"></div>
+  <div id="inv-content"></div>
 </div>
 
 <div class="panel" id="p-ejecutivo">
@@ -665,17 +777,105 @@ const SERVERS=[
   {n:'Server Events',r:49904,i:2077,role:'Eventos'},
   {n:'Pablo Perez',r:13748,i:99,role:'AGM'},
 ];
-const TOP_GUESTS=[
-  {n:'Edison Sabala',v:71,c:4},{n:'Fred Mann',v:68,c:90},
-  {n:'Scott Devereaux',v:61,c:23},{n:'Joseba Calvo',v:54,c:9},
-  {n:'Jack Morgan',v:44,c:52},{n:'Daniel Sanchez',v:39,c:4},
-  {n:'Carlos Zalles',v:37,c:16},{n:'Luis Tojeiro',v:37,c:52},
-  {n:'Karl White',v:35,c:8},{n:'Tony Diaz',v:35,c:29},
-  {n:'Horst Ferrero',v:30,c:21},{n:'Bankole Johnson',v:30,c:10},
-  {n:'Alejandro Rebolledo',v:29,c:10},{n:'Fernando Sandoval',v:29,c:22},
-  {n:'Juan Carlos Jurado',v:28,c:29},{n:'Giorgio Mariani',v:28,c:44},
-  {n:'Delano Andrade',v:27,c:9},{n:'Fran Anania',v:26,c:5},
-  {n:'Diego Pardo',v:26,c:37},{n:'Jose Barrios',v:26,c:37},
+const TOP_BY_REVENUE=[
+  {n:'Joseba Calvo',v:54,c:159,s:42290,last:'2026-03-06',tags:'VIP,Regular'},
+  {n:'Angel Mieres',v:8,c:56,s:31617,last:'2025-12-31',tags:'VIP,Good Spender'},
+  {n:'Cristina Mieres',v:26,c:146,s:31435,last:'2026-04-04',tags:'VIP,Allergy'},
+  {n:'Carlos Zalles',v:37,c:144,s:26746,last:'2026-02-05',tags:'Regular'},
+  {n:'Luis Perez',v:16,c:81,s:26544,last:'2026-01-16',tags:'Good Spender'},
+  {n:'Luis Tojeiro',v:37,c:108,s:20891,last:'2026-04-10',tags:'VIP,Good Spender'},
+  {n:'Remedios Diaz',v:23,c:169,s:20154,last:'2026-02-05',tags:'Regular,Good Spender'},
+  {n:'Diego Rodriguez',v:10,c:47,s:18489,last:'2025-09-26',tags:'VIP,Good Spender'},
+  {n:'Tony Diaz',v:35,c:94,s:18368,last:'2026-04-27',tags:'Regular,Good Spender'},
+  {n:'Daniel Sanchez',v:39,c:84,s:18041,last:'2025-04-15',tags:'Regular'},
+  {n:'Horst Ferrero',v:30,c:71,s:15580,last:'2025-12-05',tags:'VIP'},
+  {n:'Robert Washington',v:19,c:59,s:14801,last:'2026-04-25',tags:'VIP,Regular,Good Spender'},
+  {n:'Jose Daes',v:19,c:83,s:14381,last:'2026-03-27',tags:'VIP,Good Spender'},
+  {n:'Jose Alonso',v:19,c:77,s:14199,last:'2026-01-23',tags:''},
+  {n:'Fran Anania',v:26,c:80,s:13819,last:'2025-03-06',tags:'Regular'},
+  {n:'Karen Morris',v:4,c:78,s:13662,last:'2025-11-13',tags:'Allergy'},
+  {n:'Yvonne Dacal',v:11,c:33,s:13577,last:'2026-04-15',tags:'Good Spender'},
+  {n:'Joel Sardiñas',v:22,c:177,s:11861,last:'2025-12-24',tags:'Investor,VIP'},
+  {n:'Frank Chang',v:20,c:62,s:10628,last:'2026-03-07',tags:''},
+  {n:'Juan Carlos Jurado',v:28,c:83,s:10407,last:'2025-04-16',tags:''},
+];
+const TOP_BY_COVERS=[
+  {n:'Juan Tena',v:21,c:197,s:5379,last:'2025-12-31',tags:''},
+  {n:'Joel Sardiñas',v:22,c:177,s:11861,last:'2025-12-24',tags:'Investor,VIP'},
+  {n:'Remedios Diaz',v:23,c:169,s:20154,last:'2026-02-05',tags:'Regular,Good Spender'},
+  {n:'Joseba Calvo',v:54,c:159,s:42290,last:'2026-03-06',tags:'VIP,Regular'},
+  {n:'Fred Mann',v:68,c:146,s:9517,last:'2026-05-04',tags:''},
+  {n:'Cristina Mieres',v:26,c:146,s:31435,last:'2026-04-04',tags:'VIP'},
+  {n:'Carlos Zalles',v:37,c:144,s:26746,last:'2026-02-05',tags:'Regular'},
+  {n:'Luis Tojeiro',v:37,c:108,s:20891,last:'2026-04-10',tags:'VIP,Good Spender'},
+  {n:'Tony Diaz',v:35,c:94,s:18368,last:'2026-04-27',tags:'Regular,Good Spender'},
+  {n:'Daniel Sanchez',v:39,c:84,s:18041,last:'2025-04-15',tags:'Regular'},
+  {n:'Jose Daes',v:19,c:83,s:14381,last:'2026-03-27',tags:'VIP,Good Spender'},
+  {n:'Juan Carlos Jurado',v:28,c:83,s:10407,last:'2025-04-16',tags:''},
+  {n:'Luis Perez',v:16,c:81,s:26544,last:'2026-01-16',tags:'Good Spender'},
+  {n:'Fran Anania',v:26,c:80,s:13819,last:'2025-03-06',tags:'Regular'},
+  {n:'Alejandro Rebolledo',v:29,c:79,s:9359,last:'2025-10-31',tags:''},
+  {n:'Karen Morris',v:4,c:78,s:13662,last:'2025-11-13',tags:'Allergy'},
+  {n:'Jose Alonso',v:19,c:77,s:14199,last:'2026-01-23',tags:''},
+  {n:'Diego Pardo',v:26,c:77,s:9721,last:'2026-03-26',tags:''},
+  {n:'Yanet Carmona',v:15,c:79,s:12812,last:'2026-05-02',tags:''},
+  {n:'Andrea Baigorria',v:23,c:109,s:7771,last:'2025-06-30',tags:''},
+];
+const TOP_BY_VISITS=[
+  {n:'Fred Mann',v:68,c:146,s:9517,last:'2026-05-04',tags:''},
+  {n:'Scott Devereaux',v:61,c:72,s:1272,last:'2026-04-09',tags:''},
+  {n:'Joseba Calvo',v:54,c:159,s:42290,last:'2026-03-06',tags:'VIP,Regular'},
+  {n:'Jack Morgan',v:44,c:52,s:1227,last:'2026-05-01',tags:''},
+  {n:'Daniel Sanchez',v:39,c:84,s:18041,last:'2025-04-15',tags:'Regular'},
+  {n:'Luis Tojeiro',v:37,c:108,s:20891,last:'2026-04-10',tags:'VIP,Good Spender'},
+  {n:'Carlos Zalles',v:37,c:144,s:26746,last:'2026-02-05',tags:'Regular'},
+  {n:'Tony Diaz',v:35,c:94,s:18368,last:'2026-04-27',tags:'Regular,Good Spender'},
+  {n:'Horst Ferrero',v:30,c:71,s:15580,last:'2025-12-05',tags:'VIP'},
+  {n:'Alejandro Rebolledo',v:29,c:79,s:9359,last:'2025-10-31',tags:''},
+  {n:'Juan Carlos Jurado',v:28,c:83,s:10407,last:'2025-04-16',tags:''},
+  {n:'Giorgio Mariani',v:28,c:58,s:8333,last:'2026-04-30',tags:''},
+  {n:'Fernando Sandoval',v:29,c:74,s:7745,last:'2026-04-09',tags:''},
+  {n:'Diego Pardo',v:26,c:77,s:9721,last:'2026-03-26',tags:''},
+  {n:'Fran Anania',v:26,c:80,s:13819,last:'2025-03-06',tags:'Regular'},
+  {n:'Cristina Mieres',v:26,c:146,s:31435,last:'2026-04-04',tags:'VIP'},
+  {n:'Bankole Johnson',v:30,c:73,s:8345,last:'2026-02-13',tags:''},
+  {n:'Jiaming Wang',v:26,c:43,s:5719,last:'2025-06-21',tags:''},
+  {n:'Delano Andrade',v:27,c:65,s:5886,last:'2025-04-22',tags:''},
+  {n:'Fred Mann',v:68,c:146,s:9517,last:'2026-05-04',tags:''},
+];
+const LAPSED_GUESTS=[
+  {n:'Angel Mieres',v:8,c:56,s:31617,last:'2025-12-31',days:127,tags:'VIP,Good Spender'},
+  {n:'Luis Perez',v:16,c:81,s:26544,last:'2026-01-16',days:111,tags:'Good Spender'},
+  {n:'Diego Rodriguez',v:10,c:47,s:18489,last:'2025-09-26',days:223,tags:'VIP,Good Spender'},
+  {n:'Daniel Sanchez',v:39,c:84,s:18041,last:'2025-04-15',days:387,tags:'Regular'},
+  {n:'Horst Ferrero',v:30,c:71,s:15580,last:'2025-12-05',days:153,tags:'VIP'},
+  {n:'Jose Alonso',v:19,c:77,s:14199,last:'2026-01-23',days:104,tags:''},
+  {n:'Fran Anania',v:26,c:80,s:13819,last:'2025-03-06',days:427,tags:'Regular'},
+  {n:'Karen Morris',v:4,c:78,s:13662,last:'2025-11-13',days:175,tags:'Allergy'},
+  {n:'Cengiz Bayirli',v:23,c:58,s:12374,last:'2025-12-18',days:140,tags:''},
+  {n:'Joel Sardiñas',v:22,c:177,s:11861,last:'2025-12-24',days:134,tags:'Investor,VIP'},
+  {n:'Juan Carlos Jurado',v:28,c:83,s:10407,last:'2025-04-16',days:386,tags:''},
+  {n:'Josue Polanco',v:25,c:62,s:10404,last:'2025-10-23',days:196,tags:'Allergy'},
+  {n:'Hector Marquez',v:10,c:42,s:9205,last:'2025-11-29',days:159,tags:'Good Spender'},
+  {n:'Alejandro Rebolledo',v:29,c:79,s:9359,last:'2025-10-31',days:188,tags:''},
+  {n:'Aurelio Gonzalez',v:22,c:58,s:8889,last:'2025-02-13',days:448,tags:'VIP'},
+];
+const RECENT_GUESTS=[
+  {n:'Cristina Mieres',v:26,c:146,s:31435,last:'2026-04-04',tags:'VIP'},
+  {n:'Luis Tojeiro',v:37,c:108,s:20891,last:'2026-04-10',tags:'VIP,Good Spender'},
+  {n:'Tony Diaz',v:35,c:94,s:18368,last:'2026-04-27',tags:'Regular,Good Spender'},
+  {n:'Robert Washington',v:19,c:59,s:14801,last:'2026-04-25',tags:'VIP,Regular,Good Spender'},
+  {n:'Jose Daes',v:19,c:83,s:14381,last:'2026-03-27',tags:'VIP,Good Spender'},
+  {n:'Yvonne Dacal',v:11,c:33,s:13577,last:'2026-04-15',tags:'Good Spender'},
+  {n:'Yanet Carmona',v:15,c:79,s:12812,last:'2026-05-02',tags:''},
+  {n:'Frank Chang',v:20,c:62,s:10628,last:'2026-03-07',tags:''},
+  {n:'Manolo Bravo',v:16,c:61,s:9752,last:'2026-03-21',tags:''},
+  {n:'Diego Pardo',v:26,c:77,s:9721,last:'2026-03-26',tags:''},
+  {n:'Fred Mann',v:68,c:146,s:9517,last:'2026-05-04',tags:''},
+  {n:'Jose Barrios',v:26,c:78,s:9449,last:'2026-04-22',tags:''},
+  {n:'Hector Ortiz',v:22,c:48,s:9380,last:'2026-04-11',tags:''},
+  {n:'Monica Vazquez',v:16,c:65,s:8427,last:'2026-04-16',tags:''},
+  {n:'Giorgio Mariani',v:28,c:58,s:8333,last:'2026-04-30',tags:''},
 ];
 const SOURCES=[
   {n:'Teléfono / In-house',c:2239,p:35.6,col:'#3a9460'},
@@ -748,10 +948,15 @@ document.getElementById('key-modal').addEventListener('click',e=>{if(e.target===
 function goTab(id,el){
   document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  // Close any open overlays
+  document.getElementById('eov').classList.remove('on');
+  document.getElementById('key-modal').classList.remove('on');
   el.classList.add('on');document.getElementById('p-'+id).classList.add('on');
   if(id==='historico')setTimeout(()=>{renderMonthly();initMain();},60);
   if(id==='inteligencia')setTimeout(()=>initSeasonal('seasonal-chart'),60);
   if(id==='pnl')renderPNL(curPnlM);
+  if(id==='invoices'){syncInvButtons();renderInvoices();}
+  if(id==='comparar'){buildCmpSelectors();renderComparar();}
   if(id==='ejecutivo'){const s=document.getElementById('exec-sel');if(s.value)renderExec(s.value);}
 }
 
@@ -829,7 +1034,7 @@ function initMain(){
   const colors=MONTHLY.map((_,i)=>i>=ri?'rgba(200,64,26,0.7)':'rgba(58,148,96,0.65)');
   mainChart=new Chart(c.getContext('2d'),{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>'$'+c.raw.toLocaleString('en-US',{maximumFractionDigits:0})}}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},maxRotation:45}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>curMetric==='covers'?v.toLocaleString():'$'+Math.round(v/1000)+'K'}}}}});
 }
-function setMetric(m,btn){curMetric=m;document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');if(mainChart)initMain();}
+function setMetric(m,btn){curMetric=m;document.querySelectorAll('#p-historico .mb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');if(mainChart)initMain();}
 function initSeasonal(id){
   const c=document.getElementById(id);if(!c)return;
   const pre=MONTHLY.filter(m=>m.label<'2025-11');
@@ -877,15 +1082,7 @@ function renderMenu(){
 }
 
 function renderClientes(){
-  document.getElementById('guests-block').innerHTML=TOP_GUESTS.map((g,i)=>`
-    <div class="gcard">
-      <div class="gnum">${i+1}</div>
-      <div class="ginfo">
-        <div class="gname">${g.n}${g.v>=50?` <span class="pill vip">VIP</span>`:g.v>=20?` <span class="pill reg">Frecuente</span>`:''}</div>
-        <div class="gmeta">${g.c} covers totales</div>
-      </div>
-      <div class="gvisits">${g.v}</div>
-    </div>`).join('');
+  renderGuestView('revenue');
   const maxS=SOURCES[0].c;
   document.getElementById('src-block').innerHTML=SOURCES.map(s=>`
     <div class="src-row">
@@ -893,6 +1090,117 @@ function renderClientes(){
       <div class="src-bw"><div class="src-bf" style="width:${Math.round(s.c/maxS*100)}%;background:${s.col};height:5px;"></div></div>
       <div class="src-pct">${s.p}%</div>
     </div>`).join('');
+}
+
+function switchGuestView(view, btn){
+  document.querySelectorAll('#p-clientes .mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderGuestView(view);
+}
+
+function renderGuestView(view){
+  const container = document.getElementById('guest-view-container');
+  let data, title, subtitle, cols;
+
+  if(view==='revenue'){
+    data=TOP_BY_REVENUE; title='Top 20 por Revenue Lifetime';
+    subtitle='Clientes que más dinero han dejado en el restaurante';
+    cols=['Revenue','Visitas','Covers','Última visita','Tags'];
+    container.innerHTML=`
+      <div class="sl">${title}</div>
+      <div style="font-size:9px;color:var(--mu);margin-bottom:12px;">${subtitle}</div>
+      ${data.map((g,i)=>{
+        const daysAgo=Math.round((new Date('2026-05-07')-new Date(g.last))/(1000*60*60*24));
+        const lapsed=daysAgo>90;
+        return`<div class="gcard" style="border-left:3px solid ${lapsed?'var(--or)':'var(--green2)'}">
+          <div class="gnum">${i+1}</div>
+          <div class="ginfo">
+            <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''}${g.tags.includes('Good Spender')?` <span class="pill reg">$$$</span>`:''}</div>
+            <div class="gmeta">${g.v} visitas · ${g.c} covers · última: ${g.last}${lapsed?` · <span style="color:var(--or)">${daysAgo} días sin venir</span>`:` · <span style="color:var(--green2)">activo</span>`}</div>
+          </div>
+          <div class="gvisits" style="font-size:15px;">$${Math.round(g.s/1000)}K</div>
+        </div>`;
+      }).join('')}`;
+  } else if(view==='covers'){
+    data=TOP_BY_COVERS; title='Top 20 por Covers Traídos';
+    subtitle='Clientes que más gente han traído al restaurante — mayor impacto en ocupación';
+    container.innerHTML=`
+      <div class="sl">${title}</div>
+      <div style="font-size:9px;color:var(--mu);margin-bottom:12px;">${subtitle}</div>
+      ${data.map((g,i)=>{
+        const daysAgo=Math.round((new Date('2026-05-07')-new Date(g.last))/(1000*60*60*24));
+        const lapsed=daysAgo>90;
+        return`<div class="gcard" style="border-left:3px solid ${lapsed?'var(--or)':'var(--green2)'}">
+          <div class="gnum">${i+1}</div>
+          <div class="ginfo">
+            <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''}</div>
+            <div class="gmeta">${g.v} visitas · revenue $${Math.round(g.s/1000)}K · última: ${g.last}${lapsed?` · <span style="color:var(--or)">${daysAgo} días sin venir</span>`:` · <span style="color:var(--green2)">activo</span>`}</div>
+          </div>
+          <div class="gvisits" style="color:var(--blue);font-size:15px;">${g.c} cvrs</div>
+        </div>`;
+      }).join('')}`;
+  } else if(view==='visits'){
+    data=TOP_BY_VISITS; title='Top 20 por Visitas';
+    subtitle='Clientes más frecuentes — mayor lealtad al restaurante';
+    container.innerHTML=`
+      <div class="sl">${title}</div>
+      <div style="font-size:9px;color:var(--mu);margin-bottom:12px;">${subtitle}</div>
+      ${data.map((g,i)=>{
+        const daysAgo=Math.round((new Date('2026-05-07')-new Date(g.last))/(1000*60*60*24));
+        const lapsed=daysAgo>90;
+        return`<div class="gcard" style="border-left:3px solid ${lapsed?'var(--or)':'var(--green2)'}">
+          <div class="gnum">${i+1}</div>
+          <div class="ginfo">
+            <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''}</div>
+            <div class="gmeta">${g.c} covers · revenue $${Math.round(g.s/1000)}K · última: ${g.last}${lapsed?` · <span style="color:var(--or)">${daysAgo} días sin venir</span>`:` · <span style="color:var(--green2)">activo</span>`}</div>
+          </div>
+          <div class="gvisits" style="font-size:15px;">${g.v} visitas</div>
+        </div>`;
+      }).join('')}`;
+  } else if(view==='lapsed'){
+    data=LAPSED_GUESTS; title='Clientes Lapsed — Acción Inmediata';
+    subtitle='Clientes de alto valor que no han visitado en más de 90 días. Ordenados por spend lifetime.';
+    container.innerHTML=`
+      <div class="sl or">${title}</div>
+      <div style="font-size:9px;color:var(--mu);margin-bottom:12px;">${subtitle}</div>
+      <div style="background:rgba(200,64,26,0.08);border:1px solid var(--bor3);padding:10px 14px;margin-bottom:12px;font-size:10px;color:var(--tx2);">
+        💡 <strong>Acción sugerida:</strong> Llamada personal o mensaje de WhatsApp con invitación a una experiencia especial. Mencionar algo específico de su última visita para mostrar que los recuerdas.
+      </div>
+      ${data.map((g,i)=>{
+        const urgColor=g.days>300?'var(--or)':g.days>180?'#c8a020':'var(--or)';
+        return`<div class="gcard" style="border-left:3px solid var(--or)">
+          <div class="gnum" style="color:var(--or)">${i+1}</div>
+          <div class="ginfo">
+            <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''}</div>
+            <div class="gmeta">${g.v} visitas · ${g.c} covers · última: ${g.last}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--green2);">$${Math.round(g.s/1000)}K</div>
+            <div style="font-size:9px;color:${urgColor};">${g.days} días</div>
+          </div>
+        </div>`;
+      }).join('')}`;
+  } else if(view==='recent'){
+    data=RECENT_GUESTS; title='Activos Recientes — Agradecer';
+    subtitle='Clientes de valor que han visitado en los últimos 60 días. Momento ideal para reconocimiento.';
+    container.innerHTML=`
+      <div class="sl" style="color:var(--green2)">${title}</div>
+      <div style="font-size:9px;color:var(--mu);margin-bottom:12px;">${subtitle}</div>
+      <div style="background:rgba(45,122,74,0.08);border:1px solid rgba(45,122,74,0.2);padding:10px 14px;margin-bottom:12px;font-size:10px;color:var(--tx2);">
+        💡 <strong>Acción sugerida:</strong> Nota personal de agradecimiento, cortesía en próxima visita, o actualización de sus preferencias en OpenTable para personalizar la experiencia.
+      </div>
+      ${data.map((g,i)=>{
+        const daysAgo=Math.round((new Date('2026-05-07')-new Date(g.last))/(1000*60*60*24));
+        return`<div class="gcard" style="border-left:3px solid var(--green2)">
+          <div class="gnum" style="color:var(--green2)">${i+1}</div>
+          <div class="ginfo">
+            <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''} ${g.tags.includes('Good Spender')?`<span class="pill reg">$$$</span>`:''}</div>
+            <div class="gmeta">${g.v} visitas · ${g.c} covers · última: ${g.last} · <span style="color:var(--green2)">hace ${daysAgo} días</span></div>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--green2);flex-shrink:0;">$${Math.round(g.s/1000)}K</div>
+        </div>`;
+      }).join('')}`;
+  }
 }
 
 // P&L
@@ -1094,9 +1402,510 @@ function addMsg(role,text){
   d.innerHTML=`<div class="msg-av ${role==='ai'?'ai':'us'}">${role==='ai'?'CZ':RC.user_initials}</div><div class="msg-body">${text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
   el.appendChild(d);scrollC();
 }
-function scrollC(){const m=document.getElementById('chat-msgs');m.scrollTop=m.scrollHeight;}
+// ═══ COMPARADOR ═══
+const CMP_MONTHS_SALES = Object.fromEntries(MONTHLY.map(m=>[m.label,m]));
+const CMP_MONTHS_LIST = MONTHLY.map(m=>m.label);
+const CMP_LBL_MAP = {'2023-03':'Mar 23','2023-04':'Abr 23','2023-05':'May 23','2023-06':'Jun 23','2023-07':'Jul 23','2023-08':'Ago 23','2023-09':'Sep 23','2023-10':'Oct 23','2023-11':'Nov 23','2023-12':'Dic 23','2024-01':'Ene 24','2024-02':'Feb 24','2024-03':'Mar 24','2024-04':'Abr 24','2024-05':'May 24','2024-06':'Jun 24','2024-07':'Jul 24','2024-08':'Ago 24','2024-09':'Sep 24','2024-10':'Oct 24','2024-11':'Nov 24','2024-12':'Dic 24','2025-01':'Ene 25','2025-02':'Feb 25','2025-03':'Mar 25','2025-04':'Abr 25','2025-05':'May 25','2025-06':'Jun 25','2025-07':'Jul 25','2025-08':'Ago 25','2025-09':'Sep 25','2025-10':'Oct 25','2025-11':'Nov 25','2025-12':'Dic 25','2026-01':'Ene 26','2026-02':'Feb 26','2026-03':'Mar 26','2026-04':'Abr 26'};
+
+function buildCmpSelectors(){
+  const a=document.getElementById('cmp-a'),b=document.getElementById('cmp-b');
+  if(a.options.length>1)return;
+  const opts=CMP_MONTHS_LIST.map(m=>`<option value="${m}">${CMP_LBL_MAP[m]||m}</option>`).join('');
+  a.innerHTML='<option value="">Seleccionar período A</option>'+opts;
+  b.innerHTML='<option value="">Seleccionar período B</option>'+opts;
+  // Default: best recent months
+  a.value='2026-02'; b.value='2026-04';
+}
+
+function renderComparar(){
+  const ka=document.getElementById('cmp-a').value;
+  const kb=document.getElementById('cmp-b').value;
+  if(!ka||!kb){document.getElementById('cmp-content').innerHTML='<div class="empty-state" style="text-align:center;padding:40px;">Selecciona dos períodos.</div>';return;}
+
+  const ma=CMP_MONTHS_SALES[ka], mb=CMP_MONTHS_SALES[kb];
+  const pa=PNL[ka]?Object.assign({},PNL[ka],pnlOv[ka]||{}):null;
+  const pb=PNL[kb]?Object.assign({},PNL[kb],pnlOv[kb]||{}):null;
+  const ca=pa?calcP(pa):null, cb=pb?calcP(pb):null;
+  const invA=INV_TOT[ka]||0, invB=INV_TOT[kb]||0;
+
+  const la=CMP_LBL_MAP[ka]||ka, lb=CMP_LBL_MAP[kb]||kb;
+  const isPost=m=>m>='2025-11';
+
+  const delta=(a,b,fmt='$')=>{
+    if(!a||!b)return'—';
+    const d=b-a, pct=(d/Math.abs(a)*100).toFixed(1);
+    const col=d>0?'var(--green2)':'var(--or)';
+    const sign=d>0?'+':'';
+    const val=fmt==='$'?'$'+Math.abs(Math.round(d)).toLocaleString():Math.abs(d).toFixed(1)+'%';
+    return`<span style="color:${col};font-size:10px;">${sign}${d>0?'':'-'}${val} (${sign}${pct}%)</span>`;
+  };
+
+  const row=(label,va,vb,da,fmt='$',note='')=>{
+    const fmtV=v=>v===null||v===undefined?'—':fmt==='$'?'$'+Math.round(v).toLocaleString():v.toFixed(1)+'%';
+    return`<tr>
+      <td style="font-size:10px;color:var(--tx2);">${label}${note?`<div style="font-size:8px;color:var(--mu);">${note}</div>`:''}</td>
+      <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:16px;color:${isPost(ka)?'var(--or)':'var(--tx)'};">${fmtV(va)}</td>
+      <td style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:16px;color:${isPost(kb)?'var(--or)':'var(--tx)'};">${fmtV(vb)}</td>
+      <td style="text-align:right;">${da}</td>
+    </tr>`;
+  };
+
+  document.getElementById('cmp-content').innerHTML=`
+    <!-- Header -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--bor);margin-bottom:20px;">
+      <div style="background:var(--s2);padding:12px 14px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);">Métrica</div>
+      <div style="background:var(--s2);padding:12px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:${isPost(ka)?'var(--or)':'var(--green2)'};">${la}</div>
+        ${isPost(ka)?'<div style="font-size:8px;color:var(--or);letter-spacing:0.15em;">POST-REBRAND</div>':'<div style="font-size:8px;color:var(--green2);letter-spacing:0.15em;">PRE-REBRAND</div>'}
+      </div>
+      <div style="background:var(--s2);padding:12px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:${isPost(kb)?'var(--or)':'var(--green2)'};">${lb}</div>
+        ${isPost(kb)?'<div style="font-size:8px;color:var(--or);letter-spacing:0.15em;">POST-REBRAND</div>':'<div style="font-size:8px;color:var(--green2);letter-spacing:0.15em;">PRE-REBRAND</div>'}
+      </div>
+      <div style="background:var(--s2);padding:12px 14px;text-align:center;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mu);">Δ A→B</div>
+    </div>
+
+    <!-- VENTAS -->
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green2);padding:8px 0 4px;border-bottom:1px solid var(--bor);margin-bottom:2px;">Ventas (Toast)</div>
+    <table class="tbl" style="margin-bottom:16px;">
+      <tbody>
+        ${row('Ventas netas',ma?.net_sales,mb?.net_sales,delta(ma?.net_sales,mb?.net_sales))}
+        ${row('Días operativos',ma?.days,mb?.days,delta(ma?.days,mb?.days,'n'),'n')}
+        ${row('Promedio diario',ma?.avg_daily,mb?.avg_daily,delta(ma?.avg_daily,mb?.avg_daily))}
+        ${row('Covers totales',ma?.covers,mb?.covers,delta(ma?.covers,mb?.covers,'n'),'n')}
+        ${row('Covers / día',ma?Math.round(ma.covers/ma.days):null,mb?Math.round(mb.covers/mb.days):null,delta(ma?ma.covers/ma.days:null,mb?mb.covers/mb.days:null,'n'),'n')}
+        ${row('Check promedio',ma?.avg_check,mb?.avg_check,delta(ma?.avg_check,mb?.avg_check))}
+      </tbody>
+    </table>
+
+    <!-- COSTOS -->
+    ${ca&&cb?`<div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green2);padding:8px 0 4px;border-bottom:1px solid var(--bor);margin-bottom:2px;">P&L (cuando disponible)</div>
+    <table class="tbl" style="margin-bottom:16px;">
+      <tbody>
+        ${row('COGS (compras producto)',ca?.cogs,cb?.cogs,delta(ca?.cogs,cb?.cogs))}
+        ${row('Food cost %',ca?.fPct,cb?.fPct,delta(ca?.fPct,cb?.fPct,'%'),'%','target 28-32%')}
+        ${row('Nómina',ca?.lab,cb?.lab,delta(ca?.lab,cb?.lab))}
+        ${row('Labor %',ca?.lPct,cb?.lPct,delta(ca?.lPct,cb?.lPct,'%'),'%','target 28-35%')}
+        ${row('Prime cost %',ca?.pPct,cb?.pPct,delta(ca?.pPct,cb?.pPct,'%'),'%','target <58%')}
+        ${row('EBITDA',ca?.ebitda,cb?.ebitda,delta(ca?.ebitda,cb?.ebitda))}
+        ${row('EBITDA %',ca?.ePct,cb?.ePct,delta(ca?.ePct,cb?.ePct,'%'),'%','target >15%')}
+        ${row('Resultado neto',ca?.netI,cb?.netI,delta(ca?.netI,cb?.netI))}
+      </tbody>
+    </table>`:''}
+
+    <!-- COMPRAS -->
+    ${(invA||invB)?`<div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green2);padding:8px 0 4px;border-bottom:1px solid var(--bor);margin-bottom:2px;">Compras (xtraCHEF)</div>
+    <table class="tbl" style="margin-bottom:16px;">
+      <tbody>
+        ${row('Total compras capturadas',invA||null,invB||null,delta(invA,invB))}
+        ${row('Compras / venta',ma&&invA?invA/ma.net_sales*100:null,mb&&invB?invB/mb.net_sales*100:null,delta(ma&&invA?invA/ma.net_sales*100:null,mb&&invB?invB/mb.net_sales*100:null,'%'),'%')}
+        ${row('Compras / cover',ma&&invA?invA/ma.covers:null,mb&&invB?invB/mb.covers:null,delta(ma&&invA?invA/ma.covers:null,mb&&invB?invB/mb.covers:null))}
+      </tbody>
+    </table>`:''}
+
+    <!-- VISUAL -->
+    <div class="chart-wrap">
+      <div class="chart-title">Comparación visual — ${la} vs ${lb}</div>
+      <div class="chart-canvas"><canvas id="cmp-chart"></canvas></div>
+    </div>`;
+
+  // Render chart
+  setTimeout(()=>{
+    const cv=document.getElementById('cmp-chart');
+    if(!cv)return;
+    const metrics=[
+      {label:'Ventas netas',a:ma?.net_sales,b:mb?.net_sales,scale:1},
+      {label:'Covers',a:ma?.covers,b:mb?.covers,scale:1},
+      {label:'Check avg',a:ma?.avg_check,b:mb?.avg_check,scale:1},
+      {label:'Compras xCHF',a:invA||0,b:invB||0,scale:1},
+    ];
+    if(ca&&cb){
+      metrics.push({label:'EBITDA',a:ca.ebitda,b:cb.ebitda,scale:1});
+    }
+    const maxVal=Math.max(...metrics.map(m=>Math.max(Math.abs(m.a||0),Math.abs(m.b||0))));
+    if(cv._ch)cv._ch.destroy();
+    cv._ch=new Chart(cv.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:metrics.map(m=>m.label),
+        datasets:[
+          {label:la,data:metrics.map(m=>m.a||0),backgroundColor:isPost(ka)?'rgba(200,64,26,0.6)':'rgba(58,148,96,0.6)',borderWidth:0},
+          {label:lb,data:metrics.map(m=>m.b||0),backgroundColor:isPost(kb)?'rgba(200,64,26,0.35)':'rgba(58,148,96,0.35)',borderWidth:0},
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:'#c4b8a8',font:{family:'DM Mono',size:9},boxWidth:10}},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>`${c.dataset.label}: $${c.raw.toLocaleString()}`}}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>v>=1000?'$'+Math.round(v/1000)+'K':'$'+v}}}}
+    });
+  },60);
+}
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
 function sendSug(btn){document.getElementById('chat-in').value=btn.textContent;sendChat();}
+
+// ═══ INVOICE DATA ═══
+const INV_MONTHS=['2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04'];
+const INV_LBL={'2025-10':'Oct 25','2025-11':'Nov 25','2025-12':'Dic 25','2026-01':'Ene 26','2026-02':'Feb 26','2026-03':'Mar 26','2026-04':'Abr 26'};
+const INV_TOT={"2025-10":69756,"2025-11":123823,"2025-12":94224,"2026-01":108027,"2026-02":82554,"2026-03":65300,"2026-04":60460};
+const INV_VENDORS=[
+  {name:"SCREEN MEDIA GROUP LLC",cat:"Marketing \ud83d\udd34",total:36335,m:{"2025-10":0,"2025-11":9150,"2025-12":12695,"2026-01":14490,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Darien Produce",cat:"Produce",total:34734,m:{"2025-10":3951,"2025-11":4271,"2025-12":5179,"2026-01":4180,"2026-02":7434,"2026-03":4768,"2026-04":4950}},
+  {name:"AD MAIORA.LLC.",cat:"Mariscos",total:32767,m:{"2025-10":1690,"2025-11":3524,"2025-12":5205,"2026-01":6043,"2026-02":6932,"2026-03":4547,"2026-04":4825}},
+  {name:"Antonio Briceno",cat:"Entret. \ud83d\udd34",total:29000,m:{"2025-10":0,"2025-11":8100,"2025-12":5600,"2026-01":4500,"2026-02":3600,"2026-03":3600,"2026-04":3600}},
+  {name:"Senacamo",cat:"Ib\u00e9ricos",total:27726,m:{"2025-10":4180,"2025-11":3390,"2025-12":5313,"2026-01":1995,"2026-02":4856,"2026-03":3947,"2026-04":4047}},
+  {name:"Sysco South Florida, Inc",cat:"General",total:26267,m:{"2025-10":3040,"2025-11":3894,"2025-12":4766,"2026-01":2584,"2026-02":6348,"2026-03":3374,"2026-04":2262}},
+  {name:"ZERU MIAMI",cat:"Limpieza",total:21510,m:{"2025-10":450,"2025-11":393,"2025-12":0,"2026-01":4800,"2026-02":6267,"2026-03":4800,"2026-04":4800}},
+  {name:"SOUTHERN GLAZER\u2019S OF FL",cat:"Licores/Vinos",total:19865,m:{"2025-10":2225,"2025-11":4113,"2025-12":1261,"2026-01":4186,"2026-02":2569,"2026-03":3773,"2026-04":1737}},
+  {name:"ABROAD LIVING",cat:"Mantenimiento",total:19865,m:{"2025-10":0,"2025-11":19865,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"BRAVO MUSIC LLC",cat:"Entret. \ud83d\udd34",total:19000,m:{"2025-10":3000,"2025-11":2500,"2025-12":4000,"2026-01":3000,"2026-02":2500,"2026-03":2000,"2026-04":2000}},
+  {name:"Miami Purveyors, Inc",cat:"Carnes",total:18692,m:{"2025-10":1694,"2025-11":3284,"2025-12":1896,"2026-01":4012,"2026-02":4817,"2026-03":614,"2026-04":2374}},
+  {name:"Cheney Brothers, Inc",cat:"General",total:14477,m:{"2025-10":2488,"2025-11":3137,"2025-12":1439,"2026-01":1157,"2026-02":2556,"2026-03":1362,"2026-04":2337}},
+  {name:"CREATIC MIAMI",cat:"Marketing \ud83d\udd34",total:13500,m:{"2025-10":4500,"2025-11":4500,"2025-12":4500,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Valmar Seafoods More",cat:"Mariscos",total:13300,m:{"2025-10":2501,"2025-11":1095,"2025-12":1315,"2026-01":2094,"2026-02":4677,"2026-03":153,"2026-04":1464}},
+  {name:"PATAGONIAN SEA PRODUCTS LLC",cat:"Mariscos",total:12173,m:{"2025-10":3861,"2025-11":4658,"2025-12":3654,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Amazon.com",cat:"Oficina/Varios",total:11184,m:{"2025-10":1646,"2025-11":5203,"2025-12":968,"2026-01":836,"2026-02":1025,"2026-03":693,"2026-04":684}},
+  {name:"LUCIA NUNEZ",cat:"Entret. \ud83d\udd34",total:10800,m:{"2025-10":1800,"2025-11":0,"2025-12":3000,"2026-01":1800,"2026-02":1200,"2026-03":1800,"2026-04":1200}},
+  {name:"CHASE CORP BUSINESS",cat:"Otros",total:9815,m:{"2025-10":3660,"2025-11":3755,"2025-12":2400,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"SEATED",cat:"Reservaciones",total:9789,m:{"2025-10":1539,"2025-11":1086,"2025-12":3273,"2026-01":0,"2026-02":1002,"2026-03":1009,"2026-04":1880}},
+  {name:"CINTAS CORPORATION",cat:"Lavander\u00eda",total:9677,m:{"2025-10":1571,"2025-11":1950,"2025-12":1164,"2026-01":1160,"2026-02":1140,"2026-03":1150,"2026-04":1542}},
+  {name:"WINEBOW",cat:"Licores/Vinos",total:9448,m:{"2025-10":1332,"2025-11":0,"2025-12":1783,"2026-01":3518,"2026-02":2131,"2026-03":0,"2026-04":684}},
+  {name:"ECOLAB",cat:"Limpieza",total:9122,m:{"2025-10":768,"2025-11":1158,"2025-12":0,"2026-01":3931,"2026-02":1226,"2026-03":1226,"2026-04":813}},
+  {name:"Republic National Distributing Company",cat:"Licores/Vinos",total:8727,m:{"2025-10":2550,"2025-11":636,"2025-12":1269,"2026-01":1408,"2026-02":1159,"2026-03":775,"2026-04":930}},
+  {name:"VELEZ ENTERTAINMENT INC.",cat:"Entret. \ud83d\udd34",total:8400,m:{"2025-10":800,"2025-11":800,"2025-12":800,"2026-01":2000,"2026-02":0,"2026-03":3200,"2026-04":800}},
+  {name:"The Chefs' Warehouse of Florida, LLC",cat:"General",total:7629,m:{"2025-10":1591,"2025-11":782,"2025-12":912,"2026-01":1275,"2026-02":1325,"2026-03":825,"2026-04":918}},
+  {name:"Gravity Productions LLC",cat:"Entret. \ud83d\udd34",total:6900,m:{"2025-10":300,"2025-11":0,"2025-12":1050,"2026-01":3100,"2026-02":0,"2026-03":1750,"2026-04":700}},
+  {name:"National Utility Cost Reduction/NUCR, LLC",cat:"Servicios",total:6854,m:{"2025-10":1095,"2025-11":1095,"2025-12":1095,"2026-01":1190,"2026-02":0,"2026-03":1190,"2026-04":1190}},
+  {name:"InBest Services LLC",cat:"Mantenimiento",total:6500,m:{"2025-10":1300,"2025-11":1300,"2025-12":0,"2026-01":1300,"2026-02":0,"2026-03":1300,"2026-04":1300}},
+  {name:"24/7 SEAFOOD DISTRIBUTOR, CORP",cat:"Mariscos",total:5996,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":1112,"2026-02":208,"2026-03":2012,"2026-04":2664}},
+  {name:"Premier Beverage Co.dba Breakthru Beverage Florida",cat:"Licores/Vinos",total:5967,m:{"2025-10":1106,"2025-11":402,"2025-12":0,"2026-01":2931,"2026-02":892,"2026-03":0,"2026-04":635}},
+  {name:"Menumen",cat:"Men\u00fa/Dise\u00f1o",total:5700,m:{"2025-10":0,"2025-11":0,"2025-12":5300,"2026-01":400,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"GreatAmerica Financial Svcs.",cat:"Equipos/Renta",total:5618,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":5618,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"LUXURY CULINARY",cat:"Entret. \ud83d\udd34",total:5000,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":5000,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"GONZALEZ LAW,P.L",cat:"Legal/Consultor\u00eda",total:5000,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":5000,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"OPEN TABLE",cat:"Reservaciones",total:4981,m:{"2025-10":0,"2025-11":980,"2025-12":1451,"2026-01":1412,"2026-02":0,"2026-03":1138,"2026-04":0}},
+  {name:"SOMMSELECTION LLC",cat:"Vinos",total:4923,m:{"2025-10":0,"2025-11":900,"2025-12":612,"2026-01":1020,"2026-02":1020,"2026-03":0,"2026-04":1371}},
+  {name:"Charcoal Chef USA LLC",cat:"Carb\u00f3n",total:4645,m:{"2025-10":254,"2025-11":1098,"2025-12":1098,"2026-01":0,"2026-02":1098,"2026-03":1098,"2026-04":0}},
+  {name:"CASA WAGYU",cat:"Carnes",total:4570,m:{"2025-10":653,"2025-11":814,"2025-12":826,"2026-01":824,"2026-02":858,"2026-03":595,"2026-04":0}},
+  {name:"DESIGNS WITH ART",cat:"Dise\u00f1o",total:4525,m:{"2025-10":0,"2025-11":4525,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"First US linen services",cat:"Lavander\u00eda",total:4412,m:{"2025-10":568,"2025-11":753,"2025-12":756,"2026-01":821,"2026-02":0,"2026-03":200,"2026-04":1314}},
+  {name:"Maverick Beverage Company Florida",cat:"Licores",total:3706,m:{"2025-10":892,"2025-11":0,"2025-12":0,"2026-01":1456,"2026-02":1358,"2026-03":0,"2026-04":0}},
+  {name:"SUB-ZERO ICE SERVICES, INC",cat:"Hielo",total:3665,m:{"2025-10":542,"2025-11":537,"2025-12":542,"2026-01":547,"2026-02":510,"2026-03":514,"2026-04":472}},
+  {name:"RPZ EVENTS LLC",cat:"Entret. \ud83d\udd34",total:3550,m:{"2025-10":0,"2025-11":3550,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Twenty-One Wine & Spirits",cat:"Licores/Vinos",total:3296,m:{"2025-10":417,"2025-11":468,"2025-12":0,"2026-01":406,"2026-02":726,"2026-03":873,"2026-04":406}},
+  {name:"Accounting Business Services INC",cat:"Legal/Consultor\u00eda",total:3000,m:{"2025-10":600,"2025-11":600,"2025-12":0,"2026-01":600,"2026-02":0,"2026-03":600,"2026-04":600}},
+  {name:"Delicias Import, Inc.",cat:"Mariscos",total:2935,m:{"2025-10":254,"2025-11":536,"2025-12":213,"2026-01":352,"2026-02":656,"2026-03":392,"2026-04":531}},
+  {name:"Hidalgo Imports, LLC",cat:"Ib\u00e9ricos",total:2884,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":1091,"2026-03":659,"2026-04":1135}},
+  {name:"Dao Gourmet Foods",cat:"Alimentos",total:2878,m:{"2025-10":194,"2025-11":625,"2025-12":680,"2026-01":0,"2026-02":490,"2026-03":166,"2026-04":723}},
+  {name:"Square, Inc.",cat:"Pagos",total:2858,m:{"2025-10":0,"2025-11":2740,"2025-12":118,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Greater Miami Convention & Visitors Bureau",cat:"Eventos",total:2655,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":1825}},
+  {name:"World Red Eye",cat:"Entret. \ud83d\udd34",total:2600,m:{"2025-10":0,"2025-11":2600,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Sullivan Street Bakery Miami",cat:"Panader\u00eda",total:2537,m:{"2025-10":271,"2025-11":348,"2025-12":348,"2026-01":426,"2026-02":426,"2026-03":394,"2026-04":324}},
+  {name:"LIFETONE PRODUCTIONS",cat:"Entret. \ud83d\udd34",total:2450,m:{"2025-10":0,"2025-11":0,"2025-12":2450,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Keeping US Legal",cat:"Legal/Consultor\u00eda",total:2417,m:{"2025-10":2417,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Drains made Simple LLC",cat:"Mantenimiento",total:2015,m:{"2025-10":0,"2025-11":195,"2025-12":195,"2026-01":1040,"2026-02":195,"2026-03":195,"2026-04":195}},
+  {name:"OTH Network",cat:"Media",total:1944,m:{"2025-10":968,"2025-11":605,"2025-12":372,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Brodschneider&Surev LLC",cat:"Varios",total:1869,m:{"2025-10":185,"2025-11":395,"2025-12":483,"2026-01":336,"2026-02":200,"2026-03":180,"2026-04":90}},
+  {name:"Department of Business and Regulation",cat:"Licencias",total:1820,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":1820,"2026-04":0}},
+  {name:"OPEN TABLE, INC.",cat:"Reservaciones",total:1812,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":1812,"2026-03":0,"2026-04":0}},
+  {name:"KIMAYA GRAPHICS",cat:"Dise\u00f1o",total:1803,m:{"2025-10":158,"2025-11":709,"2025-12":0,"2026-01":936,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Toast Inc.",cat:"Software",total:1768,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":926,"2026-03":0,"2026-04":842}},
+  {name:"Bemka House of Caviar & Fine Food",cat:"Caviar",total:1751,m:{"2025-10":326,"2025-11":586,"2025-12":424,"2026-01":91,"2026-02":324,"2026-03":0,"2026-04":0}},
+  {name:"Eagle Brands Sales",cat:"Varios",total:1733,m:{"2025-10":263,"2025-11":474,"2025-12":0,"2026-01":0,"2026-02":328,"2026-03":335,"2026-04":333}},
+  {name:"THE DOUGH LAB",cat:"Panader\u00eda",total:1718,m:{"2025-10":354,"2025-11":596,"2025-12":180,"2026-01":177,"2026-02":322,"2026-03":0,"2026-04":90}},
+  {name:"AA Hood & Exhaust services LLC",cat:"Mantenimiento",total:1710,m:{"2025-10":1710,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"TRIGGER SEAFOOD CORPORATION.",cat:"Mariscos",total:1708,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":1203,"2026-03":505,"2026-04":0}},
+  {name:"TIGER, INC.",cat:"Varios",total:1701,m:{"2025-10":0,"2025-11":602,"2025-12":189,"2026-01":220,"2026-02":492,"2026-03":198,"2026-04":0}},
+  {name:"Cooling Engineering Group, INC.",cat:"Mantenimiento",total:1558,m:{"2025-10":370,"2025-11":0,"2025-12":0,"2026-01":402,"2026-02":786,"2026-03":0,"2026-04":0}},
+  {name:"Easy Ice, LLC",cat:"Hielo",total:1476,m:{"2025-10":217,"2025-11":217,"2025-12":236,"2026-01":236,"2026-02":287,"2026-03":283,"2026-04":0}},
+  {name:"PROVICENTER USA LLC",cat:"Varios",total:1405,m:{"2025-10":0,"2025-11":0,"2025-12":361,"2026-01":0,"2026-02":828,"2026-03":0,"2026-04":216}},
+  {name:"Resy Network",cat:"Reservaciones",total:1245,m:{"2025-10":249,"2025-11":249,"2025-12":0,"2026-01":0,"2026-02":249,"2026-03":249,"2026-04":249}},
+  {name:"MEXCOR DISTRIBUTORS OF FLORIDA",cat:"Otros",total:1145,m:{"2025-10":0,"2025-11":359,"2025-12":0,"2026-01":143,"2026-02":359,"2026-03":0,"2026-04":285}},
+  {name:"Inner Reset Studio LLC",cat:"Wellness",total:1050,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":450,"2026-02":200,"2026-03":0,"2026-04":400}},
+  {name:"ADONY'S GARDEN SERVICES",cat:"Jardiner\u00eda",total:1045,m:{"2025-10":185,"2025-11":140,"2025-12":265,"2026-01":0,"2026-02":140,"2026-03":175,"2026-04":140}},
+  {name:"Extreme Precision Inc",cat:"Mantenimiento",total:1013,m:{"2025-10":0,"2025-11":95,"2025-12":115,"2026-01":335,"2026-02":0,"2026-03":286,"2026-04":182}},
+  {name:"INTERNATIONAL WINE AND SPIRITS, INC.",cat:"Licores",total:1010,m:{"2025-10":428,"2025-11":0,"2025-12":104,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":478}},
+  {name:"WineAdvisor",cat:"Consultor\u00eda vino",total:900,m:{"2025-10":0,"2025-11":450,"2025-12":450,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"SANCHEZ EXPERT SOLUTIONS CORP.",cat:"Consultor\u00eda",total:850,m:{"2025-10":850,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"ROCA EXTERMINATOR & services LLC",cat:"Pest Control",total:848,m:{"2025-10":0,"2025-11":120,"2025-12":0,"2026-01":0,"2026-02":240,"2026-03":240,"2026-04":248}},
+  {name:"DEX Imaging",cat:"Software",total:801,m:{"2025-10":118,"2025-11":127,"2025-12":139,"2026-01":0,"2026-02":154,"2026-03":145,"2026-04":116}},
+  {name:"Mood Board LLC dba/ Kilo Caviar",cat:"Caviar",total:754,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":264,"2026-03":240,"2026-04":250}},
+  {name:"IMPERIAL DADE",cat:"Otros",total:686,m:{"2025-10":0,"2025-11":336,"2025-12":0,"2026-01":0,"2026-02":350,"2026-03":0,"2026-04":0}},
+  {name:"PANEAMORE INTERNATIONAL",cat:"Panader\u00eda",total:684,m:{"2025-10":0,"2025-11":211,"2025-12":302,"2026-01":0,"2026-02":86,"2026-03":0,"2026-04":86}},
+  {name:"Gray V",cat:"Entret. \ud83d\udd34",total:654,m:{"2025-10":109,"2025-11":109,"2025-12":109,"2026-01":109,"2026-02":0,"2026-03":109,"2026-04":0}},
+  {name:"Publix",cat:"Oficina/Varios",total:593,m:{"2025-10":28,"2025-11":134,"2025-12":53,"2026-01":28,"2026-02":264,"2026-03":56,"2026-04":30}},
+  {name:"CAPITAL WINE",cat:"Vinos",total:574,m:{"2025-10":0,"2025-11":0,"2025-12":352,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":223}},
+  {name:"Wine and Beyond Distributors LLC",cat:"Vinos",total:513,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":256,"2026-02":256,"2026-03":0,"2026-04":0}},
+  {name:"2dor Gourmet Ice LLC",cat:"Hielo",total:511,m:{"2025-10":54,"2025-11":127,"2025-12":0,"2026-01":123,"2026-02":69,"2026-03":69,"2026-04":69}},
+  {name:"Q PLUS FOOD LLC",cat:"Alimentos",total:507,m:{"2025-10":507,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"UBER",cat:"Transporte",total:500,m:{"2025-10":0,"2025-11":271,"2025-12":155,"2026-01":0,"2026-02":74,"2026-03":0,"2026-04":0}},
+  {name:"Indeed",cat:"RRHH",total:472,m:{"2025-10":0,"2025-11":0,"2025-12":423,"2026-01":50,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"The Chef's Emporium",cat:"Otros",total:434,m:{"2025-10":434,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"D'ARTAGNAN,INC",cat:"Carnes",total:426,m:{"2025-10":0,"2025-11":426,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Marky's Purveyour of Fine Food",cat:"Carnes",total:318,m:{"2025-10":0,"2025-11":318,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"LUIS MIGUEL TORRES CAMEJO",cat:"Personal",total:300,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":300,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Go Wine LLC",cat:"Vinos",total:300,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":300}},
+  {name:"RADER FOODS, INC.",cat:"Carnes",total:300,m:{"2025-10":300,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Larav Media Corp.",cat:"Media",total:295,m:{"2025-10":0,"2025-11":295,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Extra Space Storage",cat:"Almacenamiento",total:279,m:{"2025-10":0,"2025-11":0,"2025-12":279,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Fintech.net",cat:"Pagos",total:238,m:{"2025-10":47,"2025-11":0,"2025-12":94,"2026-01":0,"2026-02":48,"2026-03":48,"2026-04":0}},
+  {name:"Communication Consulting Solutions Inc.",cat:"Consultor\u00eda",total:230,m:{"2025-10":0,"2025-11":230,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Ziggy\u2019s Farm Corp",cat:"Produce",total:201,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":201}},
+  {name:"Gold Coast Beverage",cat:"Licores",total:188,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":188,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"PreGel America Inc",cat:"Pasteler\u00eda",total:177,m:{"2025-10":177,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Wayfair, LLC,",cat:"Otros",total:159,m:{"2025-10":0,"2025-11":159,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Advanced Hood Systems",cat:"Mantenimiento",total:124,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":124,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"U-Haul",cat:"Transporte",total:89,m:{"2025-10":0,"2025-11":89,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"A5 LIQUORS",cat:"Licores",total:43,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":43,"2026-04":0}},
+  {name:"WALGREENS",cat:"Oficina/Varios",total:43,m:{"2025-10":0,"2025-11":43,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Spotify",cat:"Software",total:36,m:{"2025-10":12,"2025-11":12,"2025-12":12,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"Lyft",cat:"Transporte",total:25,m:{"2025-10":0,"2025-11":0,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":25,"2026-04":0}},
+  {name:"WALMART",cat:"Oficina/Varios",total:20,m:{"2025-10":0,"2025-11":20,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}},
+  {name:"I LOVE PDF",cat:"Otros",total:18,m:{"2025-10":9,"2025-11":9,"2025-12":0,"2026-01":0,"2026-02":0,"2026-03":0,"2026-04":0}}
+];
+const INV_CATS=[
+  {name:"Customer Service (Entretenimiento)",total:96433,note:"DJ + cantantes + guitarristas"},
+  {name:"Seafood / Mariscos",total:68159,note:"AD Maiora, Valmar, Patagonian, 24/7"},
+  {name:"Digital Marketing",total:49835,note:"Screen Media Group"},
+  {name:"Wine",total:48925,note:"Southern Glazer's, Winebow, Premier"},
+  {name:"Frutas y Vegetales",total:29734,note:"Darien Produce"},
+  {name:"Executive Information",total:27391,note:"OpenTable + Zeru Miami"},
+  {name:"Grocery / Abarrotes",total:26571,note:"Sysco, Cheney Brothers"},
+  {name:"Cold Meats / Embutidos",total:25257,note:"Senacamo, Chefs' Warehouse"},
+  {name:"Cleaning Service",total:20952,note:"Zeru Miami overnight"},
+  {name:"Restaurant Maintenance",total:20839,note:"Abroad Living + varios"},
+  {name:"Meat / Carnes rojas",total:19467,note:"Miami Purveyors"},
+  {name:"Disposable",total:14493,note:""},
+  {name:"Non Alcoholic Beverage",total:14307,note:""},
+  {name:"Delivery / Logística",total:13604,note:""},
+  {name:"Reservations",total:13546,note:"OpenTable + Seated"},
+];
+
+let invView='vendor';
+function syncInvButtons(){
+  document.querySelectorAll('#p-invoices .mb').forEach(b=>b.classList.remove('on'));
+  const activeId='inv-view-'+invView;
+  const activeBtn=document.getElementById(activeId);
+  if(activeBtn)activeBtn.classList.add('on');
+  else document.getElementById('inv-view-vendor')?.classList.add('on');
+}
+function setInvView(v,btn){
+  invView=v;
+  document.querySelectorAll('#p-invoices .mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderInvoices();
+}
+
+function renderInvoices(){
+  const mf=document.getElementById('inv-month-filter').value;
+  const months=mf==='all'?INV_MONTHS:[mf];
+  const vData=INV_VENDORS.map(v=>({...v,pt:months.reduce((s,m)=>s+(v.m[m]||0),0)})).filter(v=>v.pt>0).sort((a,b)=>b.pt-a.pt);
+  const periodTotal=vData.reduce((s,v)=>s+v.pt,0)||months.reduce((s,m)=>s+(INV_TOT[m]||0),0);
+  const entTotal=vData.filter(v=>v.cat.includes('Entret.')).reduce((s,v)=>s+v.pt,0);
+  const mktTotal=vData.filter(v=>v.cat.includes('Marketing')).reduce((s,v)=>s+v.pt,0);
+
+  document.getElementById('inv-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-lbl">Total compras</div><div class="kpi-val sm">$${Math.round(periodTotal/1000)}K</div><div class="kpi-sub nu">${months.length===1?INV_LBL[months[0]]:'Oct 25 – Abr 26'} · ${vData.length} proveedores</div></div>
+    <div class="kpi"><div class="kpi-lbl">Mayor proveedor</div><div class="kpi-val sm" style="font-size:12px;">${vData[0]?vData[0].name.split(' ')[0]:'—'}</div><div class="kpi-sub nu">$${vData[0]?Math.round(vData[0].pt/1000)+'K':''}</div></div>
+    <div class="kpi"><div class="kpi-lbl">Entretenimiento</div><div class="kpi-val sm" style="color:${entTotal>8000?'var(--or)':'var(--tx)'}">$${Math.round(entTotal/1000)}K</div><div class="kpi-sub nu">${periodTotal>0?((entTotal/periodTotal)*100).toFixed(1)+'% del total':''}</div></div>
+    <div class="kpi"><div class="kpi-lbl">Marketing externo</div><div class="kpi-val sm" style="color:${mktTotal>5000?'var(--or)':'var(--tx)'}">$${Math.round(mktTotal/1000)}K</div><div class="kpi-sub nu">${periodTotal>0?((mktTotal/periodTotal)*100).toFixed(1)+'% del total':''}</div></div>`;
+
+  const flags=[];
+  if(mf==='all'){
+    flags.push({t:'al',txt:'Patagonian Sea Products: $61K en Oct-Dic 2025, desaparece completamente desde enero 2026. ¿Cambio de proveedor o problema de suministro?'});
+    flags.push({t:'al',txt:`Entretenimiento total: $${Math.round(entTotal/1000)}K en el período (promedio $${Math.round(entTotal/7)}K/mes). Sobre ventas promedio de $118K/mes = ${((entTotal/7/118000)*100).toFixed(1)}% del revenue.`});
+    flags.push({t:'in',txt:'Screen Media Group (marketing): $37,635 cobrados solo en Nov 2025–Ene 2026. Sin facturas desde febrero. Verificar si el contrato sigue activo o si se paga por otra vía.'});
+    flags.push({t:'ok',txt:'Darien Produce concentra el mayor volumen de compras. Verificar si hay contrato de precio fijo o si está sujeto a variaciones de mercado.'});
+  }
+  document.getElementById('inv-flags').innerHTML=flags.map(f=>`<div class="flag ${f.t==='al'?'al':f.t==='ok'?'ok':'in'}" style="margin-bottom:4px;"><div class="fi">${f.t==='al'?'▲':f.t==='ok'?'●':'◆'}</div><div class="ft">${f.txt}</div></div>`).join('');
+
+  const maxT=vData[0]?.pt||1;
+  if(invView==='vendor'){
+    document.getElementById('inv-content').innerHTML=`
+      <div class="sl">Proveedores — ${mf==='all'?'Oct 2025 – Abr 2026':INV_LBL[mf]}</div>
+      <div style="overflow-x:auto;">
+      <table class="tbl" style="margin-bottom:20px;min-width:900px;">
+        <thead><tr><th>#</th><th>Proveedor</th><th>Categoría</th>${INV_MONTHS.map(m=>`<th style="text-align:right">${INV_LBL[m]}</th>`).join('')}<th style="text-align:right">Total</th><th style="width:70px;"></th></tr></thead>
+        <tbody>${vData.map((v,i)=>{
+          const flag=v.cat.includes('🔴');
+          return`<tr>
+            <td style="color:var(--mu);font-size:9px;">${i+1}</td>
+            <td style="color:${flag?'var(--or)':'var(--tx)'}">${v.name}</td>
+            <td style="color:var(--mu);font-size:9px;">${v.cat}</td>
+            ${INV_MONTHS.map(m=>`<td style="text-align:right;color:${(v.m[m]||0)>0?'var(--tx2)':'var(--bor2)'};font-size:10px;">${(v.m[m]||0)>0?'$'+Math.round(v.m[m]).toLocaleString():'—'}</td>`).join('')}
+            <td style="text-align:right;font-weight:400;color:var(--tx)">$${Math.round(v.pt).toLocaleString()}</td>
+            <td><div class="bar-bg"><div class="bar-fg${flag?' or':''}" style="width:${Math.round(v.pt/maxT*100)}%"></div></div></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+  } else if(invView==='cat'){
+    // Build category totals dynamically from vendor data for selected period
+    const catMap={};
+    vData.forEach(v=>{
+      const cat=v.cat.replace(' 🔴','');
+      if(!catMap[cat])catMap[cat]={name:cat,total:0,vendors:[],flag:v.cat.includes('🔴')};
+      catMap[cat].total+=v.pt;
+      catMap[cat].vendors.push(v.name.split('(')[0].trim());
+      if(v.cat.includes('🔴'))catMap[cat].flag=true;
+    });
+    const catArr=Object.values(catMap).sort((a,b)=>b.total-a.total);
+    const maxCat=catArr[0]?.total||1;
+    document.getElementById('inv-content').innerHTML=`
+      <div class="sl">Por categoría — ${mf==='all'?'Oct 2025 – Abr 2026':INV_LBL[mf]}</div>
+      <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:20px;">
+        ${catArr.map((c,i)=>`
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--bor);">
+            <div style="width:26px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--mu);">${i+1}</div>
+            <div style="flex:1;">
+              <div style="font-size:11px;color:${c.flag?'var(--or)':'var(--tx)'};">${c.name}</div>
+              <div style="font-size:9px;color:var(--mu);">${c.vendors.slice(0,3).join(' · ')}${c.vendors.length>3?` +${c.vendors.length-3} más`:''}</div>
+              <div class="bar-bg" style="margin-top:5px;"><div class="bar-fg${c.flag?' or':''}" style="width:${Math.round(c.total/maxCat*100)}%"></div></div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;min-width:70px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:17px;color:${c.flag?'var(--or)':'var(--green2)'};">$${Math.round(c.total/1000)}K</div>
+              <div style="font-size:9px;color:var(--mu);">${((c.total/periodTotal)*100).toFixed(1)}%</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  } else if(invView==='analysis'){
+      const HHI_DATA=[
+        {cat:'Produce',hhi:10000,vendors:1,topPct:100,total:34734,risk:'critical',names:['Darien Produce'],note:'100% concentrado. Sin alternativa activa. $5K/mes promedio.'},
+        {cat:'Carnes',hhi:10000,vendors:1,topPct:100,total:18692,risk:'critical',names:['Miami Purveyors'],note:'Proveedor único para todas las carnes rojas.'},
+        {cat:'Ibéricos',hhi:10000,vendors:1,topPct:100,total:27726,risk:'critical',names:['Senacamo'],note:'Jamón ibérico — producto no sustituible fácilmente.'},
+        {cat:'Mariscos',hhi:3800,vendors:3,topPct:52,total:58240,risk:'medium',names:['AD Maiora','Valmar','Patagonian (inactivo)'],note:'Patagonian desapareció en ene 2026. Ahora 2 proveedores activos.'},
+        {cat:'Marketing',hhi:10000,vendors:2,topPct:73,total:49835,risk:'critical',names:['Screen Media','Creatic Miami'],note:'Creatic salió en ene 2026. Screen Media no factura desde feb 2026.'},
+        {cat:'Licores/Vinos',hhi:4100,vendors:2,topPct:67,total:19865,risk:'medium',names:["Southern Glazer's",'Winebow / Premier'],note:"Southern Glazer's concentra el 67%. Manejable con 2-3 distribuidores."},
+      ];
+      const RATIO_DATA=[
+        {m:'Oct 25',sales:100301,op:69756,ratio:69.5},
+        {m:'Nov 25',sales:93082,op:123823,ratio:133.0},
+        {m:'Dic 25',sales:142178,op:94224,ratio:66.3},
+        {m:'Ene 26',sales:131224,op:108027,ratio:82.3},
+        {m:'Feb 26',sales:166237,op:82554,ratio:49.7},
+        {m:'Mar 26',sales:97869,op:65300,ratio:66.7},
+        {m:'Abr 26',sales:94596,op:60460,ratio:63.9},
+      ];
+      const NON_OP=[
+        {cat:'Entretenimiento (3 artistas)',total:58800,pctRevenue:7.1,note:'Antonio Briceno $29K · Bravo Music $19K · Lucia Nunez $10.8K'},
+        {cat:'Marketing externo',total:49835,pctRevenue:6.0,note:'Screen Media $36K + Creatic Miami $13.5K (anterior)'},
+        {cat:'Limpieza overnight',total:21510,pctRevenue:2.6,note:'Zeru Miami. $4,800/mes fijo desde ene 2026.'},
+        {cat:'Mantenimiento/Rebrand',total:19865,pctRevenue:2.4,note:'Abroad Living. One-time nov 2025.'},
+        {cat:'Oficina/Suministros',total:11184,pctRevenue:1.4,note:'Amazon y varios.'},
+      ];
+      document.getElementById('inv-content').innerHTML=`
+        <div class="sl">1 · Concentración de proveedores (HHI)</div>
+        <div style="background:var(--s1);border:1px solid var(--bor);padding:10px 14px;margin-bottom:6px;font-size:10px;color:var(--tx2);line-height:1.6;">HHI: <strong style="color:var(--green2)">0–2,500</strong> competitivo · <strong style="color:var(--ye)">2,500–5,000</strong> concentrado · <strong style="color:var(--or)">5,000–10,000</strong> monopolio</div>
+        <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:24px;">
+          ${HHI_DATA.map(h=>{
+            const col=h.risk==='critical'?'var(--or)':h.risk==='medium'?'var(--ye)':'var(--green2)';
+            return`<div style="padding:12px 14px;border-bottom:1px solid var(--bor);">
+              <div style="display:flex;align-items:flex-start;gap:12px;">
+                <div style="width:80px;flex-shrink:0;"><div style="font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:2px;">HHI</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:${col};line-height:1;">${h.hhi.toLocaleString()}</div></div>
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+                    <span style="font-size:11px;color:var(--tx);">${h.cat}</span>
+                    <span style="font-size:8px;padding:1px 6px;border:1px solid ${col};color:${col};text-transform:uppercase;letter-spacing:0.12em;">${h.risk==='critical'?'Riesgo alto':h.risk==='medium'?'Concentrado':'OK'}</span>
+                    <span style="font-size:9px;color:var(--mu);">${h.vendors} proveedor${h.vendors>1?'es':''} · $${Math.round(h.total/1000)}K</span>
+                  </div>
+                  <div style="font-size:9px;color:var(--mu);margin-bottom:6px;">${h.note}</div>
+                  <div style="display:flex;gap:5px;flex-wrap:wrap;">${h.names.map(n=>`<span style="font-size:9px;background:var(--s2);padding:2px 7px;color:var(--tx2);">${n}</span>`).join('')}</div>
+                </div>
+                <div style="text-align:right;flex-shrink:0;"><div style="font-size:9px;color:var(--mu);">Top proveedor</div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:${col};">${h.topPct}%</div></div>
+              </div>
+              <div style="margin-top:8px;background:var(--s3);height:3px;"><div style="height:3px;background:${col};width:${Math.round(h.hhi/100)}%;"></div></div>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="sl">2 · Ratio compras operacionales / ventas por mes</div>
+        <div style="background:var(--s1);border:1px solid var(--bor);padding:10px 14px;margin-bottom:6px;font-size:10px;color:var(--tx2);">Excluye entretenimiento, marketing, mantenimiento y limpieza.</div>
+        <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:6px;">
+          <div style="display:grid;grid-template-columns:70px 1fr 75px 85px 65px;padding:6px 14px;border-bottom:2px solid var(--bor);font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mu);">
+            <div>Mes</div><div></div><div style="text-align:right">Ventas</div><div style="text-align:right">Compras op.</div><div style="text-align:right">Ratio</div>
+          </div>
+          ${RATIO_DATA.map(r=>{
+            const col=r.ratio>280?'var(--or)':r.ratio>220?'var(--ye)':'var(--green2)';
+            return`<div style="display:grid;grid-template-columns:70px 1fr 75px 85px 65px;padding:8px 14px;border-bottom:1px solid var(--bor);align-items:center;">
+              <div style="font-size:10px;color:var(--tx2);">${r.m}</div>
+              <div style="padding-right:12px;"><div style="background:var(--s3);height:4px;"><div style="height:4px;background:${col};width:${Math.min(Math.round(r.ratio/3.2),100)}%;"></div></div></div>
+              <div style="text-align:right;font-size:10px;color:var(--mu);">$${Math.round(r.sales/1000)}K</div>
+              <div style="text-align:right;font-size:10px;color:var(--mu);">$${Math.round(r.op/1000)}K</div>
+              <div style="text-align:right;font-family:'Cormorant Garamond',serif;font-size:17px;color:${col};">${r.ratio}%</div>
+            </div>`;
+          }).join('')}
+        </div>
+        <div style="background:rgba(200,64,26,0.08);border:1px solid var(--bor3);padding:9px 14px;margin-bottom:24px;font-size:10px;color:var(--tx2);">⚠ Nov 2025 outlier (307%): Abroad Living $19,865 one-time + entrada de entretenimiento post-rebrand. Sin ese gasto: ~250%.</div>
+        <div class="sl">3 · Gasto no operacional — impacto sobre revenue</div>
+        <div style="background:var(--s1);border:1px solid var(--bor);overflow:hidden;margin-bottom:6px;">
+          ${NON_OP.map((n,i)=>`
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--bor);">
+              <div style="width:22px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--mu);">${i+1}</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;color:var(--or);">${n.cat}</div>
+                <div style="font-size:9px;color:var(--mu);margin-bottom:4px;">${n.note}</div>
+                <div style="background:var(--s3);height:3px;"><div style="height:3px;background:var(--or);width:${Math.round(n.total/58800*100)}%;"></div></div>
+              </div>
+              <div style="text-align:right;flex-shrink:0;min-width:90px;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--or);">$${Math.round(n.total/1000)}K</div>
+                <div style="font-size:9px;color:var(--mu);">${n.pctRevenue}% del revenue</div>
+              </div>
+            </div>`).join('')}
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--s2);">
+            <div style="flex:1;font-size:11px;color:var(--tx);">Total no operacional</div>
+            <div style="text-align:right;"><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--or);">$161K</div><div style="font-size:9px;color:var(--mu);">19.5% del revenue total del período</div></div>
+          </div>
+        </div>
+        <div style="background:var(--s1);border:1px solid var(--bor);border-left:4px solid var(--green2);padding:14px 16px;">
+          <div style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--green2);margin-bottom:8px;">Implicación estratégica</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;line-height:1.85;color:var(--tx);">El 17.2% del revenue se va en gastos que no tocan el plato. Tres categorías tienen proveedor único con HHI 10,000 — cualquier subida de precio de Darien, Miami Purveyors o Senacamo no tiene contrapeso competitivo. La próxima negociación presupuestaria tiene aquí los números exactos.</div>
+        </div>`;
+  } else {
+    document.getElementById('inv-content').innerHTML=`
+      <div class="sl">Tendencia mensual total de compras</div>
+      <div class="chart-wrap"><div class="chart-canvas tall"><canvas id="inv-t1"></canvas></div></div>
+      <div class="sl" style="margin-top:16px;">Top 5 proveedores — evolución mensual</div>
+      <div class="chart-wrap"><div class="chart-canvas tall"><canvas id="inv-t2"></canvas></div></div>`;
+    setTimeout(()=>{
+      const c1=document.getElementById('inv-t1');
+      if(c1)new Chart(c1.getContext('2d'),{type:'bar',data:{labels:INV_MONTHS.map(m=>INV_LBL[m]),datasets:[{data:INV_MONTHS.map(m=>INV_TOT[m]||0),backgroundColor:'rgba(58,148,96,0.6)',borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8',callbacks:{label:c=>'$'+c.raw.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>'$'+Math.round(v/1000)+'K'}}}}});
+      const c2=document.getElementById('inv-t2');
+      const top5=INV_VENDORS.slice(0,5);
+      const cols=['rgba(58,148,96,0.8)','rgba(200,64,26,0.8)','rgba(74,122,148,0.8)','rgba(139,116,32,0.8)','rgba(107,37,53,0.8)'];
+      if(c2)new Chart(c2.getContext('2d'),{type:'line',data:{labels:INV_MONTHS.map(m=>INV_LBL[m]),datasets:top5.map((v,i)=>({label:v.name.split(' ')[0],data:INV_MONTHS.map(m=>v.m[m]||0),borderColor:cols[i],backgroundColor:'transparent',borderWidth:2,tension:0.3,pointRadius:3,pointBackgroundColor:cols[i]}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:'#c4b8a8',font:{family:'DM Mono',size:9},boxWidth:10}},tooltip:{backgroundColor:'#241e14',borderColor:'#3a3025',borderWidth:1,titleColor:'#e8ddd0',bodyColor:'#c4b8a8'}},scales:{x:{grid:{display:false},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8a7d6d',font:{family:'DM Mono',size:8},callback:v=>'$'+Math.round(v/1000)+'K'}}}}});
+    },60);
+  }
+}
+
+// ═══ CLIENTE FILTER ═══
+function applyClienteFilter(){
+  const f=document.getElementById('cliente-month-filter').value;
+  const today=new Date('2026-05-07');
+  let filtered;
+  if(f==='all'){
+    renderGuestView(document.querySelector('#p-clientes .mb.on')?.textContent.includes('Revenue')?'revenue':
+      document.querySelector('#p-clientes .mb.on')?.textContent.includes('Covers')?'covers':
+      document.querySelector('#p-clientes .mb.on')?.textContent.includes('Visitas')?'visits':
+      document.querySelector('#p-clientes .mb.on')?.textContent.includes('Lapsed')?'lapsed':'recent');
+    return;
+  }
+  if(f==='lapsed_90'){
+    filtered=TOP_BY_REVENUE.filter(g=>{const d=Math.round((today-new Date(g.last))/(1000*60*60*24));return d>90;});
+  } else if(f==='lapsed_180'){
+    filtered=TOP_BY_REVENUE.filter(g=>{const d=Math.round((today-new Date(g.last))/(1000*60*60*24));return d>180;});
+  } else {
+    filtered=TOP_BY_REVENUE.filter(g=>g.last.startsWith(f));
+  }
+  const container=document.getElementById('guest-view-container');
+  if(!filtered.length){container.innerHTML='<div class="empty-state">Sin clientes en ese período.</div>';return;}
+  container.innerHTML=`
+    <div class="sl" style="color:var(--green2)">Clientes activos en ${f.startsWith('lapsed')?'período lapsed':f} — ordenados por revenue</div>
+    ${filtered.map((g,i)=>{
+      const daysAgo=Math.round((today-new Date(g.last))/(1000*60*60*24));
+      return`<div class="gcard" style="border-left:3px solid var(--green2)">
+        <div class="gnum">${i+1}</div>
+        <div class="ginfo">
+          <div class="gname">${g.n}${g.tags.includes('VIP')?` <span class="pill vip">VIP</span>`:''}</div>
+          <div class="gmeta">${g.v} visitas · ${g.c} covers · última: ${g.last} · hace ${daysAgo} días</div>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--green2);flex-shrink:0;">$${Math.round(g.s/1000)}K</div>
+      </div>`;
+    }).join('')}`;
+}
 </script>
 </body>
 </html>
